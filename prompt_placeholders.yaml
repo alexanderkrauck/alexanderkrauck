@@ -1,0 +1,34 @@
+# ---------------------------------------------------------------------------
+# Central prompt placeholders for the lead-qualification scripts
+# ---------------------------------------------------------------------------
+
+# Description of the target audience you ultimately want to reach
+TARGET_AUDIENCE_DESCRIPTION: >
+  Affluent individuals or companies interested in buying or investing in
+  residential real-estate in Austria, with a special focus on the province of
+  Styria.  Typical members have at least €100 000 of deployable capital,
+  appreciate spa-wellness living or family-friendly neighbourhoods, and actively
+  research property opportunities online.
+
+# Concrete examples of such target profiles (free-form - bullet list or text)
+TARGET_AUDIENCE_EXAMPLES: |
+  - Graz-based renovation investor
+  - Senior Austrian couple seeking a spa-retirement flat in Bad Waltersdorf
+  - Vienna tech professional (income ≥ €120 k) looking for a buy-to-let in Styria
+  - Individual who is likely planning on a family and is looking for a family-friendly neighbourhood in Styria
+  - Small GmbH purchasing apartments as a long-term corporate asset
+
+# Description of the **channels** these people are likely to follow
+TARGET_AUDIENCE_FOLLOWING_DESCRIPTION: >
+  Instagram accounts that publish Austrian property listings, architecture
+  inspiration, financing advice, or Styrian lifestyle content that attracts the
+  audience above.
+
+# Concrete examples of such channels
+TARGET_AUDIENCE_FOLLOWING_EXAMPLES: |
+  - @s_real.at            # nationwide real-estate agency
+  - @immobilien.graz      # local Styrian listings
+  - @wohnnet_at           # Austrian property portal
+  - @austrian_architecture
+  - @finanzfluss_at       # German/Austrian finance educator
+  - @visitstyria          # regional lifestyle account

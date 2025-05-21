@@ -1,0 +1,4 @@
+openai>=1.12
+apify-client>=1.3
+pandas>=2.2
+python-dotenv>=1.0
