@@ -17,6 +17,7 @@ Can be run as a CLI  *or*  imported as a library:
 """
 
 from __future__ import annotations
+from concurrent.futures import ThreadPoolExecutor, as_completed
 ###############################################################################
 #                               STANDARD IMPORTS                              #
 ###############################################################################
@@ -32,13 +33,26 @@ from apify_client import ApifyClient
 from dotenv import load_dotenv
 from tenacity import retry, stop_after_attempt, wait_fixed, retry_if_exception_type
 import yaml
+from tqdm import tqdm  # added import for tqdm
 
 ###############################################################################
 #                          LOGGING & ENVIRONMENT                              #
 ###############################################################################
-logging.basicConfig(
-    format="%(asctime)s %(levelname)s %(message)s", level=logging.INFO
-)
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+logger.handlers.clear()
+
+file_handler = logging.FileHandler("lead_enrichment.log")
+file_handler.setLevel(logging.INFO)
+file_handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
+
+console_handler = logging.StreamHandler(sys.stderr)
+console_handler.setLevel(logging.ERROR)
+console_handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
+
+logger.addHandler(file_handler)
+logger.addHandler(console_handler)
+
 
 load_dotenv(override=True)            # reads .env if present
 
@@ -48,6 +62,8 @@ PERPLEXITY_API_KEY = os.getenv("PERPLEXITY_API_KEY", "")
 
 openai.api_key = OPENAI_API_KEY
 apify          = ApifyClient(APIFY_API_TOKEN)
+N_APIFY_PROFILES_AT_ONCE = 500
+N_LLM_CALLS_AT_ONCE = 10
 
 ###############################################################################
 #                    PROMPT BUILDERS  (no more globals!)                      #
@@ -188,6 +204,83 @@ def query_perplexity(prompt: str, timeout=40) -> str:
     resp.raise_for_status()
     return resp.json()["choices"][0]["message"]["content"]
 
+def _process_profile(
+    prof: dict[str, Any],
+    *,
+    prompts: dict[str, str],
+    use_perplexity: bool,
+) -> dict[str, Any]:
+    """
+    Runs **inside a worker thread**.
+    Does:  profile → GPT grade → (opt) Perplexity → GPT re-score
+    Returns one results-dict that is identical to what you were appending before.
+    """
+    uname = prof.get("username", "unknown")
+    captions = "\n".join(p.get("caption", "") for p in prof.get("latestPosts", []))
+
+    # 1) first grade -----------------------------------------------
+    user_msg = prompts["GRADE_USER"].format(
+        username=uname,
+        full_name=prof.get("fullName", ""),
+        location=prof.get("location", ""),
+        biography=prof.get("biography", ""),
+        external_urls=prof.get("externalUrls", ""),
+        captions=captions[:2000],
+    )
+    ig_text   = ""
+    base_score = None
+    try:
+        ig_text = gpt_chat(
+            [
+                {"role": "system", "content": prompts["GRADE_SYS"]},
+                {"role": "user",   "content": user_msg},
+            ]
+        )
+        base_score = extract_score(ig_text)
+    except Exception as exc:
+        logger.error("GPT grade failed for @%s – %s", uname, exc)
+        ig_text = str(exc)
+
+    # 2) optional Perplexity enrichment ---------------------------
+    enrichment = ""
+    if use_perplexity and PERPLEXITY_API_KEY:
+        try:
+            enrich_prompt = (
+                f"Instagram username: {uname}\n\nIG reasoning:\n{ig_text}\n\n"
+                f"{prompts['PERPLEXITY']}"
+            )
+            enrichment = query_perplexity(enrich_prompt)
+        except Exception as exc:
+            logger.warning("Perplexity failed for @%s – %s", uname, exc)
+
+    # 3) re-score if enrichment exists ----------------------------
+    final_score = base_score
+    if enrichment:
+        try:
+            final_text = gpt_chat(
+                [
+                    {"role": "system", "content": prompts["SCORE_SYS"]},
+                    {
+                        "role": "user",
+                        "content": prompts["SCORE_USER"].format(
+                            ig_reasoning=ig_text, enrichment_json=enrichment
+                        ),
+                    },
+                ],
+                temperature=0.2,
+            )
+            final_score = extract_score(final_text) or base_score
+        except Exception as exc:
+            logging.warning("Re-score GPT failed for @%s – %s", uname, exc)
+
+    logger.info(" → @%-20s  score %s", uname, final_score)
+    return dict(
+        username   = uname,
+        score      = final_score,
+        reasoning  = ig_text,
+        enrichment = enrichment,
+    )
+
 ###############################################################################
 #                              CORE FUNCTION                                  #
 ###############################################################################
@@ -238,12 +331,12 @@ def score_leads(
     handles = df_src["channelName"].tolist()
     if max_handles:
         handles = handles[:max_handles]
-
-    logging.info("Processing %d Instagram handles …", len(handles))
+    logger.info("Processing %d Instagram handles …", len(handles))
     results: list[dict[str, Any]] = []
-
-    # ─── iterate in Apify-friendly batches (≤100) ────────────────────────────
-    for chunk in batch(handles, 100):
+    
+    pbar = tqdm(total=len(handles), desc="Processing leads")  # overall progress bar
+    
+    for chunk in batch(handles, N_APIFY_PROFILES_AT_ONCE):
         try:
             run = apify.actor("apify/instagram-profile-scraper").call(
                 run_input={"usernames": chunk},
@@ -251,72 +344,27 @@ def score_leads(
             )
             profiles = list(apify.dataset(run["defaultDatasetId"]).iterate_items())
         except Exception as e:
-            logging.warning("Apify failed for %s… – skipping batch (%s)", chunk[:3], e)
+            logger.warning("Apify failed for %s… – skipping batch (%s)", chunk[:3], e)
+            pbar.update(len(chunk))
             continue
 
-        # ─── per profile: GPT grade → (optional) Perplexity → re-score ───────
-        for prof in profiles:
-            uname = prof.get("username", "unknown")
-            logging.info("Scoring @%s", uname)
-
-            # build GPT messages for the first grade
-            captions = "\n".join(p.get("caption", "") for p in prof.get("latestPosts", []))
-            user_msg  = prompts["GRADE_USER"].format(
-                username=uname,
-                full_name=prof.get("fullName", ""),
-                location=prof.get("location",""),
-                biography=prof.get("biography",""),
-                external_urls=prof.get("externalUrls",""),
-                captions=captions[:2000],
-            )
-            messages = [
-                {"role":"system","content":prompts["GRADE_SYS"]},
-                {"role":"user"  ,"content":user_msg},
-            ]
-
-            try:
-                ig_text = gpt_chat(messages)
-                base_score = extract_score(ig_text)
-            except Exception as exc:
-                logging.error("GPT grade failed for @%s – %s", uname, exc)
-                ig_text, base_score = str(exc), None
-
-            # optional Perplexity enrichment
-            enrichment = ""
-            if use_perplexity and PERPLEXITY_API_KEY:
+        with ThreadPoolExecutor(max_workers=N_LLM_CALLS_AT_ONCE) as pool:
+            future_to_uname = {
+                pool.submit(
+                    _process_profile,
+                    prof,
+                    prompts=prompts,
+                    use_perplexity=use_perplexity,
+                ): prof.get("username", "unknown")
+                for prof in profiles
+            }
+            for fut in as_completed(future_to_uname):
                 try:
-                    enrich_prompt = (
-                        f"Instagram username: {uname}\n\nIG reasoning:\n{ig_text}\n\n"
-                        f"{prompts['PERPLEXITY']}"
-                    )
-                    enrichment = query_perplexity(enrich_prompt)
+                    results.append(fut.result())
                 except Exception as exc:
-                    logging.warning("Perplexity failed for @%s – %s", uname, exc)
-
-            # re-score if we got enrichment
-            final_score = base_score
-            if enrichment:
-                try:
-                    resc_messages = [
-                        {"role":"system","content":prompts["SCORE_SYS"]},
-                        {"role":"user","content":prompts["SCORE_USER"].format(
-                            ig_reasoning=ig_text, enrichment_json=enrichment
-                        )},
-                    ]
-                    final_text  = gpt_chat(resc_messages, temperature=0.2)
-                    final_score = extract_score(final_text) or base_score
-                except Exception as exc:
-                    logging.warning("Re-score GPT failed for @%s – %s", uname, exc)
-
-            results.append(dict(
-                username   = uname,
-                score      = final_score,
-                reasoning  = ig_text,
-                enrichment = enrichment,
-            ))
-            logging.info(" → @%-20s  score %s", uname, final_score)
-            time.sleep(0.5)
-
+                    logger.error("Worker failed – %s", exc)
+                pbar.update(1)
+    pbar.close()
     df_out = pd.DataFrame(results)
     #Filter out low scores
     df_out = df_out[df_out["score"].apply(lambda x: x is not None and x >= min_filter_score)]
@@ -327,7 +375,7 @@ def score_leads(
     if csv_out:
         csv_out = Path(csv_out)
         df_out.to_csv(csv_out, index=False)
-        logging.info("Saved results → %s", csv_out.resolve())
+        logger.info("Saved results → %s", csv_out.resolve())
 
     return df_out
 
