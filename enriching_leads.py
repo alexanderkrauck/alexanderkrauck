@@ -108,20 +108,18 @@ def build_prompts(
     """).strip()
 
     PROMPT_PERPLEXITY = textwrap.dedent("""
-        Find online profiles that probably belong to the same person/company/entity and
+        Find all online profiles that probably belong to the same person/company/entity and
         could affect our judgment of income or real-estate interest.
 
-        Return a **JSON list** where each object has:
+        Return a table where each site entry has:
           site          – domain / platform (linkedin, github, …)
           url           – full link
           probability   – 0-1 likelihood it's the same entity
-          implication   – one short sentence (e.g. “C-level exec → high income”)
-
-        Only return valid JSON. Nothing else.
+          implication   – What that implies w.r.t. the target audience
     """).strip()
 
     PROMPT_SCORE_SYSTEM = textwrap.dedent(f"""
-        Output **only** the improved integer score 1-5 (same scale as before)
+        Output **only** the improved integer score 1-5
         after considering both the Instagram argumentation and the enrichment JSON.
         Prefer higher scores when the enrichment increases confidence that the
         profile matches:
@@ -134,9 +132,9 @@ def build_prompts(
         -----------------------
         {ig_reasoning}
 
-        Enrichment
+        Enrichment from other sources (internet)
         ----------
-        {enrichment_json}
+        {enrichment}
     """).strip()
 
     return dict(
@@ -229,13 +227,20 @@ def _process_profile(
     )
     ig_text   = ""
     base_score = None
+    
+    enrich_prompt = None
+    base_prompt = None
+    final_prompt = None
+    
     try:
-        ig_text = gpt_chat(
-            [
+        messages = [
                 {"role": "system", "content": prompts["GRADE_SYS"]},
                 {"role": "user",   "content": user_msg},
             ]
+        ig_text = gpt_chat(
+            messages
         )
+        base_prompt = str(ig_text)
         base_score = extract_score(ig_text)
     except Exception as exc:
         logger.error("GPT grade failed for @%s – %s", uname, exc)
@@ -257,16 +262,18 @@ def _process_profile(
     final_score = base_score
     if enrichment:
         try:
-            final_text = gpt_chat(
-                [
+            messages = [
                     {"role": "system", "content": prompts["SCORE_SYS"]},
                     {
                         "role": "user",
                         "content": prompts["SCORE_USER"].format(
-                            ig_reasoning=ig_text, enrichment_json=enrichment
+                            ig_reasoning=ig_text, enrichment=enrichment
                         ),
                     },
-                ],
+                ]
+            final_prompt = str(messages)
+            final_text = gpt_chat(
+                messages,
                 temperature=0.2,
             )
             final_score = extract_score(final_text) or base_score
@@ -279,6 +286,20 @@ def _process_profile(
         score      = final_score,
         reasoning  = ig_text,
         enrichment = enrichment,
+        biography  = prof.get("biography", ""),
+        location   = prof.get("location", ""),
+        external_urls = prof.get("externalUrls", ""),
+        full_name  = prof.get("fullName", ""),
+        captions   = captions,
+        latestPosts = prof.get("latestPosts", []),
+        createdAt  = datetime.now(timezone.utc).isoformat(),
+        updatedAt  = datetime.now(timezone.utc).isoformat(),
+        enrichmentCreatedAt = datetime.now(timezone.utc).isoformat(),
+        enrichmentUpdatedAt = datetime.now(timezone.utc).isoformat(),
+        enrich_prompt = enrich_prompt,
+        base_prompt = base_prompt,
+        final_prompt = final_prompt,
+        final_reasoning = final_text if final_text else "",
     )
 
 ###############################################################################
