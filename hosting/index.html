@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexander Krauck - AI Visionary</title>
+    <title>Alexander Krauck - AI Visionary & Consultant</title>
     <style>
         * {
             margin: 0;
@@ -134,10 +134,37 @@
             animation: fadeInUp 1s ease 0.5s forwards;
         }
 
+        .consulting-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            border: 2px solid #ff0040;
+            color: #ff0040;
+            background: rgba(255,0,64,0.1);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            animation: pulse-red 2s infinite;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.7s forwards, pulse-red 2s infinite 1s;
+        }
+
+        @keyframes pulse-red {
+            0%, 100% { box-shadow: 0 0 10px rgba(255,0,64,0.3); }
+            50% { box-shadow: 0 0 20px rgba(255,0,64,0.6); }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
         .cta-button {
             display: inline-block;
             padding: 15px 30px;
-            margin-top: 30px;
             border: 2px solid #00ff88;
             color: #00ff88;
             text-decoration: none;
@@ -148,6 +175,11 @@
             opacity: 0;
             animation: fadeInUp 1s ease 1s forwards;
             transition: all 0.3s ease;
+        }
+
+        .cta-button.secondary {
+            border-color: #00ccff;
+            color: #00ccff;
         }
 
         .cta-button::before {
@@ -161,13 +193,29 @@
             transition: left 0.5s;
         }
 
+        .cta-button.secondary::before {
+            background: linear-gradient(90deg, transparent, rgba(0,204,255,0.2), transparent);
+        }
+
         .cta-button:hover::before {
             left: 100%;
         }
 
         .cta-button:hover {
-            box-shadow: 0 0 20px #00ff88;
+            box-shadow: 0 0 20px currentColor;
             transform: translateY(-2px);
+        }
+
+        /* Social Media Icons */
+        .social-links {
+            position: fixed;
+            top: 50%;
+            left: 30px;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         /* Floating Particles */
@@ -184,24 +232,46 @@
             height: 2px;
             background: #00ff88;
             opacity: 0.7;
-            animation: float 20s infinite linear;
         }
 
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) translateX(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(100px);
-                opacity: 0;
-            }
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #00ff88;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00ff88;
+            text-decoration: none;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            background: rgba(0,255,136,0.05);
+        }
+
+        .social-icon:hover {
+            background: #00ff88;
+            color: #000;
+            box-shadow: 0 0 20px #00ff88;
+            transform: scale(1.1);
+        }
+
+        .social-icon.linkedin:hover {
+            background: #0077b5;
+            border-color: #0077b5;
+            box-shadow: 0 0 20px #0077b5;
+        }
+
+        .social-icon.twitter:hover {
+            background: #1da1f2;
+            border-color: #1da1f2;
+            box-shadow: 0 0 20px #1da1f2;
+        }
+
+        .social-icon.instagram:hover {
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+            border-color: #e6683c;
+            box-shadow: 0 0 20px #e6683c;
         }
 
         /* Navigation */
@@ -276,6 +346,404 @@
             to { width: 50px; }
         }
 
+        /* Consulting Section */
+        .consulting-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .consulting-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #ccc;
+        }
+
+        .highlight {
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        .highlight.red {
+            color: #ff0040;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .service-card {
+            background: rgba(0,255,136,0.05);
+            border: 1px solid rgba(0,255,136,0.3);
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,136,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,255,136,0.2);
+        }
+
+        .service-icon {
+            font-size: 48px;
+            color: #00ff88;
+            margin-bottom: 20px;
+        }
+
+        .service-name {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .service-description {
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(0,255,136,0.05);
+            border: 1px solid rgba(0,255,136,0.3);
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,136,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .project-name a {
+            color: #00ff88;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .project-name a:hover {
+            text-shadow: 0 0 10px #00ff88;
+        }
+
+        .project-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .project-description {
+            color: #ccc;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .project-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            font-size: 12px;
+        }
+
+        .language {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .language-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .project-topics {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .topic-tag {
+            background: rgba(0,255,136,0.2);
+            color: #00ff88;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+
+        /* Blog Section */
+        .blog-post-card {
+            background: rgba(0,255,136,0.05);
+            border: 1px solid rgba(0,255,136,0.3);
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-post-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,136,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .blog-post-card:hover::before {
+            left: 100%;
+        }
+
+        .post-header {
+            margin-bottom: 15px;
+        }
+
+        .post-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .post-link {
+            color: #00ff88;
+            text-decoration: none;
+        }
+
+        .post-link:hover {
+            text-shadow: 0 0 10px #00ff88;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 15px;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .post-excerpt {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(0,255,136,0.2);
+            color: #00ff88;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .read-more-btn {
+            background: transparent;
+            border: 1px solid #00ff88;
+            color: #00ff88;
+            padding: 8px 15px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .read-more-btn:hover {
+            background: #00ff88;
+            color: #000;
+            box-shadow: 0 0 15px #00ff88;
+        }
+
+        /* Blog Modal */
+        .blog-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .blog-modal-content {
+            background: #111;
+            border: 2px solid #00ff88;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .blog-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(0,255,136,0.3);
+        }
+
+        .blog-modal-header h1 {
+            color: #00ff88;
+            font-size: 24px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: #ff0040;
+            font-size: 30px;
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .blog-modal-meta {
+            padding: 15px 20px;
+            color: #888;
+            border-bottom: 1px solid rgba(0,255,136,0.3);
+        }
+
+        .blog-modal-body {
+            padding: 30px;
+            color: #ccc;
+            line-height: 1.8;
+        }
+
+        .blog-modal-body h2 {
+            color: #00ff88;
+            margin: 30px 0 15px 0;
+        }
+
+        .blog-modal-body h3 {
+            color: #00ccff;
+            margin: 25px 0 10px 0;
+        }
+
+        .blog-modal-body code {
+            background: rgba(0,255,136,0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #00ff88;
+        }
+
+        .blog-modal-body pre {
+            background: rgba(0,255,136,0.05);
+            border: 1px solid rgba(0,255,136,0.3);
+            padding: 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        /* Loading States */
+        .loading-projects, .loading-blog {
+            text-align: center;
+            padding: 50px;
+            color: #888;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(0,255,136,0.3);
+            border-top: 3px solid #00ff88;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
         /* About Section */
         .about-grid {
             display: grid;
@@ -288,11 +756,6 @@
             font-size: 18px;
             line-height: 1.8;
             color: #ccc;
-        }
-
-        .highlight {
-            color: #00ff88;
-            font-weight: bold;
         }
 
         .hologram {
@@ -460,6 +923,70 @@
             from { width: 0; }
         }
 
+        /* Games Section */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .game-card {
+            background: rgba(0,255,136,0.05);
+            border: 1px solid rgba(0,255,136,0.3);
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,136,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .game-card:hover::before {
+            left: 100%;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,255,136,0.2);
+            border-color: #00ff88;
+        }
+
+        .game-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .game-name {
+            font-size: 18px;
+            color: #00ff88;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .game-description {
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .game-card:hover .game-name {
+            text-shadow: 0 0 10px #00ff88;
+        }
+
         /* Contact Section */
         .contact-grid {
             display: grid;
@@ -530,13 +1057,18 @@
         /* Responsive */
         @media (max-width: 768px) {
             .about-grid,
-            .contact-grid {
+            .contact-grid,
+            .consulting-grid {
                 grid-template-columns: 1fr;
             }
             
             .nav {
                 top: 20px;
                 right: 20px;
+            }
+            
+            .social-links {
+                left: 20px;
             }
             
             .section {
@@ -546,6 +1078,11 @@
             .hologram {
                 width: 100%;
                 max-width: 300px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
             }
         }
 
@@ -587,78 +1124,30 @@
             0%, 50% { opacity: 1; }
             51%, 100% { opacity: 0; }
         }
-
-        /* Games Section */
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .game-card {
-            background: rgba(0,255,136,0.05);
-            border: 1px solid rgba(0,255,136,0.3);
-            padding: 30px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .game-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0,255,136,0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .game-card:hover::before {
-            left: 100%;
-        }
-
-        .game-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,255,136,0.2);
-            border-color: #00ff88;
-        }
-
-        .game-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .game-name {
-            font-size: 18px;
-            color: #00ff88;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        .game-description {
-            color: #ccc;
-            font-size: 14px;
-            line-height: 1.4;
-        }
-
-        .game-card:hover .game-name {
-            text-shadow: 0 0 10px #00ff88;
-        }
     </style>
 </head>
 <body>
     <div class="cursor"></div>
     <canvas class="matrix-bg" id="matrix"></canvas>
     
+    <!-- Social Media Links -->
+    <div class="social-links">
+        <a href="https://www.linkedin.com/in/alexander-krauck-979264173/" target="_blank" class="social-icon linkedin" title="LinkedIn">
+            💼
+        </a>
+        <a href="https://x.com/alexkrauck" target="_blank" class="social-icon twitter" title="X (Twitter)">
+            🐦
+        </a>
+        <a href="https://instagram.com/alexanderkrauck" target="_blank" class="social-icon instagram" title="Instagram">
+            📷
+        </a>
+    </div>
+    
     <nav class="nav">
         <a href="#home" class="nav-item">Home</a>
+        <a href="#consulting" class="nav-item">Consulting</a>
+        <a href="#projects" class="nav-item">Projects</a>
+        <a href="#blog" class="nav-item">Blog</a>
         <a href="#about" class="nav-item">About</a>
         <a href="#experience" class="nav-item">Experience</a>
         <a href="#skills" class="nav-item">Skills</a>
@@ -671,13 +1160,96 @@
         <div class="hero-content">
             <h1 class="glitch" data-text="ALEXANDER KRAUCK">ALEXANDER KRAUCK</h1>
             <p class="subtitle">AI OPERATIONS • HEAD OF COMPETENCE CENTER AI</p>
+            <div class="consulting-badge">AVAILABLE FOR CONSULTING & CUSTOM PROJECTS</div>
             <div class="terminal">
                 <div class="terminal-header">$ whoami</div>
                 <div class="terminal-line">AI_Visionary@Fabasoft:~$ Transforming Industries with Intelligence</div>
                 <div class="terminal-line">MLOps_Expert@Systems:~$ Building the Future, One Algorithm at a Time</div>
+                <div class="terminal-line">Consultant@Available:~$ Custom AI Solutions & Strategic Implementation</div>
                 <div class="terminal-line">Innovation_Leader@Austria:~$ <span class="terminal-cursor">_</span></div>
             </div>
-            <a href="#about" class="cta-button">INITIALIZE_CONTACT</a>
+            <div class="cta-buttons">
+                <a href="#consulting" class="cta-button">HIRE_ME</a>
+                <a href="#projects" class="cta-button secondary">VIEW_PROJECTS</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="consulting" class="section">
+        <div class="container">
+            <h2 class="section-title">CONSULTING_SERVICES.exe</h2>
+            <div class="consulting-grid">
+                <div class="consulting-text">
+                    <p>As <span class="highlight">Head of AI Competence Center at Fabasoft</span>, I bring enterprise-level AI expertise to your organization. I specialize in transforming complex AI concepts into <span class="highlight red">practical, revenue-generating solutions</span>.</p>
+                    <br>
+                    <p>Whether you need <span class="highlight">MLOps implementation</span>, <span class="highlight">multi-agent systems</span>, or <span class="highlight">custom AI development</span>, I deliver results that matter to your bottom line.</p>
+                    <br>
+                    <p><span class="highlight red">Available for both short-term consulting and long-term strategic partnerships.</span></p>
+                </div>
+                <div class="hologram">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                        <div style="font-size: 48px; color: #ff0040; margin-bottom: 20px;">🚀</div>
+                        <div style="color: #ff0040; font-size: 18px;">CONSULTING ACTIVE</div>
+                        <div style="color: #888; font-size: 14px;">READY FOR DEPLOYMENT</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🧠</div>
+                    <div class="service-name">MLOps Implementation</div>
+                    <div class="service-description">End-to-end machine learning operations setup, from model development to production deployment and monitoring.</div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🤖</div>
+                    <div class="service-name">Multi-Agent Systems</div>
+                    <div class="service-description">Design and implement intelligent agent networks for complex business process automation and optimization.</div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <div class="service-name">AI Strategy & Leadership</div>
+                    <div class="service-description">Strategic AI roadmap development, team leadership, and Scrum-based project management for AI initiatives.</div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🔮</div>
+                    <div class="service-name">Custom AI Development</div>
+                    <div class="service-description">Bespoke AI solutions including Graph Neural Networks, uncertainty quantification, and industry-specific applications.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">PROJECT_REPOSITORY</h2>
+            <div class="terminal">
+                <div class="terminal-header">$ git clone https://github.com/alexanderkrauck/*</div>
+                <div class="terminal-line">Fetching latest repositories from GitHub...</div>
+                <div class="terminal-line">Displaying public projects and contributions</div>
+                <div class="terminal-line">Status: <span style="color: #00ff88;">ACTIVE</span> <span class="terminal-cursor">_</span></div>
+            </div>
+            <div id="github-projects" class="projects-grid">
+                <!-- GitHub projects will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <section id="blog" class="section">
+        <div class="container">
+            <h2 class="section-title">NEURAL_BLOG.log</h2>
+            <div class="terminal">
+                <div class="terminal-header">$ cat /var/log/neural_insights.log</div>
+                <div class="terminal-line">Loading latest AI research insights and industry analysis...</div>
+                <div class="terminal-line">Parsing markdown files from /blog/ directory</div>
+                <div class="terminal-line">Ready for neural processing <span class="terminal-cursor">_</span></div>
+            </div>
+            <div id="blog-posts">
+                <!-- Blog posts will be loaded here -->
+            </div>
         </div>
     </section>
 
@@ -843,8 +1415,18 @@
                             <input type="email" placeholder="your.email@domain.com">
                         </div>
                         <div class="form-group">
+                            <label>PROJECT_TYPE</label>
+                            <select style="width: 100%; padding: 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(0,255,136,0.3); color: #fff; font-family: inherit;">
+                                <option>Consulting</option>
+                                <option>Custom AI Development</option>
+                                <option>MLOps Implementation</option>
+                                <option>Research Collaboration</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label>DATA_PACKET</label>
-                            <textarea rows="5" placeholder="Your message..."></textarea>
+                            <textarea rows="5" placeholder="Describe your project or consulting needs..."></textarea>
                         </div>
                         <button type="submit" class="cta-button">TRANSMIT_MESSAGE</button>
                     </form>
@@ -867,11 +1449,19 @@
                         <div class="contact-icon">🏢</div>
                         <div>Head of AI @ Fabasoft</div>
                     </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🚀</div>
+                        <div>Available for Consulting</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Load external scripts -->
+    <script src="js/github-projects.js"></script>
+    <script src="js/blog-loader.js"></script>
+    
     <script>
         // Custom Cursor
         const cursor = document.querySelector('.cursor');
@@ -922,9 +1512,28 @@
         function createParticle() {
             const particle = document.createElement('div');
             particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 20 + 's';
-            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particle.style.cssText = `
+                position: absolute;
+                width: 2px;
+                height: 2px;
+                background: #00ff88;
+                opacity: 0.7;
+                left: ${Math.random() * 100}%;
+                animation: float ${Math.random() * 10 + 10}s infinite linear;
+                animation-delay: ${Math.random() * 20}s;
+            `;
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes float {
+                    0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+                    10% { opacity: 1; }
+                    90% { opacity: 1; }
+                    100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
             document.querySelector('.particles').appendChild(particle);
             
             setTimeout(() => {
@@ -978,22 +1587,8 @@
             observer.observe(section);
         });
 
-        // Terminal typing effect
-        function typeWriter(element, text, delay = 100) {
-            let i = 0;
-            element.innerHTML = '';
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, delay);
-                }
-            }
-            type();
-        }
-
         // Hover effects for interactive elements
-        document.querySelectorAll('.skill-card, .experience-item').forEach(item => {
+        document.querySelectorAll('.skill-card, .experience-item, .service-card').forEach(item => {
             item.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-10px) scale(1.02)';
             });
@@ -1012,7 +1607,7 @@
         // Form submission
         document.querySelector('form').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Message transmission initiated! 🚀');
+            alert('Message transmission initiated! 🚀\n\nI will get back to you within 24 hours.');
         });
     </script>
 </body>
