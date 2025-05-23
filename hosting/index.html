@@ -1607,7 +1607,53 @@
         // Form submission
         document.querySelector('form').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Message transmission initiated! 🚀\n\nI will get back to you within 24 hours.');
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = this.querySelector('input[type="text"]').value || 'Potential Client';
+            const email = this.querySelector('input[type="email"]').value || 'client@example.com';
+            const projectType = this.querySelector('select').value || 'Consulting';
+            const message = this.querySelector('textarea').value || 'I am interested in discussing AI consulting opportunities.';
+            
+            // Create email subject and body
+            const subject = `AI Consulting Inquiry - ${projectType}`;
+            const body = `Hello Alexander,
+
+I hope this message finds you well. I am reaching out regarding your AI consulting services.
+
+CLIENT DETAILS:
+Name: ${name}
+Email: ${email}
+Project Type: ${projectType}
+
+PROJECT DESCRIPTION:
+${message}
+
+ADDITIONAL INFORMATION:
+I found your portfolio at alexanderkrauck.com and was impressed by your expertise in MLOps, Multi-agent Systems, and Graph Neural Networks. I believe your experience as Head of AI Competence Center at Fabasoft would be valuable for our project.
+
+I would appreciate the opportunity to discuss this further at your convenience.
+
+Best regards,
+${name}
+
+---
+This message was sent via the contact form at alexanderkrauck.com`;
+
+            // Encode the email components
+            const encodedSubject = encodeURIComponent(subject);
+            const encodedBody = encodeURIComponent(body);
+            
+            // Create mailto link
+            const mailtoLink = `mailto:alexander.krauck@googlemail.com?subject=${encodedSubject}&body=${encodedBody}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show confirmation message
+            setTimeout(() => {
+                alert('Email client opened! 📧\n\nIf your email client didn\'t open automatically, please send an email to:\nalexander.krauck@googlemail.com');
+            }, 500);
         });
     </script>
 </body>
