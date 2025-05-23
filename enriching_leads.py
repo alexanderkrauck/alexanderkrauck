@@ -73,13 +73,13 @@ with DEFAULT_CFG_PATH.open(encoding="utf-8") as f:
     _CFG_DEFAULTS = yaml.safe_load(f)
 
 def build_prompts(
-    target_desc: str, target_examples: str
+    target_desc: str, target_examples: str, product_desc: str = "",
 ) -> Dict[str, str]:
     """Return all prompt strings param-substituted with *this* target description."""
-    PROMPT_GRADE_SYSTEM = textwrap.dedent(f"""
+    PROMPT_GRADE_SYSTEM_INSTAGRAM = textwrap.dedent(f"""
         You are a lead-qualification expert.
 
-        Give an **integer score 1-5** assessing whether an Instagram account fits
+        Give an **integer score 1-5** assessing whether {'an instagram user'} fits
         the following target audience:
 
         {target_desc}
@@ -93,7 +93,7 @@ def build_prompts(
         ##Score n
     """).strip()
 
-    PROMPT_GRADE_USER = textwrap.dedent("""
+    PROMPT_GRADE_USER_INSTAGRAM = textwrap.dedent("""
         Instagram profile
         -----------------
         username      : {username}
@@ -107,42 +107,66 @@ def build_prompts(
         {captions}
     """).strip()
 
-    PROMPT_PERPLEXITY = textwrap.dedent("""
-        Find all online profiles that probably belong to the same person/company/entity and
-        could affect our judgment of income or real-estate interest.
+    PROMPT_PERPLEXITY = textwrap.dedent(f"""
+        You are a lead-qualification expert. The goal is to determine by doing a broader web search if a user with the given Instagram profile
+        fits the target audience. The target audience is:
+        {target_desc}
+        
+        # Instagram profile
+        The Instagram profile is:
+        {{ig_profile}}
 
+        # Output
         Return a table where each site entry has:
           site          – domain / platform (linkedin, github, …)
           url           – full link
           probability   – 0-1 likelihood it's the same entity
           implication   – What that implies w.r.t. the target audience
+        
+        In the end return why it would be reasonable that the entity would buy specifically this property and in particular why it is reasonable that this person would react to a cold email proposing this property. be critical.
+        Finally if possible try to find a contact email of this person but do not include candidate emails that are only a plausible guess.
+        
+        # Information about the thing the target audience is looking for
+        {product_desc}        
     """).strip()
 
-    PROMPT_SCORE_SYSTEM = textwrap.dedent(f"""
-        Output **only** the improved integer score 1-5
-        after considering both the Instagram argumentation and the enrichment JSON.
-        Prefer higher scores when the enrichment increases confidence that the
-        profile matches:
+    PROMPT_GRADE_SYSTEM_FINAL = textwrap.dedent(f"""
+        You are a lead-qualification expert.
+
+        Give an **integer score 1-5** assessing whether {'a user that you obtain an intagram profile, a previous assessment of the profile and an extended profile via websearch of'} fits
+        the following target audience:
 
         {target_desc}
+
+        Examples:
+        {target_examples}
+
+        FORMAT → exactly:
+
+        [your concise argumentation]
+        ##Score n
     """).strip()
 
-    PROMPT_SCORE_USER = textwrap.dedent("""
-        Instagram argumentation
+    PROMPT_GRADE_USER_FINAL = textwrap.dedent("""
+        Instagram profile
+        -----------------------
+        {ig_profile}
+        
+        Instagram reasoning
         -----------------------
         {ig_reasoning}
 
         Enrichment from other sources (internet)
-        ----------
+        -----------------------
         {enrichment}
     """).strip()
 
     return dict(
-        GRADE_SYS=PROMPT_GRADE_SYSTEM,
-        GRADE_USER=PROMPT_GRADE_USER,
+        GRADE_SYS=PROMPT_GRADE_SYSTEM_INSTAGRAM,
+        GRADE_USER=PROMPT_GRADE_USER_INSTAGRAM,
         PERPLEXITY=PROMPT_PERPLEXITY,
-        SCORE_SYS=PROMPT_SCORE_SYSTEM,
-        SCORE_USER=PROMPT_SCORE_USER,
+        SCORE_SYS=PROMPT_GRADE_SYSTEM_FINAL,
+        SCORE_USER=PROMPT_GRADE_USER_FINAL,
     )
 
 ###############################################################################
@@ -173,7 +197,7 @@ def batch(lst: List[str], n: int) -> List[List[str]]:
     reraise=True,
 )
 def gpt_chat(messages: List[Dict[str, Any]],
-             model="gpt-4o-mini",
+             model="gpt-4o",
              temperature=0.7,
              max_tokens=1024) -> str:
     resp = openai.chat.completions.create(
@@ -240,7 +264,7 @@ def _process_profile(
         ig_text = gpt_chat(
             messages
         )
-        base_prompt = str(ig_text)
+        base_prompt = str(messages)
         base_score = extract_score(ig_text)
     except Exception as exc:
         logger.error("GPT grade failed for @%s – %s", uname, exc)
@@ -252,7 +276,7 @@ def _process_profile(
         try:
             enrich_prompt = (
                 f"Instagram username: {uname}\n\nIG reasoning:\n{ig_text}\n\n"
-                f"{prompts['PERPLEXITY']}"
+                f"{prompts['PERPLEXITY'].format(ig_profile=user_msg)}"
             )
             enrichment = query_perplexity(enrich_prompt)
         except Exception as exc:
@@ -267,7 +291,7 @@ def _process_profile(
                     {
                         "role": "user",
                         "content": prompts["SCORE_USER"].format(
-                            ig_reasoning=ig_text, enrichment=enrichment
+                            ig_reasoning=ig_text, enrichment=enrichment, ig_profile=user_msg
                         ),
                     },
                 ]
@@ -309,6 +333,7 @@ def score_leads(
     *,
     target_desc: str  = _CFG_DEFAULTS["TARGET_AUDIENCE_DESCRIPTION"],
     target_examples: str = _CFG_DEFAULTS["TARGET_AUDIENCE_EXAMPLES"],
+    product_desc: str = "",
     use_perplexity: bool = True,
     csv_in: str | Path = "leads.csv",
     csv_out: str | Path | None = None,
@@ -336,7 +361,7 @@ def score_leads(
     if not csv_in.exists():
         raise FileNotFoundError(csv_in)
 
-    prompts = build_prompts(target_desc, target_examples)
+    prompts = build_prompts(target_desc, target_examples, product_desc="")
 
     # ─── read & validate handles ──────────────────────────────────────────────
     df_src = (
@@ -364,6 +389,11 @@ def score_leads(
                 timeout_secs=1200,
             )
             profiles = list(apify.dataset(run["defaultDatasetId"]).iterate_items())
+            # Filter out profiles with empty or None 'biography' (description)
+            profiles = [
+                prof for prof in profiles
+                if prof.get("biography") not in ("", None)
+            ]
         except Exception as e:
             logger.warning("Apify failed for %s… – skipping batch (%s)", chunk[:3], e)
             pbar.update(len(chunk))
