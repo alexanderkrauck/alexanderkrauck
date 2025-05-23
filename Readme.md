@@ -42,28 +42,14 @@
 
 ---
 
-## 🚀 **DEPLOYMENT INSTRUCTIONS**
-
-```bash
-# Clone the neural network
-git clone https://github.com/yourusername/InfiniLead.git
-
-# Initialize local environment
-cd InfiniLead/hosting
-python3 -m http.server 8000
-
-# Access the interface
-open http://localhost:8000
-```
-
----
-
 ## 🎮 **ENTERTAINMENT PROTOCOLS**
 
 The system includes three retro-cyberpunk minigames:
 - **SNAKE.exe** - Neural pathway optimization
 - **PAC-MAN.exe** - Resource collection simulation  
 - **SPACE_INVADERS.exe** - Threat neutralization protocol
+
+All games feature full mobile responsiveness with touch controls for seamless gameplay across devices.
 
 ---
 
