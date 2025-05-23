@@ -1,4 +1,6 @@
 
+# Alexander Krauck
+
 👋 Hi, I’m Alexander Krauck
 
 👀 I’m interested in Machine Learning Research, in particular Deep Learning
@@ -7,4 +9,4 @@
 
 💞️ I’m looking to collaborate on many future Deep Learning projects
 
-📫 How to reach me: alexander.krauck@gmail.com
+📫 How to reach me: <alexander.krauck@gmail.com>
