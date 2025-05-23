@@ -769,25 +769,101 @@
             animation: pulse 2s infinite;
         }
 
+        .hologram-portrait {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            filter: 
+                contrast(1.2) 
+                brightness(1.1) 
+                hue-rotate(10deg)
+                drop-shadow(0 0 20px rgba(0,255,136,0.5));
+            transition: all 0.3s ease;
+        }
+
+        .hologram:hover .hologram-portrait {
+            filter: 
+                contrast(1.4) 
+                brightness(1.3) 
+                hue-rotate(20deg)
+                drop-shadow(0 0 30px rgba(0,255,136,0.8));
+            transform: scale(1.05);
+        }
+
+        .hologram-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(0,255,136,0.1) 50%,
+                transparent 70%
+            );
+            animation: hologram-scan 3s infinite;
+            pointer-events: none;
+        }
+
+        .hologram-glitch {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0,255,136,0.03) 2px,
+                    rgba(0,255,136,0.03) 4px
+                );
+            animation: glitch-lines 0.1s infinite;
+            pointer-events: none;
+        }
+
+        .hologram-frame {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 1px solid rgba(0,255,136,0.3);
+            border-radius: 15px;
+            animation: frame-pulse 2s infinite alternate;
+        }
+
+        @keyframes hologram-scan {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        @keyframes glitch-lines {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(-2px); }
+            40% { transform: translateX(2px); }
+            60% { transform: translateX(-1px); }
+            80% { transform: translateX(1px); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes frame-pulse {
+            0% { 
+                border-color: rgba(0,255,136,0.3);
+                box-shadow: 0 0 10px rgba(0,255,136,0.2);
+            }
+            100% { 
+                border-color: rgba(0,255,136,0.8);
+                box-shadow: 0 0 25px rgba(0,255,136,0.5);
+            }
+        }
+
         @keyframes pulse {
             0%, 100% { box-shadow: 0 0 20px rgba(0,255,136,0.3); }
             50% { box-shadow: 0 0 40px rgba(0,255,136,0.6); }
-        }
-
-        .hologram::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent 40%, rgba(0,255,136,0.1) 50%, transparent 60%);
-            animation: scan 3s infinite;
-        }
-
-        @keyframes scan {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         /* Experience Section */
@@ -1124,10 +1200,333 @@
             0%, 50% { opacity: 1; }
             51%, 100% { opacity: 0; }
         }
+
+        /* Floating Holographic Avatar */
+        .floating-avatar {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            opacity: 0.15;
+            z-index: 1;
+            animation: float-avatar 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .floating-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            filter: 
+                contrast(1.5) 
+                brightness(1.2) 
+                hue-rotate(30deg)
+                blur(1px)
+                drop-shadow(0 0 30px rgba(0,255,136,0.6));
+            border: 2px solid rgba(0,255,136,0.3);
+        }
+
+        .floating-avatar::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 1px solid rgba(0,255,136,0.2);
+            border-radius: 50%;
+            animation: avatar-pulse 3s infinite;
+        }
+
+        .floating-avatar::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            border: 1px solid rgba(0,255,136,0.1);
+            border-radius: 50%;
+            animation: avatar-pulse 3s infinite 1s;
+        }
+
+        @keyframes float-avatar {
+            0%, 100% { 
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.15;
+            }
+            50% { 
+                transform: translateY(-20px) rotate(5deg);
+                opacity: 0.25;
+            }
+        }
+
+        @keyframes avatar-pulse {
+            0%, 100% { 
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% { 
+                transform: scale(1.1);
+                opacity: 0.6;
+            }
+        }
+
+        /* Terminal Avatar */
+        .terminal-avatar {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-right: 10px;
+            vertical-align: middle;
+            border: 1px solid #00ff88;
+            filter: 
+                contrast(1.3) 
+                brightness(1.1) 
+                hue-rotate(10deg)
+                drop-shadow(0 0 5px rgba(0,255,136,0.5));
+            animation: terminal-avatar-glow 2s infinite alternate;
+        }
+
+        @keyframes terminal-avatar-glow {
+            0% { 
+                box-shadow: 0 0 5px rgba(0,255,136,0.3);
+                filter: 
+                    contrast(1.3) 
+                    brightness(1.1) 
+                    hue-rotate(10deg)
+                    drop-shadow(0 0 5px rgba(0,255,136,0.5));
+            }
+            100% { 
+                box-shadow: 0 0 10px rgba(0,255,136,0.6);
+                filter: 
+                    contrast(1.5) 
+                    brightness(1.3) 
+                    hue-rotate(20deg)
+                    drop-shadow(0 0 8px rgba(0,255,136,0.8));
+            }
+        }
+
+        /* Cursor Following Holographic Avatar */
+        .cursor-avatar {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid rgba(0,255,136,0.6);
+            filter: 
+                contrast(1.4) 
+                brightness(1.2) 
+                hue-rotate(15deg)
+                blur(0.5px)
+                drop-shadow(0 0 15px rgba(0,255,136,0.8));
+            animation: cursor-avatar-pulse 1.5s infinite;
+        }
+
+        .cursor-avatar::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 1px solid rgba(0,255,136,0.4);
+            border-radius: 50%;
+            animation: cursor-avatar-ring 2s infinite;
+        }
+
+        @keyframes cursor-avatar-pulse {
+            0%, 100% { 
+                transform: scale(1);
+                filter: 
+                    contrast(1.4) 
+                    brightness(1.2) 
+                    hue-rotate(15deg)
+                    blur(0.5px)
+                    drop-shadow(0 0 15px rgba(0,255,136,0.8));
+            }
+            50% { 
+                transform: scale(1.1);
+                filter: 
+                    contrast(1.6) 
+                    brightness(1.4) 
+                    hue-rotate(25deg)
+                    blur(0.3px)
+                    drop-shadow(0 0 20px rgba(0,255,136,1));
+            }
+        }
+
+        @keyframes cursor-avatar-ring {
+            0% { 
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            100% { 
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Large Hologram on Title Hover */
+        .hero-hologram {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 5;
+            transition: opacity 0.5s ease;
+        }
+
+        .hero-hologram img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 3px solid rgba(0,255,136,0.8);
+            filter: 
+                contrast(1.6) 
+                brightness(1.3) 
+                hue-rotate(20deg)
+                drop-shadow(0 0 40px rgba(0,255,136,1));
+            animation: hero-hologram-pulse 2s infinite;
+        }
+
+        .hero-hologram::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
+            border: 2px solid rgba(0,255,136,0.6);
+            border-radius: 30px;
+            animation: hero-hologram-ring1 3s infinite;
+        }
+
+        .hero-hologram::after {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: -30px;
+            right: -30px;
+            bottom: -30px;
+            border: 1px solid rgba(0,255,136,0.4);
+            border-radius: 40px;
+            animation: hero-hologram-ring2 3s infinite 1s;
+        }
+
+        .hero-hologram-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 3px,
+                    rgba(0,255,136,0.1) 3px,
+                    rgba(0,255,136,0.1) 6px
+                );
+            border-radius: 20px;
+            animation: hero-hologram-scan 0.2s infinite;
+        }
+
+        .hero-hologram-label {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00ff88;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px #00ff88;
+            animation: hero-hologram-text 2s infinite;
+        }
+
+        @keyframes hero-hologram-pulse {
+            0%, 100% { 
+                transform: scale(1);
+                filter: 
+                    contrast(1.6) 
+                    brightness(1.3) 
+                    hue-rotate(20deg)
+                    drop-shadow(0 0 40px rgba(0,255,136,1));
+            }
+            50% { 
+                transform: scale(1.02);
+                filter: 
+                    contrast(1.8) 
+                    brightness(1.5) 
+                    hue-rotate(30deg)
+                    drop-shadow(0 0 60px rgba(0,255,136,1.2));
+            }
+        }
+
+        @keyframes hero-hologram-ring1 {
+            0% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% { 
+                transform: scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes hero-hologram-ring2 {
+            0% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 0.6;
+            }
+            100% { 
+                transform: scale(1.3) rotate(-360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes hero-hologram-scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-6px); }
+        }
+
+        @keyframes hero-hologram-text {
+            0%, 100% { 
+                opacity: 0.8;
+                text-shadow: 0 0 15px #00ff88;
+            }
+            50% { 
+                opacity: 1;
+                text-shadow: 0 0 25px #00ff88;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="cursor"></div>
+    <div class="cursor-avatar">
+        <img src="resources/cyberpunk_portrait_compressed.jpg" alt="Alexander Krauck - AI Visionary">
+    </div>
     <canvas class="matrix-bg" id="matrix"></canvas>
     
     <!-- Social Media Links -->
@@ -1173,6 +1572,14 @@
                 <a href="#projects" class="cta-button secondary">VIEW_PROJECTS</a>
             </div>
         </div>
+        <div class="floating-avatar">
+            <img src="resources/cyberpunk_portrait_compressed.jpg" alt="Alexander Krauck - AI Visionary">
+        </div>
+        <div class="hero-hologram">
+            <img src="resources/cyberpunk_portrait_compressed.jpg" alt="Alexander Krauck - AI Visionary" class="hologram-portrait">
+            <div class="hero-hologram-overlay"></div>
+            <div class="hero-hologram-label">NEURAL_CORE_ACTIVE</div>
+        </div>
     </section>
 
     <section id="consulting" class="section">
@@ -1193,10 +1600,13 @@
                     </div>
                 </div>
                 <div class="hologram">
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-                        <div style="font-size: 48px; color: #ff0040; margin-bottom: 20px;">🚀</div>
-                        <div style="color: #ff0040; font-size: 18px;">CONSULTING ACTIVE</div>
-                        <div style="color: #888; font-size: 14px;">READY FOR DEPLOYMENT</div>
+                    <img src="resources/cyberpunk_portrait_compressed.jpg" alt="Alexander Krauck - AI Visionary" class="hologram-portrait">
+                    <div class="hologram-overlay"></div>
+                    <div class="hologram-glitch"></div>
+                    <div class="hologram-frame"></div>
+                    <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 10;">
+                        <div style="color: #00ff88; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px #00ff88;">NEURAL_CORE_ACTIVE</div>
+                        <div style="color: #888; font-size: 10px; margin-top: 5px;">PROCESSING...</div>
                     </div>
                 </div>
             </div>
@@ -1271,10 +1681,13 @@
                     <p>From researching <span class="highlight">Graph Neural Networks</span> to developing uncertainty prediction models for the steel industry at voestalpine, I bridge the gap between cutting-edge research and real-world applications.</p>
                 </div>
                 <div class="hologram">
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-                        <div style="font-size: 48px; color: #00ff88; margin-bottom: 20px;">🤖</div>
-                        <div style="color: #00ff88; font-size: 18px;">AI NEURAL CORE</div>
-                        <div style="color: #888; font-size: 14px;">PROCESSING...</div>
+                    <img src="resources/cyberpunk_portrait_compressed.jpg" alt="Alexander Krauck - AI Visionary" class="hologram-portrait">
+                    <div class="hologram-overlay"></div>
+                    <div class="hologram-glitch"></div>
+                    <div class="hologram-frame"></div>
+                    <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 10;">
+                        <div style="color: #00ff88; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px #00ff88;">NEURAL_CORE_ACTIVE</div>
+                        <div style="color: #888; font-size: 10px; margin-top: 5px;">PROCESSING...</div>
                     </div>
                 </div>
             </div>
@@ -1471,10 +1884,45 @@
     <script>
         // Custom Cursor
         const cursor = document.querySelector('.cursor');
+        const cursorAvatar = document.querySelector('.cursor-avatar');
+        
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
+            
+            // Update cursor avatar position with slight delay for smooth following
+            setTimeout(() => {
+                cursorAvatar.style.left = e.clientX + 'px';
+                cursorAvatar.style.top = e.clientY + 'px';
+            }, 50);
         });
+
+        // Show cursor avatar on hover over key sections
+        const avatarTriggers = document.querySelectorAll('.section-title, .cta-button, .service-card, .project-card, .hologram');
+        
+        avatarTriggers.forEach(trigger => {
+            trigger.addEventListener('mouseenter', () => {
+                cursorAvatar.style.opacity = '0.8';
+            });
+            
+            trigger.addEventListener('mouseleave', () => {
+                cursorAvatar.style.opacity = '0';
+            });
+        });
+
+        // Large hologram on title hover
+        const heroTitle = document.querySelector('.glitch');
+        const heroHologram = document.querySelector('.hero-hologram');
+        
+        if (heroTitle && heroHologram) {
+            heroTitle.addEventListener('mouseenter', () => {
+                heroHologram.style.opacity = '0.9';
+            });
+            
+            heroTitle.addEventListener('mouseleave', () => {
+                heroHologram.style.opacity = '0';
+            });
+        }
 
         // Matrix Background
         const canvas = document.getElementById('matrix');
