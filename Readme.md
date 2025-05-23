@@ -1,140 +1,63 @@
-# InfiniLead: Automated Instagram Lead Generation, Enrichment & Scoring
+# InfiniLead Project Setup
 
-## Project Overview
+This project provides tools for lead enrichment and scoring using LLMs and web enrichment APIs.
 
-InfiniLead is a comprehensive Python-based toolkit for discovering, enriching, and scoring Instagram leads, with a focus on real estate and investment audiences. The system automates the process of finding relevant Instagram profiles, extracting their data, enriching their context with AI and web search, and scoring them for quality and fit. It is designed for high-throughput, explainability, and flexibility, and can be run both as a command-line tool and as a Python library (including in Jupyter notebooks).
+## Setup Instructions
 
----
+### 1. Clone the Repository
 
-## Workflow Summary
+```
+git clone <your-repo-url>
+cd InfiniLead
+```
 
-1. **Lead Discovery**: Generate diverse Instagram search queries using GPT-4o, then use Apify's Google Search Scraper to find Instagram profiles matching your criteria.
-2. **Lead Extraction & Filtering**: Extract Instagram handles and follower counts from search results, keeping only those with 100–5,000 followers (to target real, non-influencer accounts).
-3. **Lead Enrichment & Scoring**: For each handle, scrape detailed Instagram profile data, then use OpenAI GPT models to score each lead against a custom target audience definition. Optionally, enrich with additional web data using Perplexity AI.
-4. **Result Output**: Save deduplicated, scored leads to CSV for further use.
+### 2. Create and Activate a Virtual Environment
 
----
+#### On macOS/Linux:
+```
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
-## Python Scripts in Detail
+#### On Windows:
+```
+python -m venv .venv
+.venv\Scripts\activate
+```
 
-### 1. `buying_leads.py`
+### 3. Install Dependencies
 
-**Purpose:**
-Automates the discovery of Instagram leads by generating search queries and scraping Google for Instagram profiles.
+```
+pip install -r requirements.txt
+```
 
-**Detailed Steps:**
-- Uses GPT-4o to generate a list of diverse search queries relevant to your target (e.g., real estate in Styria, Austria).
-- For each query, uses Apify's Google Search Scraper to find Instagram profile links.
-- Extracts Instagram handles and follower counts from the search results.
-- Filters leads to keep only those with 100–5,000 followers (to avoid bots and influencers).
-- Deduplicates leads and saves them to a timestamped CSV file (e.g., `leads-20250521T191711Z.csv`).
+### 4. Environment Variables
 
-**Typical Output:**
-A CSV file with Instagram handles and associated metadata, ready for enrichment and scoring.
+Create a `.env` file in the root directory and add your API keys:
 
----
+```
+OPENAI_API_KEY=your_openai_key
+APIFY_API_TOKEN=your_apify_token
+PERPLEXITY_API_KEY=your_perplexity_key  # optional, for web enrichment
+```
 
-### 2. `enriching_leads.py`
+### 5. Data and Logs
+- All data files (.csv, .json, .md) are stored in the `data/` folder.
+- Log files are stored in the `logs/` folder and are timestamped per run.
 
-**Purpose:**
-The core enrichment and scoring engine. Can be run as a CLI or imported as a library.
+### 6. Running the Lead Enrichment Script
 
-**Detailed Steps:**
-- Reads Instagram handles from a CSV file (column: `channelName`).
-- Uses Apify to scrape detailed Instagram profile data in large batches (up to 500 at a time).
-- For each profile, constructs a custom prompt and uses OpenAI GPT models to generate a score (1–5) and reasoning, based on your target audience definition and examples (from `prompt_placeholders.yaml`).
-- Optionally, queries Perplexity AI to find additional online profiles (LinkedIn, etc.) and re-scores the lead with this enrichment.
-- Parallelizes LLM calls and scraping for speed (using ThreadPoolExecutor).
-- Logs all actions and errors to `lead_enrichment.log`.
-- Outputs a DataFrame (and optionally a CSV) with columns: `username`, `score`, `reasoning`, and `enrichment`.
-- Highly configurable via YAML prompt placeholders and CLI arguments.
+You can run the main script as a CLI:
 
-**Typical Output:**
-A scored and enriched CSV file (e.g., `leads_scored.csv`) and a log file (`lead_enrichment.log`).
+```
+python enriching_leads.py --csv-in data/leads.csv --csv-out data/leads_scored.csv
+```
 
----
-
-### 3. `use_code.ipynb`
-
-**Purpose:**
-A Jupyter notebook for interactive, programmatic use of the enrichment pipeline.
-
-**Detailed Steps:**
-- Loads prompt placeholders from `prompt_placeholders.yaml`.
-- Calls `score_leads` from `enriching_leads.py` with custom parameters.
-- Displays and analyzes the resulting DataFrame, allowing for further exploration and filtering.
+For more options, use:
+```
+python enriching_leads.py --help
+```
 
 ---
 
-## Supporting Files
-
-- **`prompt_placeholders.yaml`**: Stores all prompt templates and target audience definitions. Allows easy customization of the scoring criteria and examples without changing code.
-- **`requirements.txt`**: Lists all Python dependencies required to run the project (pandas, openai, apify-client, requests, tenacity, tqdm, pyyaml, python-dotenv, etc.).
-- **`lead_enrichment.log`**: Log file generated by `enriching_leads.py`, containing detailed logs of all operations, errors, and scoring results for traceability and debugging.
-- **Output CSVs**: Files like `leads_scored.csv` and `leads-<timestamp>.csv` store the results of the enrichment and scoring process.
-
----
-
-## Example Workflow
-
-1. **Generate Leads**
-   ```bash
-   python buying_leads.py
-   # Produces leads-<timestamp>.csv
-   ```
-2. **Enrich & Score Leads**
-   ```bash
-   python enriching_leads.py --csv-in leads-<timestamp>.csv --csv-out leads_scored.csv --no-perp --max 1000
-   ```
-3. **Analyze in Notebook**
-   ```python
-   from enriching_leads import score_leads
-   import yaml
-   with open('prompt_placeholders.yaml', 'r') as file:
-       prompt_placeholders = yaml.safe_load(file)
-   df = score_leads(
-       target_desc=prompt_placeholders['TARGET_AUDIENCE_FOLLOWING_DESCRIPTION'],
-       target_examples=prompt_placeholders['TARGET_AUDIENCE_FOLLOWING_EXAMPLES'],
-       use_perplexity=False,
-       csv_in="leads.csv",
-       csv_out="leads_scored.csv",
-       max_handles=10000,
-       min_filter_score=3
-   )
-   print(df[['username','score']].head())
-   ```
-
----
-
-## Configuration & Customization
-
-- **API Keys**: Set `OPENAI_API_KEY`, `APIFY_API_TOKEN`, and optionally `PERPLEXITY_API_KEY` in your environment or a `.env` file.
-- **Prompts**: Edit `prompt_placeholders.yaml` to define your target audience and examples for maximum scoring accuracy.
-- **Batch Sizes**: Adjust `N_APIFY_PROFILES_AT_ONCE` and `N_LLM_CALLS_AT_ONCE` in `enriching_leads.py` for performance tuning.
-
----
-
-## Advanced Details
-
-- **Threading**: Profile processing and LLM calls are parallelized for speed, but API rate limits and quotas should be considered.
-- **Error Handling**: Retries are implemented for OpenAI API calls; failed batches or profiles are logged and skipped.
-- **Extensibility**: The system is modular and can be extended to other social platforms or enrichment sources by modifying the prompt builders and enrichment logic.
-
----
-
-## Requirements
-
-- Python 3.8+
-- See `requirements.txt` for all dependencies.
-
-## License
-
-Proprietary. For internal use only.
-
-## Author
-
-Alexander Krauck
-
----
-
-For questions or support, please contact the author.
+For further details, see the code and comments in `enriching_leads.py`.

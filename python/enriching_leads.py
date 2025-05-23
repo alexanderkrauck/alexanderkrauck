@@ -35,6 +35,8 @@ from tenacity import retry, stop_after_attempt, wait_fixed, retry_if_exception_t
 import yaml
 from tqdm import tqdm  # added import for tqdm
 
+from utils.utils_llm import gpt_chat, query_perplexity
+
 ###############################################################################
 #                          LOGGING & ENVIRONMENT                              #
 ###############################################################################
@@ -42,7 +44,13 @@ logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 logger.handlers.clear()
 
-file_handler = logging.FileHandler("lead_enrichment.log")
+# Create a timestamped log file in the logs directory
+log_dir = Path("logs")
+log_dir.mkdir(exist_ok=True)
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+log_file_path = log_dir / f"lead_enrichment_{timestamp}.log"
+
+file_handler = logging.FileHandler(log_file_path)
 file_handler.setLevel(logging.INFO)
 file_handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
 
@@ -190,42 +198,6 @@ def batch(lst: List[str], n: int) -> List[List[str]]:
 ###############################################################################
 #                         GPT & PERPLEXITY HELPERS                            #
 ###############################################################################
-@retry(
-    stop=stop_after_attempt(2),
-    wait=wait_fixed(2),
-    retry=retry_if_exception_type(openai.OpenAIError),
-    reraise=True,
-)
-def gpt_chat(messages: List[Dict[str, Any]],
-             model="gpt-4o",
-             temperature=0.7,
-             max_tokens=1024) -> str:
-    resp = openai.chat.completions.create(
-        model=model,
-        temperature=temperature,
-        messages=messages,
-        max_tokens=max_tokens,
-    )
-    return resp.choices[0].message.content
-
-def query_perplexity(prompt: str, timeout=40) -> str:
-    hdr = {
-        "Authorization": f"Bearer {PERPLEXITY_API_KEY}",
-        "Content-Type": "application/json",
-    }
-    resp = requests.post(
-        "https://api.perplexity.ai/chat/completions",
-        headers=hdr,
-        json={
-            "model": "sonar",
-            "messages": [{"role": "user", "content": prompt}],
-            "temperature": 0.3,
-        },
-        timeout=timeout,
-    )
-    resp.raise_for_status()
-    return resp.json()["choices"][0]["message"]["content"]
-
 def _process_profile(
     prof: dict[str, Any],
     *,

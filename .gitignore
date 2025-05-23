@@ -72,6 +72,7 @@ coverage.xml
 # AI/ML specific
 data/
 models/
+outputs/
 *.h5
 *.ckpt
 *.pth
@@ -79,3 +80,8 @@ models/
 # Data Files
 *.csv
 *.json
+
+#firebase
+.firebase/
+.firebaserc
+.github/workflows/.cache/
