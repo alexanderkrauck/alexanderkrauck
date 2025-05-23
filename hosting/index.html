@@ -587,6 +587,70 @@
             0%, 50% { opacity: 1; }
             51%, 100% { opacity: 0; }
         }
+
+        /* Games Section */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .game-card {
+            background: rgba(0,255,136,0.05);
+            border: 1px solid rgba(0,255,136,0.3);
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,136,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .game-card:hover::before {
+            left: 100%;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,255,136,0.2);
+            border-color: #00ff88;
+        }
+
+        .game-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .game-name {
+            font-size: 18px;
+            color: #00ff88;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .game-description {
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .game-card:hover .game-name {
+            text-shadow: 0 0 10px #00ff88;
+        }
     </style>
 </head>
 <body>
@@ -598,6 +662,7 @@
         <a href="#about" class="nav-item">About</a>
         <a href="#experience" class="nav-item">Experience</a>
         <a href="#skills" class="nav-item">Skills</a>
+        <a href="#games" class="nav-item">Games</a>
         <a href="#contact" class="nav-item">Contact</a>
     </nav>
 
@@ -716,6 +781,48 @@
                     <div class="skill-level">
                         <div class="skill-progress" style="width: 92%;"></div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="games" class="section">
+        <div class="container">
+            <h2 class="section-title">ARCADE_PROTOCOLS</h2>
+            <div class="games-grid">
+                <a href="games/snake.html" class="game-card">
+                    <div class="game-icon">🐍</div>
+                    <div class="game-name">SNAKE.exe</div>
+                    <div class="game-description">
+                        Classic snake game with cyberpunk aesthetics.<br>
+                        Eat the food, grow longer, avoid walls and yourself.
+                    </div>
+                </a>
+                
+                <a href="games/pacman.html" class="game-card">
+                    <div class="game-icon">👾</div>
+                    <div class="game-name">PAC-MAN.exe</div>
+                    <div class="game-description">
+                        Navigate the neon maze, collect dots, avoid ghosts.<br>
+                        Power pellets turn the tables on your enemies.
+                    </div>
+                </a>
+                
+                <a href="games/space-invaders.html" class="game-card">
+                    <div class="game-icon">🚀</div>
+                    <div class="game-name">SPACE_INVADERS.exe</div>
+                    <div class="game-description">
+                        Defend Earth from alien invasion.<br>
+                        Shoot the invaders before they reach you.
+                    </div>
+                </a>
+            </div>
+            <div style="text-align: center; margin-top: 40px; color: #888; font-size: 14px;">
+                <div class="terminal">
+                    <div class="terminal-header">$ ./entertainment_protocols.sh</div>
+                    <div class="terminal-line">Loading retro gaming modules...</div>
+                    <div class="terminal-line">All games built with pure HTML5/JavaScript</div>
+                    <div class="terminal-line">Ready for deployment <span class="terminal-cursor">_</span></div>
                 </div>
             </div>
         </div>

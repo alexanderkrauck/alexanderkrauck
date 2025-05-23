@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPACE_INVADERS.exe - Alexander Krauck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #00ff88;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(0,255,136,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0,255,136,0.1) 0%, transparent 50%);
+        }
+
+        .game-container {
+            text-align: center;
+            border: 2px solid #00ff88;
+            padding: 20px;
+            background: rgba(0,255,136,0.05);
+            box-shadow: 0 0 30px rgba(0,255,136,0.3);
+            border-radius: 10px;
+        }
+
+        .game-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #00ff88;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00ff88; }
+            to { text-shadow: 0 0 20px #00ff88, 0 0 30px #00ff88; }
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        #gameCanvas {
+            border: 2px solid #00ff88;
+            background: #000011;
+            box-shadow: inset 0 0 20px rgba(0,255,136,0.2);
+            border-radius: 5px;
+        }
+
+        .controls {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.95);
+            padding: 40px;
+            border: 2px solid #ff0040;
+            color: #ff0040;
+            font-size: 1.5rem;
+            text-align: center;
+            display: none;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(255,0,64,0.5);
+        }
+
+        .victory {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.95);
+            padding: 40px;
+            border: 2px solid #00ff88;
+            color: #00ff88;
+            font-size: 1.5rem;
+            text-align: center;
+            display: none;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0,255,136,0.5);
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #00ff88;
+            text-decoration: none;
+            font-size: 1.1rem;
+            border: 1px solid #00ff88;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .back-btn:hover {
+            background: #00ff88;
+            color: #000;
+            box-shadow: 0 0 15px #00ff88;
+        }
+
+        .start-message {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .wave-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            padding: 30px;
+            border: 2px solid #00ff88;
+            color: #00ff88;
+            font-size: 2rem;
+            text-align: center;
+            display: none;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0,255,136,0.5);
+            animation: pulse 1s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-btn">← BACK_TO_MAIN</a>
+    
+    <div class="game-container">
+        <h1 class="game-title">SPACE_INVADERS.exe</h1>
+        <div class="game-stats">
+            <div>SCORE: <span id="score">0</span></div>
+            <div>LIVES: <span id="lives">3</span></div>
+            <div>WAVE: <span id="wave">1</span></div>
+        </div>
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        <div class="controls">
+            USE ARROW KEYS OR A/D TO MOVE • SPACEBAR TO SHOOT<br>
+            DESTROY ALL INVADERS TO ADVANCE TO NEXT WAVE
+        </div>
+        <div class="start-message" id="startMessage">PRESS SPACEBAR TO START</div>
+    </div>
+
+    <div class="game-over" id="gameOver">
+        <div>EARTH DESTROYED</div>
+        <div style="font-size: 1rem; margin: 10px 0;">FINAL SCORE: <span id="finalScore">0</span></div>
+        <div style="font-size: 1rem; margin: 10px 0;">WAVES SURVIVED: <span id="finalWave">0</span></div>
+        <div style="font-size: 0.8rem; color: #888;">PRESS SPACE TO RESTART</div>
+    </div>
+
+    <div class="victory" id="victory">
+        <div>WAVE CLEARED!</div>
+        <div style="font-size: 1rem; margin: 10px 0;">SCORE: <span id="victoryScore">0</span></div>
+        <div style="font-size: 0.8rem; color: #888;">PRESS SPACE FOR NEXT WAVE</div>
+    </div>
+
+    <div class="wave-message" id="waveMessage">
+        <div>WAVE <span id="currentWave">1</span></div>
+        <div style="font-size: 1rem; margin-top: 10px;">INCOMING TRANSMISSION...</div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+        const livesElement = document.getElementById('lives');
+        const waveElement = document.getElementById('wave');
+        const gameOverElement = document.getElementById('gameOver');
+        const victoryElement = document.getElementById('victory');
+        const waveMessageElement = document.getElementById('waveMessage');
+        const finalScoreElement = document.getElementById('finalScore');
+        const finalWaveElement = document.getElementById('finalWave');
+        const victoryScoreElement = document.getElementById('victoryScore');
+        const currentWaveElement = document.getElementById('currentWave');
+        const startMessageElement = document.getElementById('startMessage');
+
+        let gameState = {
+            player: { x: canvas.width / 2, y: canvas.height - 50, width: 40, height: 20, speed: 5 },
+            bullets: [],
+            invaders: [],
+            invaderBullets: [],
+            powerUps: [],
+            particles: [],
+            stars: [],
+            score: 0,
+            lives: 3,
+            wave: 1,
+            gameRunning: false,
+            gameStarted: false,
+            invaderDirection: 1,
+            invaderSpeed: 1,
+            invaderDropDistance: 20,
+            lastInvaderShot: 0,
+            invaderShootDelay: 60,
+            playerShootDelay: 0,
+            waveTransition: false
+        };
+
+        let keys = {};
+        let lastUpdateTime = 0;
+        const GAME_SPEED = 16; // ~60fps
+
+        // Initialize stars for background
+        function initStars() {
+            gameState.stars = [];
+            for (let i = 0; i < 100; i++) {
+                gameState.stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2 + 1,
+                    speed: Math.random() * 2 + 0.5
+                });
+            }
+        }
+
+        // Initialize invaders for current wave
+        function initInvaders() {
+            gameState.invaders = [];
+            const rows = 5 + Math.floor(gameState.wave / 3);
+            const cols = 10 + Math.floor(gameState.wave / 2);
+            const invaderWidth = 30;
+            const invaderHeight = 20;
+            const spacing = 10;
+            const startX = (canvas.width - (cols * (invaderWidth + spacing))) / 2;
+            const startY = 50;
+
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    let type, color, points;
+                    if (row === 0) {
+                        type = 'boss';
+                        color = '#ff0040';
+                        points = 50;
+                    } else if (row <= 2) {
+                        type = 'medium';
+                        color = '#ff8800';
+                        points = 20;
+                    } else {
+                        type = 'basic';
+                        color = '#00ff88';
+                        points = 10;
+                    }
+
+                    gameState.invaders.push({
+                        x: startX + col * (invaderWidth + spacing),
+                        y: startY + row * (invaderHeight + spacing),
+                        width: invaderWidth,
+                        height: invaderHeight,
+                        type: type,
+                        color: color,
+                        points: points,
+                        health: type === 'boss' ? 3 : type === 'medium' ? 2 : 1,
+                        maxHealth: type === 'boss' ? 3 : type === 'medium' ? 2 : 1
+                    });
+                }
+            }
+
+            gameState.invaderSpeed = 0.5 + (gameState.wave * 0.2);
+            gameState.invaderShootDelay = Math.max(30, 90 - (gameState.wave * 5));
+        }
+
+        function updateUI() {
+            scoreElement.textContent = gameState.score;
+            livesElement.textContent = gameState.lives;
+            waveElement.textContent = gameState.wave;
+        }
+
+        function createParticle(x, y, color, count = 5) {
+            for (let i = 0; i < count; i++) {
+                gameState.particles.push({
+                    x: x,
+                    y: y,
+                    vx: (Math.random() - 0.5) * 10,
+                    vy: (Math.random() - 0.5) * 10,
+                    color: color,
+                    life: 30,
+                    maxLife: 30
+                });
+            }
+        }
+
+        function createPowerUp(x, y) {
+            if (Math.random() < 0.1) { // 10% chance
+                const types = ['multishot', 'rapidfire', 'shield'];
+                const type = types[Math.floor(Math.random() * types.length)];
+                gameState.powerUps.push({
+                    x: x,
+                    y: y,
+                    width: 20,
+                    height: 20,
+                    type: type,
+                    color: type === 'multishot' ? '#ff00ff' : type === 'rapidfire' ? '#ffff00' : '#00ffff',
+                    vy: 2
+                });
+            }
+        }
+
+        function updatePlayer() {
+            // Movement
+            if (keys['ArrowLeft'] || keys['KeyA']) {
+                gameState.player.x = Math.max(0, gameState.player.x - gameState.player.speed);
+            }
+            if (keys['ArrowRight'] || keys['KeyD']) {
+                gameState.player.x = Math.min(canvas.width - gameState.player.width, gameState.player.x + gameState.player.speed);
+            }
+
+            // Shooting
+            if (gameState.playerShootDelay > 0) {
+                gameState.playerShootDelay--;
+            }
+
+            if (keys['Space'] && gameState.playerShootDelay <= 0) {
+                gameState.bullets.push({
+                    x: gameState.player.x + gameState.player.width / 2,
+                    y: gameState.player.y,
+                    width: 4,
+                    height: 10,
+                    vy: -8,
+                    color: '#00ffff'
+                });
+                gameState.playerShootDelay = 10;
+            }
+        }
+
+        function updateBullets() {
+            // Update player bullets
+            gameState.bullets = gameState.bullets.filter(bullet => {
+                bullet.y += bullet.vy;
+                return bullet.y > -bullet.height;
+            });
+
+            // Update invader bullets
+            gameState.invaderBullets = gameState.invaderBullets.filter(bullet => {
+                bullet.y += bullet.vy;
+                return bullet.y < canvas.height + bullet.height;
+            });
+        }
+
+        function updateInvaders() {
+            if (gameState.invaders.length === 0) return;
+
+            // Check if invaders need to drop down
+            let shouldDrop = false;
+            for (let invader of gameState.invaders) {
+                if ((invader.x <= 0 && gameState.invaderDirection === -1) ||
+                    (invader.x + invader.width >= canvas.width && gameState.invaderDirection === 1)) {
+                    shouldDrop = true;
+                    break;
+                }
+            }
+
+            if (shouldDrop) {
+                gameState.invaderDirection *= -1;
+                gameState.invaders.forEach(invader => {
+                    invader.y += gameState.invaderDropDistance;
+                });
+            } else {
+                gameState.invaders.forEach(invader => {
+                    invader.x += gameState.invaderDirection * gameState.invaderSpeed;
+                });
+            }
+
+            // Invader shooting
+            gameState.lastInvaderShot++;
+            if (gameState.lastInvaderShot >= gameState.invaderShootDelay) {
+                const shooters = gameState.invaders.filter(invader => {
+                    // Only bottom-most invaders in each column can shoot
+                    return !gameState.invaders.some(other => 
+                        other.x === invader.x && other.y > invader.y
+                    );
+                });
+
+                if (shooters.length > 0) {
+                    const shooter = shooters[Math.floor(Math.random() * shooters.length)];
+                    gameState.invaderBullets.push({
+                        x: shooter.x + shooter.width / 2,
+                        y: shooter.y + shooter.height,
+                        width: 4,
+                        height: 8,
+                        vy: 3 + gameState.wave * 0.5,
+                        color: '#ff0040'
+                    });
+                }
+                gameState.lastInvaderShot = 0;
+            }
+        }
+
+        function updatePowerUps() {
+            gameState.powerUps = gameState.powerUps.filter(powerUp => {
+                powerUp.y += powerUp.vy;
+                return powerUp.y < canvas.height;
+            });
+        }
+
+        function updateParticles() {
+            gameState.particles = gameState.particles.filter(particle => {
+                particle.x += particle.vx;
+                particle.y += particle.vy;
+                particle.vy += 0.2; // gravity
+                particle.life--;
+                return particle.life > 0;
+            });
+        }
+
+        function updateStars() {
+            gameState.stars.forEach(star => {
+                star.y += star.speed;
+                if (star.y > canvas.height) {
+                    star.y = 0;
+                    star.x = Math.random() * canvas.width;
+                }
+            });
+        }
+
+        function checkCollisions() {
+            // Player bullets vs invaders
+            for (let i = gameState.bullets.length - 1; i >= 0; i--) {
+                const bullet = gameState.bullets[i];
+                for (let j = gameState.invaders.length - 1; j >= 0; j--) {
+                    const invader = gameState.invaders[j];
+                    
+                    if (bullet.x < invader.x + invader.width &&
+                        bullet.x + bullet.width > invader.x &&
+                        bullet.y < invader.y + invader.height &&
+                        bullet.y + bullet.height > invader.y) {
+                        
+                        // Hit!
+                        gameState.bullets.splice(i, 1);
+                        invader.health--;
+                        
+                        createParticle(invader.x + invader.width/2, invader.y + invader.height/2, invader.color);
+                        
+                        if (invader.health <= 0) {
+                            gameState.score += invader.points;
+                            createPowerUp(invader.x + invader.width/2, invader.y + invader.height/2);
+                            gameState.invaders.splice(j, 1);
+                        }
+                        break;
+                    }
+                }
+            }
+
+            // Invader bullets vs player
+            for (let i = gameState.invaderBullets.length - 1; i >= 0; i--) {
+                const bullet = gameState.invaderBullets[i];
+                
+                if (bullet.x < gameState.player.x + gameState.player.width &&
+                    bullet.x + bullet.width > gameState.player.x &&
+                    bullet.y < gameState.player.y + gameState.player.height &&
+                    bullet.y + bullet.height > gameState.player.y) {
+                    
+                    // Player hit!
+                    gameState.invaderBullets.splice(i, 1);
+                    gameState.lives--;
+                    createParticle(gameState.player.x + gameState.player.width/2, gameState.player.y + gameState.player.height/2, '#00ffff', 10);
+                    
+                    if (gameState.lives <= 0) {
+                        gameOver();
+                    }
+                    break;
+                }
+            }
+
+            // Player vs power-ups
+            for (let i = gameState.powerUps.length - 1; i >= 0; i--) {
+                const powerUp = gameState.powerUps[i];
+                
+                if (powerUp.x < gameState.player.x + gameState.player.width &&
+                    powerUp.x + powerUp.width > gameState.player.x &&
+                    powerUp.y < gameState.player.y + gameState.player.height &&
+                    powerUp.y + powerUp.height > gameState.player.y) {
+                    
+                    // Power-up collected!
+                    gameState.powerUps.splice(i, 1);
+                    gameState.score += 100;
+                    createParticle(powerUp.x + powerUp.width/2, powerUp.y + powerUp.height/2, powerUp.color, 8);
+                }
+            }
+
+            // Check if invaders reached player
+            for (let invader of gameState.invaders) {
+                if (invader.y + invader.height >= gameState.player.y) {
+                    gameOver();
+                    break;
+                }
+            }
+        }
+
+        function drawStars() {
+            ctx.fillStyle = '#ffffff';
+            gameState.stars.forEach(star => {
+                ctx.globalAlpha = 0.8;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            ctx.globalAlpha = 1;
+        }
+
+        function drawPlayer() {
+            const player = gameState.player;
+            
+            // Player ship
+            ctx.fillStyle = '#00ffff';
+            ctx.shadowColor = '#00ffff';
+            ctx.shadowBlur = 10;
+            
+            // Ship body
+            ctx.beginPath();
+            ctx.moveTo(player.x + player.width/2, player.y);
+            ctx.lineTo(player.x, player.y + player.height);
+            ctx.lineTo(player.x + player.width/4, player.y + player.height - 5);
+            ctx.lineTo(player.x + player.width*3/4, player.y + player.height - 5);
+            ctx.lineTo(player.x + player.width, player.y + player.height);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Engine glow
+            ctx.fillStyle = '#ff8800';
+            ctx.fillRect(player.x + player.width/2 - 2, player.y + player.height, 4, 8);
+            
+            ctx.shadowBlur = 0;
+        }
+
+        function drawBullets() {
+            // Player bullets
+            ctx.fillStyle = '#00ffff';
+            ctx.shadowColor = '#00ffff';
+            ctx.shadowBlur = 5;
+            gameState.bullets.forEach(bullet => {
+                ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+            });
+
+            // Invader bullets
+            ctx.fillStyle = '#ff0040';
+            ctx.shadowColor = '#ff0040';
+            gameState.invaderBullets.forEach(bullet => {
+                ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+            });
+            ctx.shadowBlur = 0;
+        }
+
+        function drawInvaders() {
+            gameState.invaders.forEach(invader => {
+                // Health-based color intensity
+                const healthRatio = invader.health / invader.maxHealth;
+                const alpha = 0.3 + (healthRatio * 0.7);
+                
+                ctx.fillStyle = invader.color;
+                ctx.shadowColor = invader.color;
+                ctx.shadowBlur = 8;
+                ctx.globalAlpha = alpha;
+
+                // Invader body
+                if (invader.type === 'boss') {
+                    // Boss design
+                    ctx.fillRect(invader.x + 5, invader.y, invader.width - 10, invader.height);
+                    ctx.fillRect(invader.x, invader.y + 5, invader.width, invader.height - 10);
+                    ctx.fillRect(invader.x + 10, invader.y - 5, invader.width - 20, 5);
+                } else if (invader.type === 'medium') {
+                    // Medium invader
+                    ctx.fillRect(invader.x + 3, invader.y, invader.width - 6, invader.height);
+                    ctx.fillRect(invader.x, invader.y + 3, invader.width, invader.height - 6);
+                } else {
+                    // Basic invader
+                    ctx.fillRect(invader.x, invader.y, invader.width, invader.height);
+                }
+
+                // Health bar for damaged invaders
+                if (invader.health < invader.maxHealth) {
+                    ctx.globalAlpha = 1;
+                    ctx.fillStyle = '#ff0000';
+                    ctx.fillRect(invader.x, invader.y - 8, invader.width, 3);
+                    ctx.fillStyle = '#00ff00';
+                    ctx.fillRect(invader.x, invader.y - 8, invader.width * healthRatio, 3);
+                }
+            });
+            ctx.globalAlpha = 1;
+            ctx.shadowBlur = 0;
+        }
+
+        function drawPowerUps() {
+            gameState.powerUps.forEach(powerUp => {
+                const time = Date.now() * 0.01;
+                const pulse = 1 + Math.sin(time) * 0.3;
+                
+                ctx.fillStyle = powerUp.color;
+                ctx.shadowColor = powerUp.color;
+                ctx.shadowBlur = 10;
+                ctx.globalAlpha = pulse;
+                
+                ctx.beginPath();
+                ctx.arc(powerUp.x + powerUp.width/2, powerUp.y + powerUp.height/2, powerUp.width/2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Power-up symbol
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '12px monospace';
+                ctx.textAlign = 'center';
+                const symbol = powerUp.type === 'multishot' ? 'M' : powerUp.type === 'rapidfire' ? 'R' : 'S';
+                ctx.fillText(symbol, powerUp.x + powerUp.width/2, powerUp.y + powerUp.height/2 + 4);
+            });
+            ctx.globalAlpha = 1;
+            ctx.shadowBlur = 0;
+        }
+
+        function drawParticles() {
+            gameState.particles.forEach(particle => {
+                const alpha = particle.life / particle.maxLife;
+                ctx.fillStyle = particle.color;
+                ctx.globalAlpha = alpha;
+                ctx.fillRect(particle.x, particle.y, 3, 3);
+            });
+            ctx.globalAlpha = 1;
+        }
+
+        function draw() {
+            // Clear canvas with gradient
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#000011');
+            gradient.addColorStop(1, '#000033');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            drawStars();
+            drawPlayer();
+            drawBullets();
+            drawInvaders();
+            drawPowerUps();
+            drawParticles();
+        }
+
+        function update() {
+            if (!gameState.gameRunning || gameState.waveTransition) return;
+
+            updatePlayer();
+            updateBullets();
+            updateInvaders();
+            updatePowerUps();
+            updateParticles();
+            updateStars();
+            checkCollisions();
+
+            // Check wave completion
+            if (gameState.invaders.length === 0) {
+                nextWave();
+            }
+
+            updateUI();
+        }
+
+        function gameLoop(currentTime) {
+            if (currentTime - lastUpdateTime >= GAME_SPEED) {
+                update();
+                lastUpdateTime = currentTime;
+            }
+            
+            draw();
+            
+            if (gameState.gameRunning) {
+                requestAnimationFrame(gameLoop);
+            }
+        }
+
+        function startGame() {
+            if (!gameState.gameStarted) {
+                gameState.gameStarted = true;
+                gameState.gameRunning = true;
+                startMessageElement.style.display = 'none';
+                showWaveMessage();
+                setTimeout(() => {
+                    gameState.waveTransition = false;
+                    requestAnimationFrame(gameLoop);
+                }, 2000);
+            }
+        }
+
+        function showWaveMessage() {
+            gameState.waveTransition = true;
+            currentWaveElement.textContent = gameState.wave;
+            waveMessageElement.style.display = 'block';
+            setTimeout(() => {
+                waveMessageElement.style.display = 'none';
+            }, 2000);
+        }
+
+        function nextWave() {
+            gameState.wave++;
+            gameState.lives++; // Bonus life each wave
+            gameState.score += 500; // Wave completion bonus
+            
+            victoryScoreElement.textContent = gameState.score;
+            victoryElement.style.display = 'block';
+            gameState.gameRunning = false;
+        }
+
+        function continueToNextWave() {
+            victoryElement.style.display = 'none';
+            initInvaders();
+            showWaveMessage();
+            setTimeout(() => {
+                gameState.waveTransition = false;
+                gameState.gameRunning = true;
+                requestAnimationFrame(gameLoop);
+            }, 2000);
+        }
+
+        function gameOver() {
+            gameState.gameRunning = false;
+            finalScoreElement.textContent = gameState.score;
+            finalWaveElement.textContent = gameState.wave;
+            gameOverElement.style.display = 'block';
+        }
+
+        function resetGame() {
+            gameState.player.x = canvas.width / 2;
+            gameState.player.y = canvas.height - 50;
+            gameState.bullets = [];
+            gameState.invaderBullets = [];
+            gameState.powerUps = [];
+            gameState.particles = [];
+            gameState.score = 0;
+            gameState.lives = 3;
+            gameState.wave = 1;
+            gameState.gameRunning = false;
+            gameState.gameStarted = false;
+            gameState.invaderDirection = 1;
+            gameState.waveTransition = false;
+
+            initInvaders();
+            initStars();
+            updateUI();
+
+            gameOverElement.style.display = 'none';
+            victoryElement.style.display = 'none';
+            startMessageElement.style.display = 'block';
+            draw();
+        }
+
+        // Event listeners
+        document.addEventListener('keydown', (e) => {
+            keys[e.code] = true;
+
+            if (!gameState.gameRunning && gameState.gameStarted && e.code === 'Space') {
+                if (gameOverElement.style.display === 'block') {
+                    resetGame();
+                } else if (victoryElement.style.display === 'block') {
+                    continueToNextWave();
+                }
+                return;
+            }
+
+            // Start game on spacebar
+            if (!gameState.gameStarted && e.code === 'Space') {
+                startGame();
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            keys[e.code] = false;
+        });
+
+        // Initialize game
+        initInvaders();
+        initStars();
+        updateUI();
+        draw();
+    </script>
+</body>
+</html> 
