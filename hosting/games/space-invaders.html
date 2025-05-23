@@ -123,6 +123,179 @@
             margin-top: 10px;
         }
 
+        .mobile-msg {
+            display: none;
+        }
+
+        /* Mobile Touch Controls */
+        .mobile-controls {
+            display: none;
+            margin-top: 20px;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .control-btn {
+            background: rgba(0,255,136,0.1);
+            border: 2px solid #00ff88;
+            color: #00ff88;
+            font-size: 1.2rem;
+            padding: 15px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            touch-action: manipulation;
+            min-width: 60px;
+        }
+
+        .control-btn:active {
+            background: rgba(0,255,136,0.3);
+            transform: scale(0.95);
+            box-shadow: 0 0 15px rgba(0,255,136,0.5);
+        }
+
+        .shoot-btn {
+            background: rgba(255,0,64,0.1);
+            border-color: #ff0040;
+            color: #ff0040;
+            font-size: 1.5rem;
+            padding: 20px 30px;
+        }
+
+        .shoot-btn:active {
+            background: rgba(255,0,64,0.3);
+            box-shadow: 0 0 15px rgba(255,0,64,0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                overflow-y: auto;
+                min-height: 100vh;
+                align-items: flex-start;
+                padding-top: 20px;
+            }
+
+            .game-container {
+                padding: 15px;
+                width: 100%;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .game-title {
+                font-size: 1.5rem;
+                margin-bottom: 8px;
+            }
+
+            .game-stats {
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+            }
+
+            #gameCanvas {
+                width: 100%;
+                max-width: 350px;
+                height: auto;
+                aspect-ratio: 800/600;
+            }
+
+            .controls {
+                font-size: 0.8rem;
+                margin-top: 10px;
+                display: none; /* Hide keyboard instructions on mobile */
+            }
+
+            .mobile-controls {
+                display: flex;
+            }
+
+            .back-btn {
+                top: 10px;
+                left: 10px;
+                font-size: 0.9rem;
+                padding: 8px 12px;
+            }
+
+            .game-over, .victory, .wave-message {
+                padding: 30px 20px;
+                font-size: 1.2rem;
+                width: 90%;
+                max-width: 300px;
+            }
+
+            .start-message {
+                font-size: 0.8rem;
+                margin-top: 8px;
+            }
+
+            .desktop-msg {
+                display: none;
+            }
+            
+            .mobile-msg {
+                display: inline;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 10px;
+                max-width: 320px;
+            }
+
+            .game-title {
+                font-size: 1.3rem;
+            }
+
+            .game-stats {
+                font-size: 0.8rem;
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+            }
+
+            #gameCanvas {
+                max-width: 300px;
+            }
+
+            .mobile-controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .control-btn {
+                font-size: 1rem;
+                padding: 12px 15px;
+                min-width: 50px;
+            }
+
+            .shoot-btn {
+                font-size: 1.3rem;
+                padding: 15px 25px;
+            }
+
+            .game-over, .victory, .wave-message {
+                padding: 20px 15px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-controls {
+                display: none !important;
+            }
+        }
+
         .wave-message {
             position: absolute;
             top: 50%;
@@ -161,7 +334,17 @@
             USE ARROW KEYS OR A/D TO MOVE • SPACEBAR TO SHOOT<br>
             DESTROY ALL INVADERS TO ADVANCE TO NEXT WAVE
         </div>
-        <div class="start-message" id="startMessage">PRESS SPACEBAR TO START</div>
+        <div class="mobile-controls">
+            <div class="control-group">
+                <button class="control-btn" data-action="left">←</button>
+                <button class="control-btn" data-action="right">→</button>
+            </div>
+            <button class="control-btn shoot-btn" data-action="shoot">🚀</button>
+        </div>
+        <div class="start-message" id="startMessage">
+            <span class="desktop-msg">PRESS SPACEBAR TO START</span>
+            <span class="mobile-msg">TAP SHOOT TO START</span>
+        </div>
     </div>
 
     <div class="game-over" id="gameOver">
@@ -216,7 +399,8 @@
             lastInvaderShot: 0,
             invaderShootDelay: 60,
             playerShootDelay: 0,
-            waveTransition: false
+            waveTransition: false,
+            keys: {}
         };
 
         let keys = {};
@@ -320,10 +504,10 @@
 
         function updatePlayer() {
             // Movement
-            if (keys['ArrowLeft'] || keys['KeyA']) {
+            if (keys['ArrowLeft'] || keys['KeyA'] || gameState.keys.left) {
                 gameState.player.x = Math.max(0, gameState.player.x - gameState.player.speed);
             }
-            if (keys['ArrowRight'] || keys['KeyD']) {
+            if (keys['ArrowRight'] || keys['KeyD'] || gameState.keys.right) {
                 gameState.player.x = Math.min(canvas.width - gameState.player.width, gameState.player.x + gameState.player.speed);
             }
 
@@ -333,6 +517,12 @@
             }
 
             if (keys['Space'] && gameState.playerShootDelay <= 0) {
+                shoot();
+            }
+        }
+
+        function shoot() {
+            if (gameState.playerShootDelay <= 0) {
                 gameState.bullets.push({
                     x: gameState.player.x + gameState.player.width / 2,
                     y: gameState.player.y,
@@ -783,11 +973,80 @@
             keys[e.code] = false;
         });
 
+        // Responsive canvas setup
+        function resizeCanvas() {
+            const maxWidth = Math.min(window.innerWidth - 40, 800);
+            const maxHeight = Math.min(window.innerHeight - 200, 600);
+            
+            if (window.innerWidth <= 768) {
+                const scale = Math.min(maxWidth / 800, maxHeight / 600);
+                canvas.style.width = (800 * scale) + 'px';
+                canvas.style.height = (600 * scale) + 'px';
+            } else {
+                canvas.style.width = '800px';
+                canvas.style.height = '600px';
+            }
+        }
+
+        // Mobile touch controls
+        function setupMobileControls() {
+            const controlButtons = document.querySelectorAll('.control-btn');
+            
+            controlButtons.forEach(button => {
+                button.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    handleControlInput(button.dataset.action, true);
+                });
+                
+                button.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    handleControlInput(button.dataset.action, false);
+                });
+                
+                button.addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                    handleControlInput(button.dataset.action, true);
+                });
+                
+                button.addEventListener('mouseup', (e) => {
+                    e.preventDefault();
+                    handleControlInput(button.dataset.action, false);
+                });
+            });
+        }
+
+        function handleControlInput(action, isPressed) {
+            if (action === 'shoot' && isPressed) {
+                // Start game on first shoot
+                if (!gameState.gameStarted) {
+                    startGame();
+                    return;
+                }
+                
+                if (gameState.gameRunning) {
+                    shoot();
+                }
+            } else if (action === 'left') {
+                gameState.keys.left = isPressed;
+            } else if (action === 'right') {
+                gameState.keys.right = isPressed;
+            }
+        }
+
         // Initialize game
         initInvaders();
         initStars();
         updateUI();
         draw();
+
+        // Window resize handling
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+        });
+
+        // Initialize mobile features
+        resizeCanvas();
+        setupMobileControls();
     </script>
 </body>
 </html> 

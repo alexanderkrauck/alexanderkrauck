@@ -122,6 +122,161 @@
             font-size: 0.9rem;
             margin-top: 10px;
         }
+
+        .mobile-msg {
+            display: none;
+        }
+
+        /* Mobile Touch Controls */
+        .mobile-controls {
+            display: none;
+            margin-top: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .control-btn {
+            background: rgba(0,255,136,0.1);
+            border: 2px solid #00ff88;
+            color: #00ff88;
+            font-size: 1.5rem;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        .control-btn:active {
+            background: rgba(0,255,136,0.3);
+            transform: scale(0.95);
+            box-shadow: 0 0 15px rgba(0,255,136,0.5);
+        }
+
+        .control-btn.up { grid-column: 2; grid-row: 1; }
+        .control-btn.left { grid-column: 1; grid-row: 2; }
+        .control-btn.right { grid-column: 3; grid-row: 2; }
+        .control-btn.down { grid-column: 2; grid-row: 3; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                overflow-y: auto;
+                min-height: 100vh;
+                align-items: flex-start;
+                padding-top: 20px;
+            }
+
+            .game-container {
+                padding: 15px;
+                width: 100%;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .game-title {
+                font-size: 1.5rem;
+                margin-bottom: 8px;
+            }
+
+            .game-stats {
+                font-size: 0.9rem;
+                margin-bottom: 10px;
+            }
+
+            #gameCanvas {
+                width: 100%;
+                max-width: 350px;
+                height: auto;
+                aspect-ratio: 600/660;
+            }
+
+            .controls {
+                font-size: 0.8rem;
+                margin-top: 10px;
+                display: none; /* Hide keyboard instructions on mobile */
+            }
+
+            .mobile-controls {
+                display: grid;
+            }
+
+            .back-btn {
+                top: 10px;
+                left: 10px;
+                font-size: 0.9rem;
+                padding: 8px 12px;
+            }
+
+            .game-over, .victory {
+                padding: 30px 20px;
+                font-size: 1.2rem;
+                width: 90%;
+                max-width: 300px;
+            }
+
+            .start-message {
+                font-size: 0.8rem;
+                margin-top: 8px;
+            }
+
+            .desktop-msg {
+                display: none;
+            }
+            
+            .mobile-msg {
+                display: inline;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 10px;
+                max-width: 320px;
+            }
+
+            .game-title {
+                font-size: 1.3rem;
+            }
+
+            .game-stats {
+                font-size: 0.8rem;
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+            }
+
+            #gameCanvas {
+                max-width: 300px;
+            }
+
+            .mobile-controls {
+                max-width: 180px;
+                gap: 8px;
+            }
+
+            .control-btn {
+                font-size: 1.2rem;
+                padding: 12px;
+            }
+
+            .game-over, .victory {
+                padding: 20px 15px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-controls {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -139,7 +294,16 @@
             USE ARROW KEYS OR WASD TO CONTROL PAC-MAN<br>
             EAT ALL DOTS TO WIN • AVOID THE GHOSTS
         </div>
-        <div class="start-message" id="startMessage">PRESS ANY ARROW KEY TO START</div>
+        <div class="mobile-controls">
+            <button class="control-btn up" data-direction="up">↑</button>
+            <button class="control-btn left" data-direction="left">←</button>
+            <button class="control-btn right" data-direction="right">→</button>
+            <button class="control-btn down" data-direction="down">↓</button>
+        </div>
+        <div class="start-message" id="startMessage">
+            <span class="desktop-msg">PRESS ANY ARROW KEY TO START</span>
+            <span class="mobile-msg">TAP ANY DIRECTION TO START</span>
+        </div>
     </div>
 
     <div class="game-over" id="gameOver">
@@ -696,6 +860,71 @@
         // Initialize game
         initGame();
         draw();
+
+        // Responsive canvas setup
+        function resizeCanvas() {
+            const maxWidth = Math.min(window.innerWidth - 40, 600);
+            const maxHeight = Math.min(window.innerHeight - 200, 660);
+            
+            if (window.innerWidth <= 768) {
+                const scale = Math.min(maxWidth / 600, maxHeight / 660);
+                canvas.style.width = (600 * scale) + 'px';
+                canvas.style.height = (660 * scale) + 'px';
+            } else {
+                canvas.style.width = '600px';
+                canvas.style.height = '660px';
+            }
+        }
+
+        // Mobile touch controls
+        function setupMobileControls() {
+            const controlButtons = document.querySelectorAll('.control-btn');
+            
+            controlButtons.forEach(button => {
+                button.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    handleDirectionInput(button.dataset.direction);
+                });
+                
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    handleDirectionInput(button.dataset.direction);
+                });
+            });
+        }
+
+        function handleDirectionInput(direction) {
+            // Start game on first touch/click
+            if (!gameState.gameStarted) {
+                startGame();
+            }
+
+            if (!gameState.gameRunning) return;
+
+            switch(direction) {
+                case 'up':
+                    gameState.pacman.nextDirection = 0;
+                    break;
+                case 'right':
+                    gameState.pacman.nextDirection = 1;
+                    break;
+                case 'down':
+                    gameState.pacman.nextDirection = 2;
+                    break;
+                case 'left':
+                    gameState.pacman.nextDirection = 3;
+                    break;
+            }
+        }
+
+        // Window resize handling
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+        });
+
+        // Initialize mobile features
+        resizeCanvas();
+        setupMobileControls();
     </script>
 </body>
 </html> 
