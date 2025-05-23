@@ -1520,6 +1520,425 @@
                 text-shadow: 0 0 25px #00ff88;
             }
         }
+
+        /* Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1001;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .burger {
+            width: 30px;
+            height: 20px;
+            position: relative;
+            transform: rotate(0deg);
+            transition: .5s ease-in-out;
+        }
+
+        .burger span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: #00ff88;
+            border-radius: 9px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+            box-shadow: 0 0 10px rgba(0,255,136,0.5);
+        }
+
+        .burger span:nth-child(1) {
+            top: 0px;
+        }
+
+        .burger span:nth-child(2) {
+            top: 8px;
+        }
+
+        .burger span:nth-child(3) {
+            top: 16px;
+        }
+
+        .burger.open span:nth-child(1) {
+            top: 8px;
+            transform: rotate(135deg);
+        }
+
+        .burger.open span:nth-child(2) {
+            opacity: 0;
+            left: -60px;
+        }
+
+        .burger.open span:nth-child(3) {
+            top: 8px;
+            transform: rotate(-135deg);
+        }
+
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .mobile-nav.open {
+            right: 0;
+        }
+
+        .mobile-nav-item {
+            color: #00ff88;
+            text-decoration: none;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .mobile-nav.open .mobile-nav-item {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .mobile-nav-item:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-nav-item:nth-child(2) { transition-delay: 0.2s; }
+        .mobile-nav-item:nth-child(3) { transition-delay: 0.3s; }
+        .mobile-nav-item:nth-child(4) { transition-delay: 0.4s; }
+        .mobile-nav-item:nth-child(5) { transition-delay: 0.5s; }
+        .mobile-nav-item:nth-child(6) { transition-delay: 0.6s; }
+        .mobile-nav-item:nth-child(7) { transition-delay: 0.7s; }
+        .mobile-nav-item:nth-child(8) { transition-delay: 0.8s; }
+        .mobile-nav-item:nth-child(9) { transition-delay: 0.9s; }
+
+        .mobile-nav-item::before {
+            content: '> ';
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-nav-item:hover::before {
+            opacity: 1;
+        }
+
+        .mobile-nav-item:hover {
+            text-shadow: 0 0 20px #00ff88;
+            transform: translateX(10px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            /* Navigation */
+            .nav {
+                display: none;
+            }
+            
+            .mobile-nav-toggle {
+                display: block;
+            }
+            
+            /* Hero Section */
+            .hero {
+                padding: 20px;
+                min-height: 100vh;
+            }
+            
+            .glitch {
+                font-size: clamp(1.5rem, 12vw, 3rem);
+                letter-spacing: 2px;
+            }
+            
+            .subtitle {
+                font-size: clamp(0.8rem, 4vw, 1rem);
+                margin: 15px 0;
+            }
+            
+            .consulting-badge {
+                font-size: 0.7rem;
+                padding: 8px 15px;
+                margin: 15px 0;
+                letter-spacing: 1px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                margin-top: 20px;
+            }
+            
+            .cta-button {
+                width: 100%;
+                max-width: 280px;
+                padding: 12px 20px;
+                font-size: 14px;
+                letter-spacing: 1px;
+            }
+            
+            /* Floating Elements */
+            .floating-avatar {
+                display: none; /* Hide on mobile for performance */
+            }
+            
+            .social-links {
+                left: 15px;
+                gap: 15px;
+            }
+            
+            .social-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            /* Hero Hologram */
+            .hero-hologram {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .hero-hologram-label {
+                font-size: 12px;
+                bottom: -40px;
+                letter-spacing: 2px;
+            }
+            
+            /* Sections */
+            .section {
+                padding: 60px 20px;
+            }
+            
+            .section-title {
+                font-size: clamp(1.5rem, 8vw, 2.5rem);
+                margin-bottom: 30px;
+            }
+            
+            /* Grid Layouts */
+            .about-grid,
+            .contact-grid,
+            .consulting-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .services-grid,
+            .projects-grid,
+            .skills-grid,
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            /* Hologram */
+            .hologram {
+                width: 100%;
+                max-width: 250px;
+                height: 250px;
+                margin: 0 auto;
+            }
+            
+            /* Terminal */
+            .terminal {
+                padding: 15px;
+                margin: 15px 0;
+                font-size: 12px;
+            }
+            
+            .terminal-header {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+            
+            .terminal-line {
+                margin: 3px 0;
+                word-break: break-word;
+            }
+            
+            .terminal-avatar {
+                width: 18px;
+                height: 18px;
+                margin-right: 8px;
+            }
+            
+            /* Cards */
+            .service-card,
+            .project-card,
+            .skill-card,
+            .game-card,
+            .blog-post-card {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+            }
+            
+            .service-icon,
+            .skill-icon {
+                font-size: 36px;
+                margin-bottom: 15px;
+            }
+            
+            .game-icon {
+                font-size: 36px;
+                margin-bottom: 15px;
+            }
+            
+            /* Experience Timeline */
+            .experience-timeline {
+                padding-left: 20px;
+            }
+            
+            .experience-item {
+                margin: 30px 0;
+                padding: 20px 15px;
+            }
+            
+            .experience-item::before {
+                left: -37px;
+            }
+            
+            .exp-title {
+                font-size: 20px;
+                margin-bottom: 8px;
+            }
+            
+            .exp-company {
+                font-size: 16px;
+            }
+            
+            /* Contact Section */
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px 15px;
+                margin: 15px 0;
+            }
+            
+            .contact-icon {
+                font-size: 36px;
+                margin-bottom: 10px;
+                margin-right: 0;
+            }
+            
+            /* Blog Modal */
+            .blog-modal {
+                padding: 10px;
+            }
+            
+            .blog-modal-content {
+                max-height: 95vh;
+                width: 100%;
+            }
+            
+            .blog-modal-header {
+                padding: 15px;
+            }
+            
+            .blog-modal-header h1 {
+                font-size: 18px;
+            }
+            
+            .blog-modal-body {
+                padding: 20px 15px;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+            
+            /* Cursor Effects */
+            .cursor,
+            .cursor-avatar {
+                display: none; /* Hide custom cursor on mobile */
+            }
+            
+            /* Particles */
+            .particles {
+                display: none; /* Hide particles on mobile for performance */
+            }
+            
+            /* Matrix Background */
+            .matrix-bg {
+                opacity: 0.05; /* Reduce opacity on mobile */
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Extra small screens */
+            .hero {
+                padding: 15px;
+            }
+            
+            .section {
+                padding: 40px 15px;
+            }
+            
+            .glitch {
+                font-size: clamp(1.2rem, 15vw, 2.5rem);
+            }
+            
+            .social-links {
+                left: 10px;
+                gap: 10px;
+            }
+            
+            .social-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
+            }
+            
+            .mobile-nav-toggle {
+                top: 20px;
+                right: 20px;
+            }
+            
+            .terminal {
+                padding: 10px;
+                font-size: 11px;
+            }
+            
+            .service-card,
+            .project-card,
+            .skill-card,
+            .game-card,
+            .blog-post-card {
+                padding: 15px 10px;
+            }
+            
+            .hero-hologram {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .hologram {
+                max-width: 200px;
+                height: 200px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-nav-toggle,
+            .mobile-nav {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1554,17 +1973,38 @@
         <a href="#contact" class="nav-item">Contact</a>
     </nav>
 
+    <!-- Mobile Navigation -->
+    <button class="mobile-nav-toggle" id="mobileNavToggle">
+        <div class="burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </button>
+
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#home" class="mobile-nav-item">Home</a>
+        <a href="#consulting" class="mobile-nav-item">Consulting</a>
+        <a href="#projects" class="mobile-nav-item">Projects</a>
+        <a href="#blog" class="mobile-nav-item">Blog</a>
+        <a href="#about" class="mobile-nav-item">About</a>
+        <a href="#experience" class="mobile-nav-item">Experience</a>
+        <a href="#skills" class="mobile-nav-item">Skills</a>
+        <a href="#games" class="mobile-nav-item">Games</a>
+        <a href="#contact" class="mobile-nav-item">Contact</a>
+    </nav>
+
     <section id="home" class="hero">
         <div class="particles"></div>
         <div class="hero-content">
             <h1 class="glitch" data-text="ALEXANDER KRAUCK">ALEXANDER KRAUCK</h1>
-            <p class="subtitle">AI OPERATIONS • HEAD OF COMPETENCE CENTER AI</p>
+            <p class="subtitle">AI OPERATIONS • HEAD OF COMPETENCE CENTER AI • INDEPENDENT CONSULTANT</p>
             <div class="consulting-badge">AVAILABLE FOR CONSULTING & CUSTOM PROJECTS</div>
             <div class="terminal">
                 <div class="terminal-header">$ whoami</div>
-                <div class="terminal-line">AI_Visionary@Fabasoft:~$ Transforming Industries with Intelligence</div>
-                <div class="terminal-line">MLOps_Expert@Systems:~$ Building the Future, One Algorithm at a Time</div>
-                <div class="terminal-line">Consultant@Available:~$ Custom AI Solutions & Strategic Implementation</div>
+                <div class="terminal-line">AI_Visionary@Fabasoft:~$ Leading AI Innovation at Enterprise Level</div>
+                <div class="terminal-line">Independent_Consultant@Available:~$ Custom AI Solutions & Strategic Implementation</div>
+                <div class="terminal-line">MLOps_Expert@Freelance:~$ Building the Future, One Algorithm at a Time</div>
                 <div class="terminal-line">Innovation_Leader@Austria:~$ <span class="terminal-cursor">_</span></div>
             </div>
             <div class="cta-buttons">
@@ -1587,11 +2027,11 @@
             <h2 class="section-title">CONSULTING_SERVICES.exe</h2>
             <div class="consulting-grid">
                 <div class="consulting-text">
-                    <p>As <span class="highlight">Head of AI Competence Center at Fabasoft</span>, I bring enterprise-level AI expertise to your organization. I specialize in transforming complex AI concepts into <span class="highlight red">practical, revenue-generating solutions</span>.</p>
+                    <p>I am <span class="highlight">Head of AI Competence Center at Fabasoft</span> and also offer <span class="highlight red">independent consulting services</span> to help organizations transform complex AI concepts into practical, revenue-generating solutions.</p>
                     <br>
-                    <p>Whether you need <span class="highlight">MLOps implementation</span>, <span class="highlight">multi-agent systems</span>, or <span class="highlight">custom AI development</span>, I deliver results that matter to your bottom line.</p>
+                    <p>Whether you need <span class="highlight">MLOps implementation</span>, <span class="highlight">multi-agent systems</span>, or <span class="highlight">custom AI development</span>, I deliver results that matter to your bottom line - <span class="highlight red">as an independent consultant</span>.</p>
                     <br>
-                    <p><span class="highlight red">Available for both short-term consulting and long-term strategic partnerships.</span></p>
+                    <p><span class="highlight red">Available for both short-term consulting projects and long-term strategic partnerships.</span></p>
                     <br>
                     <div style="text-align: center;">
                         <button id="contactBtn" class="cta-button" style="margin: 0; font-size: 16px; padding: 18px 35px;">
@@ -1857,8 +2297,8 @@
                     
                     <div class="contact-item" style="flex-direction: column; text-align: center; padding: 30px; background: rgba(0,255,136,0.05); border: 1px solid rgba(0,255,136,0.3);">
                         <div class="contact-icon" style="font-size: 48px; margin-bottom: 15px;">🚀</div>
-                        <div style="font-size: 18px; color: #00ff88; margin-bottom: 10px;">STATUS</div>
-                        <div>Available for Consulting</div>
+                        <div style="font-size: 18px; color: #00ff88; margin-bottom: 10px;">CONSULTING_STATUS</div>
+                        <div>Available for Independent Projects</div>
                     </div>
                     
                     <div class="contact-item" style="flex-direction: column; text-align: center; padding: 30px; background: rgba(255,0,64,0.1); border: 1px solid rgba(255,0,64,0.5);">
@@ -2110,6 +2550,35 @@ This message was sent via alexanderkrauck.com`;
                 contactBtn2.addEventListener('click', openContactEmail);
             }
         });
+
+        // Mobile Navigation
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        const burger = document.getElementById('burger');
+        
+        if (mobileNavToggle && mobileNav && burger) {
+            mobileNavToggle.addEventListener('click', () => {
+                mobileNav.classList.toggle('open');
+                burger.classList.toggle('open');
+            });
+            
+            // Close mobile nav when clicking on a link
+            const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+            mobileNavItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    mobileNav.classList.remove('open');
+                    burger.classList.remove('open');
+                });
+            });
+            
+            // Close mobile nav when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!mobileNav.contains(e.target) && !mobileNavToggle.contains(e.target)) {
+                    mobileNav.classList.remove('open');
+                    burger.classList.remove('open');
+                }
+            });
+        }
     </script>
 </body>
 </html>
