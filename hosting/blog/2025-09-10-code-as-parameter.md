@@ -1,5 +1,11 @@
 # When "Newer" Isn't Better: Rethinking Code Updates for AI Agents
 
+*Published: September 10, 2025*  
+*Author: Alexander Krauck*  
+*Tags: AI, Innovation, Agents*
+
+---
+
 **A practical guide to treating code like adjustable settings for different language models—when to upgrade, when to freeze, and how to benchmark before you ship.**
 
 ---
