@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -360,46 +360,46 @@
     }
 }
 </style></head>
-<body><div class="language-switcher" data-no-translate="true" id="language-switcher"><a aria-current="true" class="active" href="space-invaders.html">EN</a><a class="" href="../de/games/space-invaders.html">DE</a><a class="" href="../es/games/space-invaders.html">ES</a><a class="" href="../fr/games/space-invaders.html">FR</a><a class="" href="../ja/games/space-invaders.html">JA</a></div>
+<body><div class="language-switcher" data-no-translate="true" id="language-switcher"><a class="" href="../../games/space-invaders.html">EN</a><a class="" href="../../de/games/space-invaders.html">DE</a><a class="" href="../../es/games/space-invaders.html">ES</a><a class="" href="../../fr/games/space-invaders.html">FR</a><a aria-current="true" class="active" href="space-invaders.html">JA</a></div>
 <a class="back-btn" href="../index.html">← BACK_TO_MAIN</a>
 <div class="game-container">
 <h1 class="game-title">SPACE_INVADERS.exe</h1>
 <div class="game-stats">
-<div>SCORE: <span id="score">0</span></div>
-<div>LIVES: <span id="lives">3</span></div>
-<div>WAVE: <span id="wave">1</span></div>
+<div>スコア <span id="score">0</span></div>
+<div>生きている： <span id="lives">3</span></div>
+<div>WAVE： <span id="wave">1</span></div>
 </div>
 <canvas height="600" id="gameCanvas" width="800"></canvas>
 <div class="controls">
-            USE ARROW KEYS OR A/D TO MOVE • SPACEBAR TO SHOOT<br/>
-            DESTROY ALL INVADERS TO ADVANCE TO NEXT WAVE
+            矢印キーまたはA/Dで移動 - スペースキーで射撃<br/>
+            次のウェーブに進むために、すべてのインベーダーを破壊する。
         </div>
 <div class="mobile-controls">
 <div class="control-group">
-<button class="control-btn" data-action="left">←</button>
+<button class="control-btn" data-action="left"></button>
 <button class="control-btn" data-action="right">→</button>
 </div>
 <button class="control-btn shoot-btn" data-action="shoot">🚀</button>
 </div>
 <div class="start-message" id="startMessage">
-<span class="desktop-msg">PRESS SPACEBAR TO START</span>
-<span class="mobile-msg">TAP SHOOT TO START</span>
+<span class="desktop-msg">スペースキーでスタート</span>
+<span class="mobile-msg">シュートをタップしてスタート</span>
 </div>
 </div>
 <div class="game-over" id="gameOver">
-<div>EARTH DESTROYED</div>
-<div style="font-size: 1rem; margin: 10px 0;">FINAL SCORE: <span id="finalScore">0</span></div>
-<div style="font-size: 1rem; margin: 10px 0;">WAVES SURVIVED: <span id="finalWave">0</span></div>
-<div style="font-size: 0.8rem; color: #888;">PRESS SPACE TO RESTART</div>
+<div>しょうど</div>
+<div style="font-size: 1rem; margin: 10px 0;">最終スコア <span id="finalScore">0</span></div>
+<div style="font-size: 1rem; margin: 10px 0;">波は生き残った： <span id="finalWave">0</span></div>
+<div style="font-size: 0.8rem; color: #888;">プレススペースで再起動</div>
 </div>
 <div class="victory" id="victory">
-<div>WAVE CLEARED!</div>
-<div style="font-size: 1rem; margin: 10px 0;">SCORE: <span id="victoryScore">0</span></div>
-<div style="font-size: 0.8rem; color: #888;">PRESS SPACE FOR NEXT WAVE</div>
+<div>波クリア！</div>
+<div style="font-size: 1rem; margin: 10px 0;">スコア <span id="victoryScore">0</span></div>
+<div style="font-size: 0.8rem; color: #888;">プレススペース</div>
 </div>
 <div class="wave-message" id="waveMessage">
-<div>WAVE <span id="currentWave">1</span></div>
-<div style="font-size: 1rem; margin-top: 10px;">INCOMING TRANSMISSION...</div>
+<div>ウェーブ <span id="currentWave">1</span></div>
+<div style="font-size: 1rem; margin-top: 10px;">着信...</div>
 </div>
 <script>
         const canvas = document.getElementById('gameCanvas');

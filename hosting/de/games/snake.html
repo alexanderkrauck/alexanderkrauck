@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -304,19 +304,19 @@
     }
 }
 </style></head>
-<body><div class="language-switcher" data-no-translate="true" id="language-switcher"><a aria-current="true" class="active" href="snake.html">EN</a><a class="" href="../de/games/snake.html">DE</a><a class="" href="../es/games/snake.html">ES</a><a class="" href="../fr/games/snake.html">FR</a><a class="" href="../ja/games/snake.html">JA</a></div>
-<a class="back-btn" href="../index.html">← BACK_TO_MAIN</a>
+<body><div class="language-switcher" data-no-translate="true" id="language-switcher"><a class="" href="../../games/snake.html">EN</a><a aria-current="true" class="active" href="snake.html">DE</a><a class="" href="../../es/games/snake.html">ES</a><a class="" href="../../fr/games/snake.html">FR</a><a class="" href="../../ja/games/snake.html">JA</a></div>
+<a class="back-btn" href="../index.html">← ZURÜCK_ZU_MAIN</a>
 <div class="game-container">
 <h1 class="game-title">SNAKE.exe</h1>
 <div class="game-stats">
-<div>SCORE: <span id="score">0</span></div>
-<div>LENGTH: <span id="length">1</span></div>
-<div>SPEED: <span id="speed">1</span></div>
+<div>ZUSAMMENFASSUNG: <span id="score">0</span></div>
+<div>LÄNGE: <span id="length">1</span></div>
+<div>GESCHWINDIGKEIT: <span id="speed">1</span></div>
 </div>
 <canvas height="480" id="gameCanvas" width="480"></canvas>
 <div class="controls">
-            USE ARROW KEYS OR WASD TO CONTROL THE SNAKE<br/>
-            EAT THE FOOD TO GROW AND INCREASE SCORE
+            BENUTZE DIE PFEILTASTEN ODER WASD, UM DIE SCHLANGE ZU STEUERN<br/>
+            DAS ESSEN ESSEN, UM ZU WACHSEN UND DIE PUNKTZAHL ZU ERHÖHEN
         </div>
 <div class="mobile-controls">
 <button class="control-btn up" data-direction="up">↑</button>
@@ -325,15 +325,15 @@
 <button class="control-btn down" data-direction="down">↓</button>
 </div>
 <div class="start-message" id="startMessage">
-<span class="desktop-msg">PRESS ANY ARROW KEY TO START</span>
-<span class="mobile-msg">TAP ANY DIRECTION TO START</span>
+<span class="desktop-msg">ZUM STARTEN EINE BELIEBIGE PFEILTASTE DRÜCKEN</span>
+<span class="mobile-msg">TIPPEN SIE AUF EINE BELIEBIGE RICHTUNG, UM ZU STARTEN</span>
 </div>
 </div>
 <div class="game-over" id="gameOver">
-<div>SYSTEM FAILURE</div>
-<div style="font-size: 1rem; margin: 10px 0;">FINAL SCORE: <span id="finalScore">0</span></div>
-<div style="font-size: 1rem; margin: 10px 0;">FINAL LENGTH: <span id="finalLength">0</span></div>
-<div style="font-size: 0.8rem; color: #888;">PRESS SPACE TO RESTART</div>
+<div>SYSTEMFEHLER</div>
+<div style="font-size: 1rem; margin: 10px 0;">ENDGÜLTIGES ERGEBNIS: <span id="finalScore">0</span></div>
+<div style="font-size: 1rem; margin: 10px 0;">ENDLÄNGE: <span id="finalLength">0</span></div>
+<div style="font-size: 0.8rem; color: #888;">ZUM NEUSTART DIE LEERTASTE DRÜCKEN</div>
 </div>
 <script>
         const canvas = document.getElementById('gameCanvas');

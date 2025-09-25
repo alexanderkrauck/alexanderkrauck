@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -320,19 +320,19 @@
     }
 }
 </style></head>
-<body><div class="language-switcher" data-no-translate="true" id="language-switcher"><a aria-current="true" class="active" href="pacman.html">EN</a><a class="" href="../de/games/pacman.html">DE</a><a class="" href="../es/games/pacman.html">ES</a><a class="" href="../fr/games/pacman.html">FR</a><a class="" href="../ja/games/pacman.html">JA</a></div>
+<body><div class="language-switcher" data-no-translate="true" id="language-switcher"><a class="" href="../../games/pacman.html">EN</a><a class="" href="../../de/games/pacman.html">DE</a><a class="" href="../../es/games/pacman.html">ES</a><a aria-current="true" class="active" href="pacman.html">FR</a><a class="" href="../../ja/games/pacman.html">JA</a></div>
 <a class="back-btn" href="../index.html">← BACK_TO_MAIN</a>
 <div class="game-container">
 <h1 class="game-title">PAC-MAN.exe</h1>
 <div class="game-stats">
-<div>SCORE: <span id="score">0</span></div>
-<div>LIVES: <span id="lives">3</span></div>
-<div>LEVEL: <span id="level">1</span></div>
+<div>SCORE : <span id="score">0</span></div>
+<div>VIT : <span id="lives">3</span></div>
+<div>NIVEAU : <span id="level">1</span></div>
 </div>
 <canvas height="620" id="gameCanvas" width="600"></canvas>
 <div class="controls">
-            USE ARROW KEYS OR WASD TO CONTROL PAC-MAN<br/>
-            EAT ALL DOTS TO WIN • AVOID THE GHOSTS
+            UTILISE LES TOUCHES FLÉCHÉES OU LA SOURIS POUR CONTRÔLER PAC-MAN<br/>
+            MANGEZ TOUS LES POINTS POUR GAGNER - ÉVITEZ LES FANTÔMES
         </div>
 <div class="mobile-controls">
 <button class="control-btn up" data-direction="up">↑</button>
@@ -341,19 +341,19 @@
 <button class="control-btn down" data-direction="down">↓</button>
 </div>
 <div class="start-message" id="startMessage">
-<span class="desktop-msg">PRESS ANY ARROW KEY TO START</span>
-<span class="mobile-msg">TAP ANY DIRECTION TO START</span>
+<span class="desktop-msg">APPUYER SUR N'IMPORTE QUELLE TOUCHE FLÉCHÉE POUR DÉMARRER</span>
+<span class="mobile-msg">APPUYEZ SUR N'IMPORTE QUELLE DIRECTION POUR COMMENCER</span>
 </div>
 </div>
 <div class="game-over" id="gameOver">
-<div>SYSTEM TERMINATED</div>
-<div style="font-size: 1rem; margin: 10px 0;">FINAL SCORE: <span id="finalScore">0</span></div>
-<div style="font-size: 0.8rem; color: #888;">PRESS SPACE TO RESTART</div>
+<div>SYSTÈME TERMINÉ</div>
+<div style="font-size: 1rem; margin: 10px 0;">SCORE FINAL : <span id="finalScore">0</span></div>
+<div style="font-size: 0.8rem; color: #888;">APPUYER SUR ESPACE POUR REDÉMARRER</div>
 </div>
 <div class="victory" id="victory">
-<div>LEVEL COMPLETE!</div>
-<div style="font-size: 1rem; margin: 10px 0;">SCORE: <span id="victoryScore">0</span></div>
-<div style="font-size: 0.8rem; color: #888;">PRESS SPACE FOR NEXT LEVEL</div>
+<div>NIVEAU COMPLET !</div>
+<div style="font-size: 1rem; margin: 10px 0;">SCORE : <span id="victoryScore">0</span></div>
+<div style="font-size: 0.8rem; color: #888;">APPUYER SUR L'ESPACE POUR LE NIVEAU SUIVANT</div>
 </div>
 <script>
         const canvas = document.getElementById('gameCanvas');
