@@ -13,15 +13,9 @@ class BlogLoader {
     }
 
     async loadBlogPosts() {
-        // In a real implementation, you'd have a server endpoint that lists blog files
-        // For now, we'll use a predefined list based on our file naming convention
-        const blogFiles = [
-            '2024-12-01-ai-revolution-in-industry.md',
-            '2024-11-15-graph-neural-networks-breakthrough.md',
-            '2024-10-20-mlops-enterprise-deployment.md'
-        ];
-
         try {
+            const blogFiles = await this.discoverBlogFiles();
+            
             const posts = await Promise.all(
                 blogFiles.map(async (filename) => {
                     try {
@@ -45,6 +39,36 @@ class BlogLoader {
         } catch (error) {
             console.error('Error loading blog posts:', error);
             return this.getFallbackPosts();
+        }
+    }
+
+    async discoverBlogFiles() {
+        // List of actual blog files in the blog directory
+        const blogFiles = [
+            '2025-09-10-code-as-parameter.md',
+            '2024-12-01-ai-revolution-in-industry.md',
+            '2024-11-15-graph-neural-networks-breakthrough.md',
+            '2024-10-20-mlops-enterprise-deployment.md'
+        ];
+        
+        // Verify which files actually exist
+        const existingFiles = [];
+        for (const filename of blogFiles) {
+            if (await this.fileExists(`/blog/${filename}`)) {
+                existingFiles.push(filename);
+            }
+        }
+        
+        console.log(`Found ${existingFiles.length} blog files:`, existingFiles);
+        return existingFiles;
+    }
+    
+    async fileExists(url) {
+        try {
+            const response = await fetch(url, { method: 'HEAD' });
+            return response.ok;
+        } catch {
+            return false;
         }
     }
 

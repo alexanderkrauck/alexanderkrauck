@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexander Krauck - AI Visionary & Consultant</title>
+    <title>Alexander Krauck — Consultant & Founder of Goedly</title>
     <style>
         * {
             margin: 0;
@@ -18,6 +18,94 @@
             overflow-x: hidden;
             cursor: none;
         }
+
+        /* Light theme (default) overrides */
+        body.light {
+            background: #f7fafc;
+            color: #1f2937;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+            cursor: auto;
+        }
+
+        body.light .matrix-bg { display: none; }
+        body.light .cursor, body.light .cursor-avatar { display: none; }
+        body.light .hero { background: radial-gradient(ellipse at center, rgba(16,185,129,0.08) 0%, transparent 70%); }
+        body.light .glitch { color: #0f766e; text-shadow: none; animation: none; letter-spacing: 3px; }
+        body.light .glitch::before, body.light .glitch::after { display: none; }
+        body.light .subtitle { color: #475569; }
+        body.light .consulting-badge { border-color: #0f766e; color: #0f766e; background: rgba(16,185,129,0.08); box-shadow: none; }
+        body.light .consulting-badge { text-transform: none; letter-spacing: 0; animation: none; }
+        body.light .section { background: transparent; }
+        body.light .section-title { color: #0f766e; text-transform: none; letter-spacing: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; font-weight: 700; }
+        body.light .section-title::after { background: #0f766e; }
+        body.light .nav-item { color: #0f766e; text-transform: none; letter-spacing: 0; opacity: 1; }
+        body.light .nav-item::before { content: ''; }
+        body.light .cta-button { color: #0f766e; border-color: #0f766e; }
+        body.light .cta-button.secondary { color: #2563eb; border-color: #2563eb; }
+        body.light .cta-button:hover { box-shadow: 0 6px 18px rgba(15,118,110,0.25); }
+        body.light .social-icon { color: #0f766e; border-color: rgba(15,118,110,0.4); background: #ffffff; }
+        body.light .social-icon:hover { background: #0f766e; color: #ffffff; box-shadow: 0 0 14px rgba(15,118,110,0.35); }
+        body.light .particles { display: none; }
+        body.light .terminal { display: none; }
+        body.light .hero-hologram, body.light .hologram { display: none; }
+        body.light .floating-avatar { opacity: 1; bottom: 10%; top: auto; right: 10%; animation: none; }
+        body.light .floating-avatar img { filter: none; border: 1px solid #e5e7eb; box-shadow: 0 8px 18px rgba(2,6,23,0.06); }
+        body.light .terminal,
+        body.light .service-card,
+        body.light .project-card,
+        body.light .blog-post-card,
+        body.light .skill-card,
+        body.light .game-card,
+        body.light .contact-form {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 8px 22px rgba(2,6,23,0.06);
+        }
+        body.light .terminal-header { background: #f1f5f9; color: #0f172a; border-bottom: 1px solid #e5e7eb; }
+        body.light .terminal-line { color: #334155; }
+        body.light .project-description,
+        body.light .service-description,
+        body.light .post-excerpt,
+        body.light .about-text,
+        body.light .consulting-text,
+        body.light .exp-description,
+        body.light .game-description,
+        body.light .contact-item { color: #334155; }
+        body.light .service-icon, body.light .skill-icon { color: #0f766e; }
+        body.light .service-name, body.light .skill-name { color: #0f172a; }
+        body.light .service-card:hover, body.light .skill-card:hover { box-shadow: 0 16px 30px rgba(2,6,23,0.08); }
+        body.light .topic-tag, body.light .tag { background: rgba(15,118,110,0.12); color: #0f766e; }
+        body.light .language-dot { box-shadow: 0 0 0 2px rgba(15,118,110,0.15); }
+        body.light .contact-item:hover { color: #0f766e; }
+        body.light .read-more-btn { color: #0f766e; border-color: #0f766e; }
+        body.light .read-more-btn:hover { background: #0f766e; color: #fff; box-shadow: 0 0 12px rgba(15,118,110,0.25); }
+        body.light .hologram, body.light .hero-hologram { filter: saturate(0.95) drop-shadow(0 6px 18px rgba(2,6,23,0.12)); }
+        body.light .hero-hologram-label { color: #0f766e; text-shadow: none; }
+        body.light .post-link, body.light .project-name a { color: #0f766e; }
+        body.light .project-name a:hover, body.light .post-link:hover { text-shadow: none; color: #115e59; }
+        body.light .consulting-grid, body.light .about-grid { grid-template-columns: 1fr; }
+
+        /* Theme toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 22px;
+            right: 22px;
+            z-index: 1100;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(0,255,136,0.35);
+            color: #00ff88;
+            background: rgba(0,0,0,0.35);
+            backdrop-filter: blur(6px);
+            cursor: pointer;
+            user-select: none;
+        }
+        .theme-toggle:hover { box-shadow: 0 0 16px rgba(0,255,136,0.25); }
+        body.light .theme-toggle { border-color: #e5e7eb; color: #0f766e; background: #ffffff; box-shadow: 0 4px 12px rgba(2,6,23,0.05); }
+        body.light .theme-toggle:hover { box-shadow: 0 8px 18px rgba(2,6,23,0.08); }
 
         /* Custom Cursor */
         .cursor {
@@ -277,7 +365,7 @@
         /* Navigation */
         .nav {
             position: fixed;
-            top: 30px;
+            top: 70px; /* offset to avoid overlap with theme toggle */
             right: 30px;
             z-index: 1000;
         }
@@ -365,6 +453,8 @@
             color: #00ff88;
             font-weight: bold;
         }
+        .link { color: inherit; text-decoration: none; border-bottom: 1px dashed currentColor; padding-bottom: 1px; }
+        .link:hover { opacity: 0.85; }
 
         .highlight.red {
             color: #ff0040;
@@ -1941,12 +2031,18 @@
         }
     </style>
 </head>
-<body>
+<body class="light">
     <div class="cursor"></div>
     <div class="cursor-avatar">
         <img src="resources/cyberpunk_portrait_compressed.jpg" alt="Alexander Krauck - AI Visionary">
     </div>
     <canvas class="matrix-bg" id="matrix"></canvas>
+    
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="theme-toggle" aria-pressed="false" title="Toggle theme">
+        <span id="themeIcon" aria-hidden="true">🌞</span>
+        <span id="themeLabel" class="toggle-label">Light</span>
+    </button>
     
     <!-- Social Media Links -->
     <div class="social-links">
@@ -1971,6 +2067,7 @@
         <a href="#skills" class="nav-item">Skills</a>
         <a href="#games" class="nav-item">Games</a>
         <a href="#contact" class="nav-item">Contact</a>
+        <a href="AGB.pdf" class="nav-item" target="_blank" rel="noopener">AGB</a>
     </nav>
 
     <!-- Mobile Navigation -->
@@ -1992,24 +2089,25 @@
         <a href="#skills" class="mobile-nav-item">Skills</a>
         <a href="#games" class="mobile-nav-item">Games</a>
         <a href="#contact" class="mobile-nav-item">Contact</a>
+        <a href="AGB.pdf" class="mobile-nav-item" target="_blank" rel="noopener">AGB</a>
     </nav>
 
     <section id="home" class="hero">
         <div class="particles"></div>
         <div class="hero-content">
             <h1 class="glitch" data-text="ALEXANDER KRAUCK">ALEXANDER KRAUCK</h1>
-            <p class="subtitle">AI OPERATIONS • HEAD OF COMPETENCE CENTER AI • INDEPENDENT CONSULTANT</p>
-            <div class="consulting-badge">AVAILABLE FOR CONSULTING & CUSTOM PROJECTS</div>
+            <p class="subtitle">Consultant (Einzelunternehmen, AT) • Founder of <a class="link" href="https://goedly.com" target="_blank" rel="noopener noreferrer">Goedly</a> — Autonomous Software Manufacturing</p>
+            <div class="consulting-badge">Consulting + Goedly: Automating the software lifecycle</div>
             <div class="terminal">
                 <div class="terminal-header">$ whoami</div>
-                <div class="terminal-line">AI_Visionary@Fabasoft:~$ Leading AI Innovation at Enterprise Level</div>
-                <div class="terminal-line">Independent_Consultant@Available:~$ Custom AI Solutions & Strategic Implementation</div>
-                <div class="terminal-line">MLOps_Expert@Freelance:~$ Building the Future, One Algorithm at a Time</div>
-                <div class="terminal-line">Innovation_Leader@Austria:~$ <span class="terminal-cursor">_</span></div>
+                <div class="terminal-line">Founder@Goedly:~$ Autonomous software manufacturing from idea -> production</div>
+                <div class="terminal-line">Consultant@AT_Einzelunternehmen:~$ Strategy, automation & delivery</div>
+                <div class="terminal-line">AgentOps@Lifecycle:~$ Websites & apps generated, deployed, iterated</div>
+                <div class="terminal-line">Austria@Europe:~$ <span class="terminal-cursor">_</span></div>
             </div>
             <div class="cta-buttons">
-                <a href="#consulting" class="cta-button">HIRE_ME</a>
-                <a href="#projects" class="cta-button secondary">VIEW_PROJECTS</a>
+                <a href="#consulting" id="hireCta" class="cta-button" data-dark-text="HIRE_ME" data-light-text="Book consultation">HIRE_ME</a>
+                <a href="#projects" id="viewProjectsCta" class="cta-button secondary" data-dark-text="VIEW_PROJECTS" data-light-text="View projects">VIEW_PROJECTS</a>
             </div>
         </div>
         <div class="floating-avatar">
@@ -2024,14 +2122,18 @@
 
     <section id="consulting" class="section">
         <div class="container">
-            <h2 class="section-title">CONSULTING_SERVICES.exe</h2>
+            <h2 class="section-title" id="consultingTitle" data-dark-text="CONSULTING_SERVICES.exe" data-light-text="Consulting Services">CONSULTING_SERVICES.exe</h2>
             <div class="consulting-grid">
                 <div class="consulting-text">
-                    <p>I am <span class="highlight">Head of AI Competence Center at Fabasoft</span> and also offer <span class="highlight red">independent consulting services</span> to help organizations transform complex AI concepts into practical, revenue-generating solutions.</p>
+                    <p>I run <a class="highlight link" href="https://goedly.com" target="_blank" rel="noopener noreferrer">Goedly</a> — an autonomous software manufacturing company focused on automating the entire lifecycle of software (from brief to live site/app and beyond).</p>
                     <br>
-                    <p>Whether you need <span class="highlight">MLOps implementation</span>, <span class="highlight">multi-agent systems</span>, or <span class="highlight">custom AI development</span>, I deliver results that matter to your bottom line - <span class="highlight red">as an independent consultant</span>.</p>
+                    <p>In parallel, I offer <span class="highlight red">consulting as an Einzelunternehmen in Austria</span> to help teams design, build, and operate agentic systems that deliver real outcomes.</p>
                     <br>
-                    <p><span class="highlight red">Available for both short-term consulting projects and long-term strategic partnerships.</span></p>
+                    <p>Need <span class="highlight">full-lifecycle automation</span> for websites, internal tools, or data products? I combine <span class="highlight">multi-agent pipelines</span>, <span class="highlight">MLOps/CI-CD</span>, and <span class="highlight">infrastructure-as-code</span> to go from idea -> production fast.</p>
+                    <br>
+                    <p><span class="highlight red">Available for short engagements and long-term partnerships.</span></p>
+                    <br>
+                    <p style="font-size:14px;color:#888;">AGB (Allgemeine Geschäftsbedingungen) for consulting: <a class="link" href="AGB.pdf" target="_blank" rel="noopener">Download PDF</a></p>
                     <br>
                     <div style="text-align: center;">
                         <button id="contactBtn" class="cta-button" style="margin: 0; font-size: 16px; padding: 18px 35px;">
@@ -2053,27 +2155,27 @@
             
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">🧠</div>
-                    <div class="service-name">MLOps Implementation</div>
-                    <div class="service-description">End-to-end machine learning operations setup, from model development to production deployment and monitoring.</div>
+                    <div class="service-icon">🧩</div>
+                    <div class="service-name">Autonomous Manufacturing</div>
+                    <div class="service-description">Agentic pipelines that turn a brief into live software: generate, test, deploy, and iterate continuously.</div>
                 </div>
                 
                 <div class="service-card">
                     <div class="service-icon">🤖</div>
-                    <div class="service-name">Multi-Agent Systems</div>
-                    <div class="service-description">Design and implement intelligent agent networks for complex business process automation and optimization.</div>
+                    <div class="service-name">Agent Systems</div>
+                    <div class="service-description">Design and implement robust multi-agent systems for business automation and content/software generation.</div>
                 </div>
                 
                 <div class="service-card">
-                    <div class="service-icon">⚡</div>
-                    <div class="service-name">AI Strategy & Leadership</div>
-                    <div class="service-description">Strategic AI roadmap development, team leadership, and Scrum-based project management for AI initiatives.</div>
+                    <div class="service-icon">⚙️</div>
+                    <div class="service-name">Ops & Tooling</div>
+                    <div class="service-description">MLOps, CI/CD, observability, and infrastructure-as-code to keep autonomous systems reliable and compliant.</div>
                 </div>
                 
                 <div class="service-card">
-                    <div class="service-icon">🔮</div>
-                    <div class="service-name">Custom AI Development</div>
-                    <div class="service-description">Bespoke AI solutions including Graph Neural Networks, uncertainty quantification, and industry-specific applications.</div>
+                    <div class="service-icon">🌐</div>
+                    <div class="service-name">Websites & Apps</div>
+                    <div class="service-description">From landing pages to full apps: automated generation, human QA, and zero-downtime deployment.</div>
                 </div>
             </div>
         </div>
@@ -2081,7 +2183,7 @@
 
     <section id="projects" class="section">
         <div class="container">
-            <h2 class="section-title">PROJECT_REPOSITORY</h2>
+            <h2 class="section-title" id="projectsTitle" data-dark-text="PROJECT_REPOSITORY" data-light-text="Projects">PROJECT_REPOSITORY</h2>
             <div class="terminal">
                 <div class="terminal-header">$ git clone https://github.com/alexanderkrauck/*</div>
                 <div class="terminal-line">Fetching latest repositories from GitHub...</div>
@@ -2096,7 +2198,7 @@
 
     <section id="blog" class="section">
         <div class="container">
-            <h2 class="section-title">NEURAL_BLOG.log</h2>
+            <h2 class="section-title" id="blogTitle" data-dark-text="NEURAL_BLOG.log" data-light-text="Blog">NEURAL_BLOG.log</h2>
             <div class="terminal">
                 <div class="terminal-header">$ cat /var/log/neural_insights.log</div>
                 <div class="terminal-line">Loading latest AI research insights and industry analysis...</div>
@@ -2111,14 +2213,14 @@
 
     <section id="about" class="section">
         <div class="container">
-            <h2 class="section-title">ABOUT_ME.exe</h2>
+            <h2 class="section-title" id="aboutTitle" data-dark-text="ABOUT_ME.exe" data-light-text="About">ABOUT_ME.exe</h2>
             <div class="about-grid">
                 <div class="about-text">
-                    <p>I am the <span class="highlight">Head of the Competence Center for Artificial Intelligence</span> at Fabasoft, where I guide and collaborate with project leads to identify and implement advanced AI solutions tailored to their products.</p>
+                    <p>I'm a consultant (Einzelunternehmen, AT) and the founder of <a class="highlight link" href="https://goedly.com" target="_blank" rel="noopener noreferrer">Goedly</a>, focused on autonomous software manufacturing.</p>
                     <br>
-                    <p>My expertise spans <span class="highlight">MLOps, Multi-agent Systems, and Scrum methodologies</span>, with a proven track record of transforming theoretical AI concepts into practical, industry-ready solutions.</p>
+                    <p>I build systems that take a problem statement and manufacture working software: planning, coding, testing, deployment, and iteration. Under the hood: <span class="highlight">agentic architectures</span>, <span class="highlight">MLOps/CI/CD</span>, and <span class="highlight">infrastructure-as-code</span>.</p>
                     <br>
-                    <p>From researching <span class="highlight">Graph Neural Networks</span> to developing uncertainty prediction models for the steel industry at voestalpine, I bridge the gap between cutting-edge research and real-world applications.</p>
+                    <p>My background includes applied AI R&D (e.g., <span class="highlight">Graph Neural Networks</span>, uncertainty modeling) and production delivery in industry settings.</p>
                 </div>
                 <div class="hologram">
                     <img src="resources/cyberpunk_portrait_compressed.jpg" alt="Alexander Krauck - AI Visionary" class="hologram-portrait">
@@ -2136,13 +2238,27 @@
 
     <section id="experience" class="section">
         <div class="container">
-            <h2 class="section-title">EXPERIENCE_LOG</h2>
+            <h2 class="section-title" id="experienceTitle" data-dark-text="EXPERIENCE_LOG" data-light-text="Experience">EXPERIENCE_LOG</h2>
             <div class="experience-timeline">
+                <div class="experience-item">
+                    <h3 class="exp-title">Founder</h3>
+                    <div class="exp-company"><a class="link" href="https://goedly.com" target="_blank" rel="noopener noreferrer">Goedly</a></div>
+                    <div class="exp-date">2024 - Present</div>
+                    <p class="exp-description">Building autonomous software manufacturing pipelines that generate, deploy, and evolve software products from a problem brief.</p>
+                </div>
+
+                <div class="experience-item">
+                    <h3 class="exp-title">Independent Consultant</h3>
+                    <div class="exp-company">Einzelunternehmen (Austria)</div>
+                    <div class="exp-date">2024 - Present</div>
+                    <p class="exp-description">Consulting on agent systems, MLOps, and end-to-end automation for teams shipping AI-powered products.</p>
+                </div>
+                
                 <div class="experience-item">
                     <h3 class="exp-title">Head of Competence Center AI</h3>
                     <div class="exp-company">Fabasoft</div>
-                    <div class="exp-date">April 2024 - Present</div>
-                    <p class="exp-description">Leading AI innovation initiatives, collaborating with project leads to implement advanced AI solutions, and driving the latest LLM technologies to transform business processes.</p>
+                    <div class="exp-date">2024</div>
+                    <p class="exp-description">Led AI initiatives and collaboration across product teams; introduced LLM-driven capabilities and production-oriented AI practices.</p>
                 </div>
                 
                 <div class="experience-item">
@@ -2164,7 +2280,7 @@
 
     <section id="skills" class="section">
         <div class="container">
-            <h2 class="section-title">SKILL_MATRIX</h2>
+            <h2 class="section-title" id="skillsTitle" data-dark-text="SKILL_MATRIX" data-light-text="Skills">SKILL_MATRIX</h2>
             <div class="skills-grid">
                 <div class="skill-card">
                     <div class="skill-icon">🧠</div>
@@ -2219,7 +2335,7 @@
 
     <section id="games" class="section">
         <div class="container">
-            <h2 class="section-title">ARCADE_PROTOCOLS</h2>
+            <h2 class="section-title" id="gamesTitle" data-dark-text="ARCADE_PROTOCOLS" data-light-text="Games">ARCADE_PROTOCOLS</h2>
             <div class="games-grid">
                 <a href="games/snake.html" class="game-card">
                     <div class="game-icon">🐍</div>
@@ -2261,7 +2377,7 @@
 
     <section id="contact" class="section">
         <div class="container">
-            <h2 class="section-title">ESTABLISH_CONNECTION</h2>
+            <h2 class="section-title" id="contactTitle" data-dark-text="ESTABLISH_CONNECTION" data-light-text="Contact">ESTABLISH_CONNECTION</h2>
             <div style="text-align: center; max-width: 800px; margin: 0 auto;">
                 <div class="terminal">
                     <div class="terminal-header">$ cat /etc/contact_info</div>
@@ -2292,7 +2408,7 @@
                     <div class="contact-item" style="flex-direction: column; text-align: center; padding: 30px; background: rgba(0,255,136,0.05); border: 1px solid rgba(0,255,136,0.3);">
                         <div class="contact-icon" style="font-size: 48px; margin-bottom: 15px;">🏢</div>
                         <div style="font-size: 18px; color: #00ff88; margin-bottom: 10px;">CURRENT_ROLE</div>
-                        <div>Head of AI @ Fabasoft</div>
+                        <div>Founder @ <a class="link" href="https://goedly.com" target="_blank" rel="noopener noreferrer">Goedly</a> • Consultant (Einzelunternehmen, AT)</div>
                     </div>
                     
                     <div class="contact-item" style="flex-direction: column; text-align: center; padding: 30px; background: rgba(0,255,136,0.05); border: 1px solid rgba(0,255,136,0.3);">
@@ -2500,27 +2616,25 @@
 
         // Contact button handlers
         function openContactEmail() {
-            const subject = 'AI Consulting Inquiry - Initial Contact';
+            const subject = 'Consulting & Goedly — Initial Contact';
             const body = `Hello Alexander,
 
-I hope this message finds you well. I am reaching out regarding your AI consulting services.
+I am reaching out regarding consulting and/or Goedly's autonomous software manufacturing capabilities.
 
-I found your portfolio at alexanderkrauck.com and was impressed by your expertise in:
-• MLOps and Multi-agent Systems
-• Graph Neural Networks research
-• Your role as Head of AI Competence Center at Fabasoft
+I found your portfolio at alexanderkrauck.com and noted your expertise in:
+• Autonomous pipelines for websites/apps (agentic systems)
+• MLOps, CI/CD and production reliability
+• Applied AI (e.g., GNNs, uncertainty)
 
-I would like to discuss potential collaboration opportunities for my organization.
+I'd like to discuss a potential engagement.
 
 PROJECT DETAILS:
-[ Please describe your project, timeline, and specific AI needs here ]
+[ Brief, goals, scope, timeline ]
 
 ORGANIZATION:
-[ Company name and brief description ]
+[ Company name and short description ]
 
-I would appreciate the opportunity to schedule a consultation at your convenience.
-
-Best regards,
+Thanks and best regards,
 [ Your name ]
 
 ---
@@ -2577,6 +2691,60 @@ This message was sent via alexanderkrauck.com`;
                     mobileNav.classList.remove('open');
                     burger.classList.remove('open');
                 }
+            });
+        }
+
+        // Theme toggle logic
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeLabel = document.getElementById('themeLabel');
+
+        const DARK_PORTRAIT = 'resources/cyberpunk_portrait_compressed.jpg';
+        const LIGHT_PORTRAIT = 'resources/suite_portrait.jpg';
+
+        function updatePortraits(theme) {
+            const isLight = theme === 'light';
+            const src = isLight ? LIGHT_PORTRAIT : DARK_PORTRAIT;
+            document.querySelectorAll('.hologram-portrait').forEach(img => {
+                if (img && img.getAttribute('src') !== src) {
+                    img.setAttribute('src', src);
+                    img.setAttribute('alt', isLight ? 'Alexander Krauck — Professional Portrait' : 'Alexander Krauck — AI Visionary');
+                }
+            });
+            const favatar = document.querySelector('.floating-avatar img');
+            if (favatar && favatar.getAttribute('src') !== src) {
+                favatar.setAttribute('src', src);
+                favatar.setAttribute('alt', isLight ? 'Alexander Krauck — Professional Portrait' : 'Alexander Krauck — AI Visionary');
+            }
+            const cimg = document.querySelector('.cursor-avatar img');
+            if (cimg) {
+                cimg.setAttribute('src', src);
+            }
+        }
+
+        function applyTheme(theme) {
+            const isLight = theme === 'light';
+            document.body.classList.toggle('light', isLight);
+            if (themeToggle) themeToggle.setAttribute('aria-pressed', String(isLight));
+            if (themeIcon) themeIcon.textContent = isLight ? '🌞' : '🌙';
+            if (themeLabel) themeLabel.textContent = isLight ? 'Light' : 'Dark';
+            // Swap header and CTA texts for professional light mode
+            document.querySelectorAll('[data-light-text][data-dark-text]').forEach(el => {
+                const text = isLight ? el.getAttribute('data-light-text') : el.getAttribute('data-dark-text');
+                if (text) el.textContent = text;
+            });
+            updatePortraits(theme);
+        }
+
+        // Default to light unless saved preference exists
+        const savedTheme = localStorage.getItem('theme');
+        applyTheme(savedTheme === 'dark' ? 'dark' : 'light');
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const toTheme = document.body.classList.contains('light') ? 'dark' : 'light';
+                localStorage.setItem('theme', toTheme);
+                applyTheme(toTheme);
             });
         }
     </script>

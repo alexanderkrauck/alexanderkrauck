@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Loader Test</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #0f0;
+            padding: 20px;
+        }
+        #blog-posts {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .blog-post-card {
+            border: 1px solid #0f0;
+            padding: 15px;
+            margin: 10px 0;
+            background: rgba(0,255,0,0.05);
+        }
+        .loading-blog {
+            text-align: center;
+            padding: 50px;
+        }
+        .error {
+            color: #f00;
+            padding: 10px;
+            border: 1px solid #f00;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blog Loader Test</h1>
+    <div id="status"></div>
+    <div id="blog-posts"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/showdown@2.1.0/dist/showdown.min.js"></script>
+    <script src="hosting/js/blog-loader.js"></script>
+    <script>
+        // Test the blog loader
+        async function testBlogLoader() {
+            const statusEl = document.getElementById('status');
+            statusEl.innerHTML = '<p>Testing blog loader...</p>';
+            
+            try {
+                // Create blog loader instance
+                const loader = new BlogLoader();
+                
+                // Test file discovery
+                statusEl.innerHTML += '<p>Discovering blog files...</p>';
+                const files = await loader.discoverBlogFiles();
+                statusEl.innerHTML += `<p>Found ${files.length} files: ${files.join(', ')}</p>`;
+                
+                // Test loading posts
+                statusEl.innerHTML += '<p>Loading blog posts...</p>';
+                const posts = await loader.loadBlogPosts();
+                statusEl.innerHTML += `<p>Loaded ${posts.length} posts successfully!</p>`;
+                
+                // Display posts
+                loader.renderBlogPosts('blog-posts', 10);
+                
+                // Log details to console
+                console.log('Blog files discovered:', files);
+                console.log('Blog posts loaded:', posts);
+                
+            } catch (error) {
+                statusEl.innerHTML += `<div class="error">Error: ${error.message}</div>`;
+                console.error('Blog loader test failed:', error);
+            }
+        }
+        
+        // Run test when page loads
+        testBlogLoader();
+    </script>
+</body>
+</html>
