@@ -194,7 +194,7 @@
                 width: 100%;
                 max-width: 350px;
                 height: auto;
-                aspect-ratio: 600/660;
+                aspect-ratio: 30/31;
             }
 
             .controls {
@@ -289,7 +289,7 @@
             <div>LIVES: <span id="lives">3</span></div>
             <div>LEVEL: <span id="level">1</span></div>
         </div>
-        <canvas id="gameCanvas" width="600" height="660"></canvas>
+        <canvas id="gameCanvas" width="600" height="620"></canvas>
         <div class="controls">
             USE ARROW KEYS OR WASD TO CONTROL PAC-MAN<br>
             EAT ALL DOTS TO WIN • AVOID THE GHOSTS
@@ -331,11 +331,9 @@
         const startMessageElement = document.getElementById('startMessage');
 
         const CELL_SIZE = 20;
-        const ROWS = 33;
-        const COLS = 30;
 
         // Maze layout (1 = wall, 0 = dot, 2 = empty, 3 = power pellet, 4 = ghost spawn)
-        const maze = [
+        const initialMaze = [
             [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
             [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
             [1,3,1,1,1,1,0,1,1,1,1,1,0,0,1,1,0,0,1,1,1,1,1,0,1,1,1,1,3,1],
@@ -368,6 +366,20 @@
             [1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,1],
             [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
         ];
+
+        const ROWS = initialMaze.length;
+        const COLS = initialMaze[0].length;
+        const CANVAS_WIDTH = COLS * CELL_SIZE;
+        const CANVAS_HEIGHT = ROWS * CELL_SIZE;
+
+        canvas.width = CANVAS_WIDTH;
+        canvas.height = CANVAS_HEIGHT;
+
+        let maze = cloneMaze(initialMaze);
+
+        function cloneMaze(layout) {
+            return layout.map(row => row.slice());
+        }
 
         let gameState = {
             pacman: { x: 15, y: 23, direction: 0, nextDirection: 0, moving: false },
@@ -631,24 +643,109 @@
 
         function drawPacman() {
             const pacman = gameState.pacman;
-            const x = pacman.x * CELL_SIZE + CELL_SIZE/2;
-            const y = pacman.y * CELL_SIZE + CELL_SIZE/2;
+            const x = pacman.x * CELL_SIZE + CELL_SIZE / 2;
+            const y = pacman.y * CELL_SIZE + CELL_SIZE / 2;
+            const radius = CELL_SIZE / 2 - 2;
+            const directionAngles = [ -Math.PI / 2, 0, Math.PI / 2, Math.PI ];
+            const facingAngle = directionAngles[pacman.direction] ?? 0;
 
-            ctx.fillStyle = gameState.powerMode ? '#ffff00' : '#ffff00';
-            ctx.shadowColor = '#ffff00';
-            ctx.shadowBlur = gameState.powerMode ? 15 : 8;
+            const time = Date.now() * 0.012;
+            const mouthSwing = pacman.moving ? 0.35 + Math.abs(Math.sin(time)) * 0.25 : 0.25;
+            const mouthStart = facingAngle - mouthSwing;
+            const mouthEnd = facingAngle + mouthSwing;
 
-            // Animate mouth
-            const time = Date.now() * 0.01;
-            const mouthAngle = pacman.moving ? Math.abs(Math.sin(time)) * 0.8 : 0.3;
+            ctx.save();
 
+            ctx.shadowColor = '#ffe066';
+            ctx.shadowBlur = gameState.powerMode ? 22 : 12;
+
+            const gradient = ctx.createRadialGradient(
+                x - radius * 0.3,
+                y - radius * 0.3,
+                radius * 0.2,
+                x,
+                y,
+                radius
+            );
+            gradient.addColorStop(0, '#fff9b0');
+            gradient.addColorStop(0.55, '#ffe066');
+            gradient.addColorStop(1, '#ffc300');
+
+            ctx.fillStyle = gradient;
             ctx.beginPath();
-            const startAngle = pacman.direction * Math.PI/2 - mouthAngle;
-            const endAngle = pacman.direction * Math.PI/2 + mouthAngle;
-            ctx.arc(x, y, CELL_SIZE/2 - 2, startAngle, endAngle);
-            ctx.lineTo(x, y);
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
             ctx.fill();
+
             ctx.shadowBlur = 0;
+
+            // Subtle highlight for depth
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(x, y, radius - 1, 0, Math.PI * 2);
+            ctx.clip();
+            ctx.globalAlpha = 0.35;
+            ctx.fillStyle = '#ffffff';
+            const highlightAngle = facingAngle - Math.PI / 4;
+            ctx.beginPath();
+            ctx.ellipse(
+                x - Math.cos(facingAngle) * radius * 0.1 - Math.cos(highlightAngle) * radius * 0.25,
+                y - Math.sin(facingAngle) * radius * 0.1 - Math.sin(highlightAngle) * radius * 0.25,
+                radius * 0.6,
+                radius * 0.35,
+                highlightAngle,
+                0,
+                Math.PI * 2
+            );
+            ctx.fill();
+            ctx.restore();
+
+            // Mouth wedge
+            ctx.fillStyle = '#000033';
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.arc(x, y, radius + 1, mouthStart, mouthEnd, false);
+            ctx.closePath();
+            ctx.fill();
+
+            // Outline body without the mouth cutout
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#f7b500';
+            ctx.beginPath();
+            ctx.arc(x, y, radius, mouthEnd, mouthStart, true);
+            ctx.stroke();
+
+            // Hide outline overlap inside mouth
+            ctx.strokeStyle = '#000033';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x + Math.cos(mouthStart) * radius, y + Math.sin(mouthStart) * radius);
+            ctx.moveTo(x, y);
+            ctx.lineTo(x + Math.cos(mouthEnd) * radius, y + Math.sin(mouthEnd) * radius);
+            ctx.stroke();
+
+            // Eye
+            const eyeAngle = facingAngle - Math.PI / 2;
+            const eyeX = x + Math.cos(eyeAngle) * radius * 0.35;
+            const eyeY = y + Math.sin(eyeAngle) * radius * 0.35;
+
+            ctx.fillStyle = '#1a1a1a';
+            ctx.beginPath();
+            ctx.arc(eyeX, eyeY, radius * 0.12, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(
+                eyeX - Math.cos(facingAngle) * radius * 0.06,
+                eyeY - Math.sin(facingAngle) * radius * 0.06,
+                radius * 0.04,
+                0,
+                Math.PI * 2
+            );
+            ctx.fill();
+
+            ctx.restore();
         }
 
         function drawGhosts() {
@@ -765,14 +862,7 @@
         }
 
         function resetGame() {
-            // Reset maze
-            for (let row = 0; row < ROWS; row++) {
-                for (let col = 0; col < COLS; col++) {
-                    if (maze[row][col] === 2) {
-                        maze[row][col] = 0; // Restore dots
-                    }
-                }
-            }
+            maze = cloneMaze(initialMaze);
 
             gameState.score = 0;
             gameState.lives = 3;
@@ -795,14 +885,7 @@
             gameState.level++;
             gameState.lives++;
             
-            // Reset maze
-            for (let row = 0; row < ROWS; row++) {
-                for (let col = 0; col < COLS; col++) {
-                    if (maze[row][col] === 2) {
-                        maze[row][col] = 0; // Restore dots
-                    }
-                }
-            }
+            maze = cloneMaze(initialMaze);
 
             resetPositions();
             initGame();
@@ -863,16 +946,16 @@
 
         // Responsive canvas setup
         function resizeCanvas() {
-            const maxWidth = Math.min(window.innerWidth - 40, 600);
-            const maxHeight = Math.min(window.innerHeight - 200, 660);
-            
+            const maxWidth = Math.min(window.innerWidth - 40, CANVAS_WIDTH);
+            const maxHeight = Math.min(window.innerHeight - 200, CANVAS_HEIGHT);
+
             if (window.innerWidth <= 768) {
-                const scale = Math.min(maxWidth / 600, maxHeight / 660);
-                canvas.style.width = (600 * scale) + 'px';
-                canvas.style.height = (660 * scale) + 'px';
+                const scale = Math.min(maxWidth / CANVAS_WIDTH, maxHeight / CANVAS_HEIGHT);
+                canvas.style.width = (CANVAS_WIDTH * scale) + 'px';
+                canvas.style.height = (CANVAS_HEIGHT * scale) + 'px';
             } else {
-                canvas.style.width = '600px';
-                canvas.style.height = '660px';
+                canvas.style.width = CANVAS_WIDTH + 'px';
+                canvas.style.height = CANVAS_HEIGHT + 'px';
             }
         }
 

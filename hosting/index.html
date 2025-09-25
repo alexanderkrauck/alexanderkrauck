@@ -29,32 +29,38 @@
 
         body.light .matrix-bg { display: none; }
         body.light .cursor, body.light .cursor-avatar { display: none; }
-        body.light .hero { background: radial-gradient(ellipse at center, rgba(16,185,129,0.08) 0%, transparent 70%); }
-        body.light .glitch { color: #0f766e; text-shadow: none; animation: none; letter-spacing: 3px; }
-        body.light .glitch::before, body.light .glitch::after { display: none; }
-        body.light .subtitle { color: #475569; }
-        body.light .consulting-badge { border-color: #0f766e; color: #0f766e; background: rgba(16,185,129,0.08); box-shadow: none; }
-        body.light .consulting-badge { text-transform: none; letter-spacing: 0; animation: none; }
+        body.light .hero { background: radial-gradient(ellipse at center, rgba(15,118,110,0.12) 0%, transparent 70%); }
+        body.light .hero-eyebrow { color: #0f766e; border-color: rgba(15,118,110,0.3); background: rgba(15,118,110,0.12); }
+        body.light .hero-title { color: #0f172a; }
+        body.light .hero-subtitle { color: #475569; }
+        body.light .hero-metric { background: #ffffff; border-color: rgba(148,163,184,0.35); box-shadow: 0 24px 60px rgba(15,23,42,0.12); }
+        body.light .hero-metric-value { color: #0f766e; }
+        body.light .hero-metric-label { color: #475569; }
+        body.light .hero-proof-label { color: #64748b; }
+        body.light .hero-proof-item { color: #0f172a; border-color: rgba(148,163,184,0.4); background: rgba(255,255,255,0.9); }
+        body.light .hero-testimonial { background: rgba(255,255,255,0.92); border-color: rgba(148,163,184,0.5); color: #0f172a; box-shadow: 0 24px 55px rgba(15,23,42,0.18); }
+        body.light .hero-testimonial-quote { color: #0f172a; }
+        body.light .hero-testimonial-meta { color: #475569; }
+        body.light .hero-portrait-frame { background: linear-gradient(160deg, #ffffff 0%, #ecfeff 100%); border-color: rgba(148,163,184,0.4); box-shadow: 0 30px 65px rgba(15,23,42,0.18); }
+        body.light .hero-portrait-glow { background: radial-gradient(circle at 50% 50%, rgba(15,118,110,0.25), transparent 65%); opacity: 1; }
         body.light .section { background: transparent; }
         body.light .section-title { color: #0f766e; text-transform: none; letter-spacing: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial; font-weight: 700; }
         body.light .section-title::after { background: #0f766e; }
         body.light .nav-item { color: #0f766e; text-transform: none; letter-spacing: 0; opacity: 1; }
         body.light .nav-item::before { content: ''; }
-        body.light .cta-button { color: #0f766e; border-color: #0f766e; }
-        body.light .cta-button.secondary { color: #2563eb; border-color: #2563eb; }
-        body.light .cta-button:hover { box-shadow: 0 6px 18px rgba(15,118,110,0.25); }
+        body.light .cta-button { color: #0f172a; border-color: rgba(15,118,110,0.3); background: #ffffff; box-shadow: 0 10px 30px rgba(15,23,42,0.08); }
+        body.light .cta-button.primary { color: #ffffff; background: #0f766e; border-color: #0f766e; box-shadow: 0 18px 40px rgba(15,118,110,0.35); }
+        body.light .cta-button.primary:hover { box-shadow: 0 22px 48px rgba(15,118,110,0.45); }
+        body.light .cta-button.secondary { color: #0f766e; border-color: rgba(15,118,110,0.4); background: transparent; }
+        body.light .cta-button:hover { box-shadow: 0 8px 22px rgba(15,118,110,0.25); }
         body.light .social-icon { color: #0f766e; border-color: rgba(15,118,110,0.4); background: #ffffff; }
         body.light .social-icon:hover { background: #0f766e; color: #ffffff; box-shadow: 0 0 14px rgba(15,118,110,0.35); }
         body.light .particles { display: none; }
         body.light .terminal { display: none; }
-        body.light .hero-hologram, body.light .hologram { display: none; }
-        body.light .floating-avatar { opacity: 1; bottom: 10%; top: auto; right: 10%; animation: none; }
-        body.light .floating-avatar img { filter: none; border: 1px solid #e5e7eb; box-shadow: 0 8px 18px rgba(2,6,23,0.06); }
         body.light .terminal,
         body.light .service-card,
         body.light .project-card,
         body.light .blog-post-card,
-        body.light .skill-card,
         body.light .game-card,
         body.light .contact-form {
             background: #ffffff;
@@ -66,24 +72,40 @@
         body.light .project-description,
         body.light .service-description,
         body.light .post-excerpt,
-        body.light .about-text,
-        body.light .consulting-text,
         body.light .exp-description,
         body.light .game-description,
         body.light .contact-item { color: #334155; }
-        body.light .service-icon, body.light .skill-icon { color: #0f766e; }
-        body.light .service-name, body.light .skill-name { color: #0f172a; }
-        body.light .service-card:hover, body.light .skill-card:hover { box-shadow: 0 16px 30px rgba(2,6,23,0.08); }
+        body.light .service-icon { color: #0f766e; }
+        body.light .service-name { color: #0f172a; }
+        body.light .service-card:hover { box-shadow: 0 16px 30px rgba(2,6,23,0.08); }
         body.light .topic-tag, body.light .tag { background: rgba(15,118,110,0.12); color: #0f766e; }
         body.light .language-dot { box-shadow: 0 0 0 2px rgba(15,118,110,0.15); }
         body.light .contact-item:hover { color: #0f766e; }
         body.light .read-more-btn { color: #0f766e; border-color: #0f766e; }
         body.light .read-more-btn:hover { background: #0f766e; color: #fff; box-shadow: 0 0 12px rgba(15,118,110,0.25); }
-        body.light .hologram, body.light .hero-hologram { filter: saturate(0.95) drop-shadow(0 6px 18px rgba(2,6,23,0.12)); }
-        body.light .hero-hologram-label { color: #0f766e; text-shadow: none; }
         body.light .post-link, body.light .project-name a { color: #0f766e; }
         body.light .project-name a:hover, body.light .post-link:hover { text-shadow: none; color: #115e59; }
-        body.light .consulting-grid, body.light .about-grid { grid-template-columns: 1fr; }
+        body.light .consulting-intro { color: #1f2937; }
+        body.light .consulting-paragraph { color: #334155; }
+        body.light .consulting-points li { color: #1f2937; }
+        body.light .consulting-metric { background: #ffffff; border-color: rgba(15,118,110,0.25); box-shadow: 0 22px 50px rgba(15,23,42,0.12); }
+        body.light .consulting-metric-value { color: #0f766e; }
+        body.light .consulting-metric-label { color: #334155; }
+        body.light .offer-card { background: #ffffff; border-color: rgba(15,118,110,0.25); box-shadow: 0 24px 60px rgba(15,23,42,0.1); }
+        body.light .offer-title { color: #0f172a; }
+        body.light .offer-description { color: #475569; }
+        body.light .offer-meta-tag { background: rgba(15,118,110,0.1); color: #0f766e; }
+        body.light .capability-tag { background: rgba(15,118,110,0.12); color: #0f766e; border-color: rgba(15,118,110,0.2); }
+        body.light .offer-list li { color: #475569; }
+        body.light .consulting-links .cta-button.secondary { color: #0f766e; border-color: rgba(15,118,110,0.4); }
+        body.light .cta-button.ghost { color: #0f766e; border-color: rgba(15,118,110,0.3); background: rgba(15,118,110,0.08); }
+        body.light .consulting-note { color: #475569; }
+
+        body.light .contact-eyebrow {
+            color: #0f766e;
+            border-color: rgba(15,118,110,0.3);
+            background: rgba(15,118,110,0.08);
+        }
 
         /* Theme toggle */
         .theme-toggle {
@@ -145,153 +167,274 @@
 
         /* Hero Section */
         .hero {
-            height: 100vh;
+            position: relative;
+            min-height: calc(100vh - 100px);
+            padding: 160px 50px 140px;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            background: radial-gradient(ellipse at center, rgba(0,255,136,0.1) 0%, transparent 70%);
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, rgba(0,255,136,0.14) 0%, transparent 70%);
         }
 
-        .hero-content {
-            text-align: center;
-            z-index: 2;
-        }
-
-        .glitch {
-            font-size: clamp(2rem, 8vw, 6rem);
-            font-weight: bold;
-            text-transform: uppercase;
-            position: relative;
-            color: #00ff88;
-            letter-spacing: 5px;
-            animation: glitch 2s infinite;
-        }
-
-        .glitch::before,
-        .glitch::after {
-            content: attr(data-text);
+        .hero::after {
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(0,255,136,0.06), transparent 45%);
+            pointer-events: none;
+            z-index: 1;
         }
 
-        .glitch::before {
-            animation: glitch-before 0.3s infinite;
-            color: #ff0040;
-            z-index: -1;
-        }
-
-        .glitch::after {
-            animation: glitch-after 0.3s infinite;
-            color: #00ffff;
-            z-index: -2;
-        }
-
-        @keyframes glitch {
-            0%, 100% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-        }
-
-        @keyframes glitch-before {
-            0%, 100% { transform: translate(0); }
-            20% { transform: translate(2px, 0); }
-            40% { transform: translate(2px, 0); }
-            60% { transform: translate(-2px, 0); }
-            80% { transform: translate(-2px, 0); }
-        }
-
-        @keyframes glitch-after {
-            0%, 100% { transform: translate(0); }
-            20% { transform: translate(-2px, 0); }
-            40% { transform: translate(-2px, 0); }
-            60% { transform: translate(2px, 0); }
-            80% { transform: translate(2px, 0); }
-        }
-
-        .subtitle {
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            color: #888;
-            margin: 20px 0;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.5s forwards;
-        }
-
-        .consulting-badge {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 20px 0;
-            border: 2px solid #ff0040;
-            color: #ff0040;
-            background: rgba(255,0,64,0.1);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-            animation: pulse-red 2s infinite;
-            opacity: 0;
-            animation: fadeInUp 1s ease 0.7s forwards, pulse-red 2s infinite 1s;
-        }
-
-        @keyframes pulse-red {
-            0%, 100% { box-shadow: 0 0 10px rgba(255,0,64,0.3); }
-            50% { box-shadow: 0 0 20px rgba(255,0,64,0.6); }
-        }
-
-        .cta-buttons {
+        .hero-inner {
+            position: relative;
+            z-index: 2;
             display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 30px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 80px;
+            width: 100%;
+            max-width: 1200px;
             flex-wrap: wrap;
         }
 
+        .hero-text {
+            flex: 1 1 460px;
+            max-width: 620px;
+            text-align: left;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(0,255,136,0.45);
+            color: #00ff88;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.75rem;
+            background: rgba(0,255,136,0.1);
+            margin-bottom: 24px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-family: 'Space Grotesk', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.08;
+            color: #f1fff7;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+            line-height: 1.7;
+            color: #d0fbe4;
+            margin-bottom: 32px;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+            margin-bottom: 32px;
+        }
+
+        .hero-metric {
+            padding: 18px 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(0,255,136,0.25);
+            background: rgba(0,255,136,0.08);
+            backdrop-filter: blur(8px);
+        }
+
+        .hero-metric-value {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #00ff88;
+            margin-bottom: 6px;
+        }
+
+        .hero-metric-label {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #89f9c7;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
         .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            border: 2px solid #00ff88;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px 28px;
+            border-radius: 12px;
+            border: 1px solid rgba(0,255,136,0.5);
             color: #00ff88;
             text-decoration: none;
             text-transform: uppercase;
+            font-size: 0.85rem;
             letter-spacing: 2px;
+            background: rgba(0,255,136,0.06);
             position: relative;
             overflow: hidden;
-            opacity: 0;
-            animation: fadeInUp 1s ease 1s forwards;
             transition: all 0.3s ease;
         }
 
+        .cta-button.primary {
+            background: linear-gradient(135deg, rgba(0,255,136,0.9), rgba(0,204,255,0.65));
+            border-color: rgba(0,255,200,0.5);
+            color: #02140c;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
         .cta-button.secondary {
-            border-color: #00ccff;
+            border-color: rgba(0,204,255,0.5);
             color: #00ccff;
+            background: rgba(0,204,255,0.08);
         }
 
         .cta-button::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0,255,136,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .cta-button.secondary::before {
-            background: linear-gradient(90deg, transparent, rgba(0,204,255,0.2), transparent);
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
         }
 
         .cta-button:hover::before {
-            left: 100%;
+            transform: translateX(100%);
         }
 
         .cta-button:hover {
-            box-shadow: 0 0 20px currentColor;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 18px 40px rgba(0,255,136,0.25);
+        }
+
+        .cta-button.secondary:hover {
+            box-shadow: 0 18px 40px rgba(0,204,255,0.28);
+        }
+
+        .hero-proof {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 14px;
+            color: #7bf5c0;
+        }
+
+        .hero-proof-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.75;
+        }
+
+        .hero-proof-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .hero-proof-item {
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(0,255,136,0.3);
+            background: rgba(0,255,136,0.08);
+        }
+
+        .hero-media {
+            flex: 1 1 320px;
+            max-width: 480px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-portrait-frame {
+            position: relative;
+            width: min(90vw, 360px);
+            aspect-ratio: 4 / 5;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid rgba(0,255,136,0.25);
+            background: linear-gradient(160deg, rgba(0,0,0,0.7) 0%, rgba(0,255,136,0.15) 100%);
+            box-shadow: 0 32px 60px rgba(0,0,0,0.45);
+        }
+
+        .hero-portrait {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-portrait-glow {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 50% 20%, rgba(0,255,136,0.35), transparent 60%);
+            opacity: 0.6;
+            mix-blend-mode: screen;
+        }
+
+        .hero-testimonial {
+            position: absolute;
+            bottom: -40px;
+            right: 30px;
+            width: clamp(240px, 80%, 320px);
+            padding: 22px 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(0,255,136,0.25);
+            background: rgba(5,20,18,0.95);
+            color: #e4fff1;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 24px 50px rgba(0,0,0,0.45);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .hero-testimonial.is-transitioning {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .hero-testimonial-quote {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
+
+        .hero-testimonial-meta {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #8bf6cd;
+            gap: 2px;
+        }
+
+        .hero-testimonial-name {
+            font-weight: 600;
+        }
+
+        .hero-testimonial-role {
+            opacity: 0.75;
+            font-size: 0.75rem;
         }
 
         /* Social Media Icons */
@@ -400,8 +543,8 @@
 
         /* Sections */
         .section {
-            min-height: 100vh;
-            padding: 100px 50px;
+            min-height: auto;
+            padding: 80px 45px;
             position: relative;
         }
 
@@ -435,18 +578,247 @@
         }
 
         /* Consulting Section */
-        .consulting-grid {
+        .consulting-lead {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-            margin-bottom: 50px;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+            gap: 48px;
+            align-items: start;
+            margin-bottom: 60px;
         }
 
-        .consulting-text {
+        .consulting-intro {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .consulting-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(0,255,136,0.35);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.75rem;
+            color: #00ff88;
+            background: rgba(0,255,136,0.08);
+        }
+
+        .consulting-paragraph {
             font-size: 18px;
             line-height: 1.8;
-            color: #ccc;
+            color: #c7fbe5;
+        }
+
+        .consulting-points {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .consulting-points li {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            color: #9ff9d5;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .consulting-points li::before {
+            content: '▹';
+            color: #00ff88;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-top: 2px;
+        }
+
+        .consulting-metrics {
+            display: grid;
+            gap: 18px;
+        }
+
+        .consulting-metric {
+            padding: 20px 22px;
+            border-radius: 18px;
+            border: 1px solid rgba(0,255,136,0.25);
+            background: rgba(0,255,136,0.08);
+            backdrop-filter: blur(10px);
+        }
+
+        .consulting-metric-value {
+            display: block;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #00ff88;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .consulting-metric-label {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #8ff6cd;
+        }
+
+        .consulting-offers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 28px;
+            margin-bottom: 48px;
+        }
+
+        .offer-card {
+            background: rgba(0,255,136,0.06);
+            border: 1px solid rgba(0,255,136,0.25);
+            border-radius: 18px;
+            padding: 26px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .offer-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left, rgba(0,255,136,0.18), transparent 55%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(0,255,136,0.18);
+        }
+
+        .offer-card:hover::before {
+            opacity: 1;
+        }
+
+        .offer-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #e9fff6;
+        }
+
+        .offer-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .offer-meta-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 11px;
+            border-radius: 999px;
+            background: rgba(0,255,136,0.12);
+            color: #00ff88;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .offer-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #bffbe6;
+        }
+
+        .offer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .offer-list li {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #91f4ce;
+            position: relative;
+            padding-left: 16px;
+        }
+
+        .offer-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #00ff88;
+        }
+
+        .consulting-capabilities {
+            margin-bottom: 36px;
+        }
+
+        .capability-heading {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8df5cc;
+            margin-bottom: 14px;
+        }
+
+        .capability-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .capability-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(0,255,136,0.25);
+            background: rgba(0,255,136,0.08);
+            color: #a9fbe0;
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+        }
+
+        .consulting-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .consulting-links .cta-button {
+            opacity: 1;
+            animation: none;
+        }
+
+        .consulting-links .cta-button.secondary {
+            background: rgba(0,204,255,0.08);
+            color: #00ccff;
+            border-color: rgba(0,204,255,0.45);
+        }
+
+        .cta-button.ghost {
+            background: transparent;
+            border: 1px solid rgba(0,255,136,0.3);
+            color: #00ff88;
+        }
+
+        .consulting-note {
+            font-size: 0.8rem;
+            color: #7df4c4;
+            margin-top: 8px;
         }
 
         .highlight {
@@ -458,62 +830,6 @@
 
         .highlight.red {
             color: #ff0040;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .service-card {
-            background: rgba(0,255,136,0.05);
-            border: 1px solid rgba(0,255,136,0.3);
-            padding: 30px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0,255,136,0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .service-card:hover::before {
-            left: 100%;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,255,136,0.2);
-        }
-
-        .service-icon {
-            font-size: 48px;
-            color: #00ff88;
-            margin-bottom: 20px;
-        }
-
-        .service-name {
-            font-size: 18px;
-            color: #fff;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .service-description {
-            color: #ccc;
-            font-size: 14px;
-            line-height: 1.4;
         }
 
         /* Projects Section */
@@ -834,128 +1150,6 @@
             letter-spacing: 2px;
         }
 
-        /* About Section */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .about-text {
-            font-size: 18px;
-            line-height: 1.8;
-            color: #ccc;
-        }
-
-        .hologram {
-            width: 300px;
-            height: 300px;
-            border: 2px solid #00ff88;
-            border-radius: 10px;
-            position: relative;
-            overflow: hidden;
-            background: rgba(0,255,136,0.05);
-            animation: pulse 2s infinite;
-        }
-
-        .hologram-portrait {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            filter: 
-                contrast(1.2) 
-                brightness(1.1) 
-                hue-rotate(10deg)
-                drop-shadow(0 0 20px rgba(0,255,136,0.5));
-            transition: all 0.3s ease;
-        }
-
-        .hologram:hover .hologram-portrait {
-            filter: 
-                contrast(1.4) 
-                brightness(1.3) 
-                hue-rotate(20deg)
-                drop-shadow(0 0 30px rgba(0,255,136,0.8));
-            transform: scale(1.05);
-        }
-
-        .hologram-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                45deg,
-                transparent 30%,
-                rgba(0,255,136,0.1) 50%,
-                transparent 70%
-            );
-            animation: hologram-scan 3s infinite;
-            pointer-events: none;
-        }
-
-        .hologram-glitch {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(0,255,136,0.03) 2px,
-                    rgba(0,255,136,0.03) 4px
-                );
-            animation: glitch-lines 0.1s infinite;
-            pointer-events: none;
-        }
-
-        .hologram-frame {
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            border: 1px solid rgba(0,255,136,0.3);
-            border-radius: 15px;
-            animation: frame-pulse 2s infinite alternate;
-        }
-
-        @keyframes hologram-scan {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        @keyframes glitch-lines {
-            0% { transform: translateX(0); }
-            20% { transform: translateX(-2px); }
-            40% { transform: translateX(2px); }
-            60% { transform: translateX(-1px); }
-            80% { transform: translateX(1px); }
-            100% { transform: translateX(0); }
-        }
-
-        @keyframes frame-pulse {
-            0% { 
-                border-color: rgba(0,255,136,0.3);
-                box-shadow: 0 0 10px rgba(0,255,136,0.2);
-            }
-            100% { 
-                border-color: rgba(0,255,136,0.8);
-                box-shadow: 0 0 25px rgba(0,255,136,0.5);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(0,255,136,0.3); }
-            50% { box-shadow: 0 0 40px rgba(0,255,136,0.6); }
-        }
-
         /* Experience Section */
         .experience-timeline {
             position: relative;
@@ -1019,74 +1213,6 @@
         .exp-description {
             color: #ccc;
             line-height: 1.6;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-        }
-
-        .skill-card {
-            background: rgba(0,255,136,0.05);
-            border: 1px solid rgba(0,255,136,0.3);
-            padding: 30px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0,255,136,0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .skill-card:hover::before {
-            left: 100%;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,255,136,0.2);
-        }
-
-        .skill-icon {
-            font-size: 48px;
-            color: #00ff88;
-            margin-bottom: 20px;
-        }
-
-        .skill-name {
-            font-size: 18px;
-            color: #fff;
-            margin-bottom: 10px;
-        }
-
-        .skill-level {
-            width: 100%;
-            height: 4px;
-            background: rgba(0,255,136,0.2);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: linear-gradient(90deg, #00ff88, #00ccaa);
-            border-radius: 2px;
-            animation: loadSkill 2s ease forwards;
-        }
-
-        @keyframes loadSkill {
-            from { width: 0; }
         }
 
         /* Games Section */
@@ -1154,104 +1280,498 @@
         }
 
         /* Contact Section */
-        .contact-grid {
+        .contact-wrapper {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+            gap: 48px;
+            align-items: stretch;
         }
 
-        .contact-form {
-            background: rgba(0,255,136,0.05);
-            padding: 40px;
-            border: 1px solid rgba(0,255,136,0.3);
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            color: #00ff88;
-            margin-bottom: 8px;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(0,255,136,0.3);
-            color: #fff;
-            font-family: inherit;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #00ff88;
-            box-shadow: 0 0 10px rgba(0,255,136,0.3);
-        }
-
-        .contact-info {
-            padding: 40px 0;
-        }
-
-        .contact-item {
+        .contact-hero {
             display: flex;
-            align-items: center;
-            margin: 30px 0;
-            color: #ccc;
-            transition: all 0.3s ease;
+            flex-direction: column;
+            gap: 32px;
         }
 
-        .contact-item:hover {
+        .contact-message {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .contact-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(0,255,136,0.35);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.75rem;
             color: #00ff88;
-            transform: translateX(10px);
+            background: rgba(0,255,136,0.08);
+        }
+
+        .contact-heading {
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            color: #e9fff6;
+            letter-spacing: -0.2px;
+        }
+
+        .contact-paragraph {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #b5f9e4;
+        }
+
+        .contact-cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .contact-note {
+            font-size: 0.9rem;
+            color: #8ff6cc;
+        }
+
+        .contact-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .contact-card {
+            background: rgba(0,255,136,0.05);
+            border: 1px solid rgba(0,255,136,0.25);
+            border-radius: 16px;
+            padding: 24px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: left;
         }
 
         .contact-icon {
-            font-size: 24px;
-            margin-right: 20px;
+            font-size: 32px;
+        }
+
+        .contact-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #7df4c4;
+        }
+
+        .contact-value {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #c7fbe5;
+        }
+
+        .contact-terminal {
+            align-self: stretch;
+        }
+
+        .legal-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(4,12,10,0.82);
+            backdrop-filter: blur(12px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            z-index: 1400;
+        }
+
+        .legal-modal.active {
+            display: flex;
+        }
+
+        .legal-modal-content {
+            max-width: 860px;
+            width: 100%;
+            background: rgba(0,0,0,0.9);
+            border: 1px solid rgba(0,255,136,0.25);
+            border-radius: 22px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+            padding: 36px 40px;
+            position: relative;
+            color: #eafff7;
+            display: flex;
+            flex-direction: column;
+            gap: 26px;
+        }
+
+        .legal-modal h3 {
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #8df5cc;
+        }
+
+        .legal-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .legal-card {
+            background: rgba(0,255,136,0.05);
+            border: 1px solid rgba(0,255,136,0.25);
+            border-radius: 16px;
+            padding: 22px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .legal-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 0.95rem;
+        }
+
+        .legal-card li strong {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #7df4c4;
+        }
+
+        .legal-card li span {
+            color: #9ff9d5;
+        }
+
+        .legal-text {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #c7fbe5;
+        }
+
+        .legal-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: none;
+            border: 1px solid rgba(0,255,136,0.35);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #00ff88;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .legal-close:hover {
+            background: rgba(0,255,136,0.12);
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        body.light .contact-wrapper {
+            color: #1f2937;
+        }
+
+        body.light .contact-heading {
+            color: #0f172a;
+        }
+
+        body.light .contact-paragraph {
+            color: #475569;
+        }
+
+        body.light .contact-note {
+            color: #475569;
+        }
+
+        body.light .contact-card {
+            background: #ffffff;
+            border-color: rgba(15,118,110,0.25);
+            box-shadow: 0 20px 50px rgba(15,23,42,0.08);
+        }
+
+        body.light .contact-label {
+            color: #0f766e;
+        }
+
+        body.light .contact-value {
+            color: #1f2937;
+        }
+
+        body.light .legal-modal-content {
+            background: #ffffff;
+            border-color: rgba(15,118,110,0.25);
+            color: #1f2937;
+        }
+
+        body.light .legal-card {
+            background: rgba(15,118,110,0.08);
+            border-color: rgba(15,118,110,0.2);
+        }
+
+        body.light .legal-card li span,
+        body.light .legal-text {
+            color: #1f2937;
+        }
+
+        body.light .legal-close {
+            border-color: rgba(15,118,110,0.35);
+            color: #0f766e;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .about-grid,
-            .contact-grid,
-            .consulting-grid {
+            .nav {
+                display: none;
+            }
+
+            .mobile-nav-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 120px 20px 80px;
+                min-height: auto;
+            }
+
+            .hero-inner {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 60px;
+            }
+
+            .hero-text {
+                text-align: left;
+            }
+
+            .hero-eyebrow {
+                font-size: 0.7rem;
+                letter-spacing: 2px;
+            }
+
+            .hero-title {
+                font-size: clamp(2.1rem, 9vw, 3rem);
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                margin-bottom: 24px;
+            }
+
+            .hero-metrics {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .hero-metric {
+                padding: 16px 18px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                width: 100%;
+                gap: 12px;
+            }
+
+            .cta-button {
+                width: 100%;
+            }
+
+            .hero-proof {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .hero-proof-list {
+                gap: 8px;
+            }
+
+            .hero-media {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .hero-portrait-frame {
+                width: min(80vw, 320px);
+            }
+
+            .hero-testimonial {
+                position: static;
+                width: 100%;
+                margin-top: 24px;
+            }
+
+            .consulting-lead {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .consulting-metrics {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .consulting-offers {
                 grid-template-columns: 1fr;
             }
-            
-            .nav {
-                top: 20px;
-                right: 20px;
-            }
-            
-            .social-links {
-                left: 20px;
-            }
-            
-            .section {
-                padding: 50px 20px;
-            }
-            
-            .hologram {
-                width: 100%;
-                max-width: 300px;
+
+            .consulting-links {
+                flex-direction: column;
+                align-items: stretch;
             }
 
-            .cta-buttons {
+            .social-links {
+                left: 15px;
+                gap: 15px;
+            }
+
+            .social-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .section {
+                padding: 50px 24px;
+            }
+
+            .section-title {
+                font-size: clamp(1.5rem, 8vw, 2.5rem);
+                margin-bottom: 30px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .services-grid,
+            .projects-grid,
+            .games-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .terminal {
+                padding: 15px;
+                margin: 15px 0;
+                font-size: 12px;
+            }
+
+            .terminal-header {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+
+            .terminal-line {
+                margin: 3px 0;
+                word-break: break-word;
+            }
+
+            .terminal-avatar {
+                width: 18px;
+                height: 18px;
+                margin-right: 8px;
+            }
+
+            .service-card,
+            .project-card,
+            .game-card,
+            .blog-post-card {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+            }
+
+            .service-icon,
+            .game-icon {
+                font-size: 36px;
+                margin-bottom: 15px;
+            }
+
+            .experience-timeline {
+                padding-left: 20px;
+            }
+
+            .experience-item {
+                margin: 30px 0;
+                padding: 20px 15px;
+            }
+
+            .experience-item::before {
+                left: -37px;
+            }
+
+            .exp-title {
+                font-size: 20px;
+                margin-bottom: 8px;
+            }
+
+            .exp-company {
+                font-size: 16px;
+            }
+
+            .contact-item {
                 flex-direction: column;
-                align-items: center;
+                text-align: center;
+                padding: 20px 15px;
+                margin: 15px 0;
+            }
+
+            .contact-icon {
+                font-size: 36px;
+                margin-bottom: 10px;
+                margin-right: 0;
+            }
+
+            .blog-modal {
+                padding: 10px;
+            }
+
+            .blog-modal-content {
+                max-height: 95vh;
+                width: 100%;
+            }
+
+            .blog-modal-header {
+                padding: 15px;
+            }
+
+            .blog-modal-header h1 {
+                font-size: 18px;
+            }
+
+            .blog-modal-body {
+                padding: 20px 15px;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+
+            .cursor,
+            .cursor-avatar {
+                display: none;
+            }
+
+            .particles {
+                display: none;
+            }
+
+            .matrix-bg {
+                opacity: 0.05;
             }
         }
-
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -1289,79 +1809,6 @@
         @keyframes blink {
             0%, 50% { opacity: 1; }
             51%, 100% { opacity: 0; }
-        }
-
-        /* Floating Holographic Avatar */
-        .floating-avatar {
-            position: absolute;
-            top: 20%;
-            right: 10%;
-            width: 200px;
-            height: 200px;
-            opacity: 0.15;
-            z-index: 1;
-            animation: float-avatar 6s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        .floating-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            filter: 
-                contrast(1.5) 
-                brightness(1.2) 
-                hue-rotate(30deg)
-                blur(1px)
-                drop-shadow(0 0 30px rgba(0,255,136,0.6));
-            border: 2px solid rgba(0,255,136,0.3);
-        }
-
-        .floating-avatar::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border: 1px solid rgba(0,255,136,0.2);
-            border-radius: 50%;
-            animation: avatar-pulse 3s infinite;
-        }
-
-        .floating-avatar::after {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            right: -20px;
-            bottom: -20px;
-            border: 1px solid rgba(0,255,136,0.1);
-            border-radius: 50%;
-            animation: avatar-pulse 3s infinite 1s;
-        }
-
-        @keyframes float-avatar {
-            0%, 100% { 
-                transform: translateY(0) rotate(0deg);
-                opacity: 0.15;
-            }
-            50% { 
-                transform: translateY(-20px) rotate(5deg);
-                opacity: 0.25;
-            }
-        }
-
-        @keyframes avatar-pulse {
-            0%, 100% { 
-                transform: scale(1);
-                opacity: 0.3;
-            }
-            50% { 
-                transform: scale(1.1);
-                opacity: 0.6;
-            }
         }
 
         /* Terminal Avatar */
@@ -1471,157 +1918,30 @@
             }
         }
 
-        /* Large Hologram on Title Hover */
-        .hero-hologram {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 400px;
-            height: 400px;
-            opacity: 0;
-            pointer-events: none;
-            z-index: 5;
-            transition: opacity 0.5s ease;
-        }
-
-        .hero-hologram img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 20px;
-            border: 3px solid rgba(0,255,136,0.8);
-            filter: 
-                contrast(1.6) 
-                brightness(1.3) 
-                hue-rotate(20deg)
-                drop-shadow(0 0 40px rgba(0,255,136,1));
-            animation: hero-hologram-pulse 2s infinite;
-        }
-
-        .hero-hologram::before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: -15px;
-            right: -15px;
-            bottom: -15px;
-            border: 2px solid rgba(0,255,136,0.6);
-            border-radius: 30px;
-            animation: hero-hologram-ring1 3s infinite;
-        }
-
-        .hero-hologram::after {
-            content: '';
-            position: absolute;
-            top: -30px;
-            left: -30px;
-            right: -30px;
-            bottom: -30px;
-            border: 1px solid rgba(0,255,136,0.4);
-            border-radius: 40px;
-            animation: hero-hologram-ring2 3s infinite 1s;
-        }
-
-        .hero-hologram-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 3px,
-                    rgba(0,255,136,0.1) 3px,
-                    rgba(0,255,136,0.1) 6px
-                );
-            border-radius: 20px;
-            animation: hero-hologram-scan 0.2s infinite;
-        }
-
-        .hero-hologram-label {
-            position: absolute;
-            bottom: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #00ff88;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 15px #00ff88;
-            animation: hero-hologram-text 2s infinite;
-        }
-
-        @keyframes hero-hologram-pulse {
-            0%, 100% { 
-                transform: scale(1);
-                filter: 
-                    contrast(1.6) 
-                    brightness(1.3) 
-                    hue-rotate(20deg)
-                    drop-shadow(0 0 40px rgba(0,255,136,1));
-            }
-            50% { 
-                transform: scale(1.02);
-                filter: 
-                    contrast(1.8) 
-                    brightness(1.5) 
-                    hue-rotate(30deg)
-                    drop-shadow(0 0 60px rgba(0,255,136,1.2));
-            }
-        }
-
-        @keyframes hero-hologram-ring1 {
-            0% { 
-                transform: scale(1) rotate(0deg);
-                opacity: 0.8;
-            }
-            100% { 
-                transform: scale(1.2) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes hero-hologram-ring2 {
-            0% { 
-                transform: scale(1) rotate(0deg);
-                opacity: 0.6;
-            }
-            100% { 
-                transform: scale(1.3) rotate(-360deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes hero-hologram-scan {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-6px); }
-        }
-
-        @keyframes hero-hologram-text {
-            0%, 100% { 
-                opacity: 0.8;
-                text-shadow: 0 0 15px #00ff88;
-            }
-            50% { 
-                opacity: 1;
-                text-shadow: 0 0 25px #00ff88;
-            }
-        }
-
         /* Mobile Navigation */
         .mobile-nav-toggle {
             display: none;
             position: fixed;
-            top: 30px;
-            right: 30px;
-            z-index: 1001;
-            background: none;
-            border: none;
+            top: calc(env(safe-area-inset-top, 0px) + 26px);
+            right: calc(env(safe-area-inset-right, 0px) + 22px);
+            z-index: 1300;
+            background: rgba(0,0,0,0.55);
+            border: 1px solid rgba(0,255,136,0.4);
+            border-radius: 999px;
             cursor: pointer;
-            padding: 10px;
+            padding: 10px 14px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mobile-nav-label {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #00ff88;
         }
 
         .burger {
@@ -1644,6 +1964,21 @@
             transform: rotate(0deg);
             transition: .25s ease-in-out;
             box-shadow: 0 0 10px rgba(0,255,136,0.5);
+        }
+
+        body.light .mobile-nav-toggle {
+            background: rgba(255,255,255,0.85);
+            border-color: rgba(15,118,110,0.3);
+            box-shadow: 0 10px 26px rgba(15,23,42,0.12);
+        }
+
+        body.light .burger span {
+            background: #0f766e;
+            box-shadow: 0 0 10px rgba(15,118,110,0.35);
+        }
+
+        body.light .mobile-nav-label {
+            color: #0f766e;
         }
 
         .burger span:nth-child(1) {
@@ -1680,18 +2015,31 @@
             width: 100%;
             height: 100vh;
             background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             z-index: 1000;
             transition: right 0.3s ease;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
+            padding: 120px 32px 48px;
+            gap: 48px;
         }
 
         .mobile-nav.open {
             right: 0;
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            align-items: flex-start;
+        }
+
+        .mobile-nav-actions {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
         }
 
         .mobile-nav-item {
@@ -1704,6 +2052,7 @@
             transform: translateX(50px);
             transition: all 0.3s ease;
             position: relative;
+            text-align: left;
         }
 
         .mobile-nav.open .mobile-nav-item {
@@ -1720,6 +2069,16 @@
         .mobile-nav-item:nth-child(7) { transition-delay: 0.7s; }
         .mobile-nav-item:nth-child(8) { transition-delay: 0.8s; }
         .mobile-nav-item:nth-child(9) { transition-delay: 0.9s; }
+        .mobile-nav-item:nth-child(10) { transition-delay: 1.0s; }
+        .mobile-nav-item:nth-child(11) { transition-delay: 1.1s; }
+
+        .mobile-nav-actions .mobile-nav-item {
+            transition-delay: 0.95s;
+        }
+
+        .mobile-nav-actions .mobile-nav-item + .mobile-nav-item {
+            transition-delay: 1.05s;
+        }
 
         .mobile-nav-item::before {
             content: '> ';
@@ -1736,290 +2095,171 @@
             transform: translateX(10px);
         }
 
-        /* Responsive */
+        .mobile-nav-action {
+            font-size: 18px;
+            letter-spacing: 2px;
+            padding: 14px 20px;
+            border: 1px solid rgba(0,255,136,0.4);
+            border-radius: 12px;
+            width: 100%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,255,136,0.08);
+        }
+
+        .mobile-nav-action.primary {
+            border-color: rgba(0,255,136,0.6);
+            background: linear-gradient(135deg, rgba(0,255,136,0.85), rgba(0,204,255,0.55));
+            color: #02140c;
+        }
+
+        body.light .mobile-nav {
+            background: rgba(255,255,255,0.94);
+        }
+
+        body.light .mobile-nav-item {
+            color: #0f766e;
+        }
+
+        body.light .mobile-nav-item::before {
+            color: #0f766e;
+        }
+
+        body.light .mobile-nav-action {
+            border-color: rgba(15,118,110,0.25);
+            background: rgba(15,118,110,0.08);
+            color: #0f172a;
+        }
+
+        body.light .mobile-nav-action.primary {
+            background: #0f766e;
+            color: #ffffff;
+            border-color: #0f766e;
+        }
+
         @media (max-width: 768px) {
-            /* Navigation */
-            .nav {
-                display: none;
+            .theme-toggle {
+                top: calc(env(safe-area-inset-top, 0px) + 22px);
+                left: calc(env(safe-area-inset-left, 0px) + 18px);
+                right: auto;
             }
-            
-            .mobile-nav-toggle {
-                display: block;
-            }
-            
-            /* Hero Section */
-            .hero {
-                padding: 20px;
-                min-height: 100vh;
-            }
-            
-            .glitch {
-                font-size: clamp(1.5rem, 12vw, 3rem);
-                letter-spacing: 2px;
-            }
-            
-            .subtitle {
-                font-size: clamp(0.8rem, 4vw, 1rem);
-                margin: 15px 0;
-            }
-            
-            .consulting-badge {
-                font-size: 0.7rem;
-                padding: 8px 15px;
-                margin: 15px 0;
-                letter-spacing: 1px;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-                margin-top: 20px;
-            }
-            
-            .cta-button {
-                width: 100%;
-                max-width: 280px;
-                padding: 12px 20px;
-                font-size: 14px;
-                letter-spacing: 1px;
-            }
-            
-            /* Floating Elements */
-            .floating-avatar {
-                display: none; /* Hide on mobile for performance */
-            }
-            
-            .social-links {
-                left: 15px;
-                gap: 15px;
-            }
-            
-            .social-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
-            }
-            
-            /* Hero Hologram */
-            .hero-hologram {
-                width: 250px;
-                height: 250px;
-            }
-            
-            .hero-hologram-label {
-                font-size: 12px;
-                bottom: -40px;
-                letter-spacing: 2px;
-            }
-            
-            /* Sections */
-            .section {
-                padding: 60px 20px;
-            }
-            
-            .section-title {
-                font-size: clamp(1.5rem, 8vw, 2.5rem);
-                margin-bottom: 30px;
-            }
-            
-            /* Grid Layouts */
-            .about-grid,
-            .contact-grid,
-            .consulting-grid {
+
+            .contact-wrapper {
                 grid-template-columns: 1fr;
-                gap: 30px;
+                gap: 36px;
             }
-            
-            .services-grid,
-            .projects-grid,
-            .skills-grid,
-            .games-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            /* Hologram */
-            .hologram {
-                width: 100%;
-                max-width: 250px;
-                height: 250px;
-                margin: 0 auto;
-            }
-            
-            /* Terminal */
-            .terminal {
-                padding: 15px;
-                margin: 15px 0;
-                font-size: 12px;
-            }
-            
-            .terminal-header {
-                font-size: 14px;
-                margin-bottom: 8px;
-            }
-            
-            .terminal-line {
-                margin: 3px 0;
-                word-break: break-word;
-            }
-            
-            .terminal-avatar {
-                width: 18px;
-                height: 18px;
-                margin-right: 8px;
-            }
-            
-            /* Cards */
-            .service-card,
-            .project-card,
-            .skill-card,
-            .game-card,
-            .blog-post-card {
-                padding: 20px 15px;
-                margin-bottom: 20px;
-            }
-            
-            .service-icon,
-            .skill-icon {
-                font-size: 36px;
-                margin-bottom: 15px;
-            }
-            
-            .game-icon {
-                font-size: 36px;
-                margin-bottom: 15px;
-            }
-            
-            /* Experience Timeline */
-            .experience-timeline {
-                padding-left: 20px;
-            }
-            
-            .experience-item {
-                margin: 30px 0;
-                padding: 20px 15px;
-            }
-            
-            .experience-item::before {
-                left: -37px;
-            }
-            
-            .exp-title {
-                font-size: 20px;
-                margin-bottom: 8px;
-            }
-            
-            .exp-company {
-                font-size: 16px;
-            }
-            
-            /* Contact Section */
-            .contact-item {
+
+            .contact-cta {
                 flex-direction: column;
-                text-align: center;
-                padding: 20px 15px;
-                margin: 15px 0;
             }
-            
-            .contact-icon {
-                font-size: 36px;
-                margin-bottom: 10px;
-                margin-right: 0;
+
+            .contact-card-grid {
+                grid-template-columns: 1fr;
             }
-            
-            /* Blog Modal */
-            .blog-modal {
-                padding: 10px;
+
+            .contact-terminal {
+                order: -1;
             }
-            
-            .blog-modal-content {
-                max-height: 95vh;
-                width: 100%;
+
+            .legal-modal-content {
+                padding: 28px 24px;
             }
-            
-            .blog-modal-header {
-                padding: 15px;
-            }
-            
-            .blog-modal-header h1 {
-                font-size: 18px;
-            }
-            
-            .blog-modal-body {
-                padding: 20px 15px;
-                font-size: 14px;
-                line-height: 1.6;
-            }
-            
-            /* Cursor Effects */
-            .cursor,
-            .cursor-avatar {
-                display: none; /* Hide custom cursor on mobile */
-            }
-            
-            /* Particles */
-            .particles {
-                display: none; /* Hide particles on mobile for performance */
-            }
-            
-            /* Matrix Background */
-            .matrix-bg {
-                opacity: 0.05; /* Reduce opacity on mobile */
+
+            .legal-columns {
+                grid-template-columns: 1fr;
             }
         }
 
+        @media (max-width: 640px) {
+            .contact-card {
+                padding: 20px 16px;
+            }
+
+            .legal-modal-content {
+                padding: 24px 18px;
+            }
+        }
+
+        /* Responsive */
+
         @media (max-width: 480px) {
-            /* Extra small screens */
             .hero {
-                padding: 15px;
+                padding: 100px 15px 60px;
             }
-            
+
+            .hero-inner {
+                gap: 40px;
+            }
+
+            .hero-title {
+                font-size: clamp(1.8rem, 11vw, 2.6rem);
+            }
+
+            .hero-subtitle {
+                font-size: 0.95rem;
+            }
+
+            .hero-metric {
+                padding: 14px 16px;
+            }
+
+            .hero-testimonial {
+                margin-top: 18px;
+            }
+
+            .consulting-links .cta-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .offer-card {
+                padding: 24px 20px;
+            }
+
+            .contact-cta {
+                width: 100%;
+            }
+
+            .contact-cta .cta-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .contact-card {
+                padding: 22px 18px;
+            }
+
             .section {
-                padding: 40px 15px;
+                padding: 36px 18px;
             }
-            
-            .glitch {
-                font-size: clamp(1.2rem, 15vw, 2.5rem);
-            }
-            
+
             .social-links {
                 left: 10px;
                 gap: 10px;
             }
-            
+
             .social-icon {
                 width: 35px;
                 height: 35px;
                 font-size: 14px;
             }
-            
+
             .mobile-nav-toggle {
                 top: 20px;
                 right: 20px;
             }
-            
+
             .terminal {
                 padding: 10px;
                 font-size: 11px;
             }
-            
+
             .service-card,
             .project-card,
-            .skill-card,
             .game-card,
             .blog-post-card {
                 padding: 15px 10px;
-            }
-            
-            .hero-hologram {
-                width: 200px;
-                height: 200px;
-            }
-            
-            .hologram {
-                max-width: 200px;
-                height: 200px;
             }
         }
 
@@ -2062,16 +2302,17 @@
         <a href="#consulting" class="nav-item">Consulting</a>
         <a href="#projects" class="nav-item">Projects</a>
         <a href="#blog" class="nav-item">Blog</a>
-        <a href="#about" class="nav-item">About</a>
         <a href="#experience" class="nav-item">Experience</a>
-        <a href="#skills" class="nav-item">Skills</a>
         <a href="#games" class="nav-item">Games</a>
         <a href="#contact" class="nav-item">Contact</a>
+        <a href="CV.pdf" class="nav-item" target="_blank" rel="noopener">CV</a>
         <a href="AGB.pdf" class="nav-item" target="_blank" rel="noopener">AGB</a>
+        <a href="#" class="nav-item" id="legalNavLink" role="button">Imprint</a>
     </nav>
 
     <!-- Mobile Navigation -->
-    <button class="mobile-nav-toggle" id="mobileNavToggle">
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation">
+        <span class="mobile-nav-label">MENU</span>
         <div class="burger" id="burger">
             <span></span>
             <span></span>
@@ -2080,104 +2321,189 @@
     </button>
 
     <nav class="mobile-nav" id="mobileNav">
-        <a href="#home" class="mobile-nav-item">Home</a>
-        <a href="#consulting" class="mobile-nav-item">Consulting</a>
-        <a href="#projects" class="mobile-nav-item">Projects</a>
-        <a href="#blog" class="mobile-nav-item">Blog</a>
-        <a href="#about" class="mobile-nav-item">About</a>
-        <a href="#experience" class="mobile-nav-item">Experience</a>
-        <a href="#skills" class="mobile-nav-item">Skills</a>
-        <a href="#games" class="mobile-nav-item">Games</a>
-        <a href="#contact" class="mobile-nav-item">Contact</a>
-        <a href="AGB.pdf" class="mobile-nav-item" target="_blank" rel="noopener">AGB</a>
+        <div class="mobile-nav-links">
+            <a href="#home" class="mobile-nav-item">Home</a>
+            <a href="#consulting" class="mobile-nav-item">Consulting</a>
+            <a href="#projects" class="mobile-nav-item">Projects</a>
+            <a href="#blog" class="mobile-nav-item">Blog</a>
+            <a href="#experience" class="mobile-nav-item">Experience</a>
+            <a href="#games" class="mobile-nav-item">Games</a>
+            <a href="#contact" class="mobile-nav-item">Contact</a>
+        </div>
+        <div class="mobile-nav-actions">
+            <a href="CV.pdf" class="mobile-nav-item mobile-nav-action primary" target="_blank" rel="noopener">Download CV</a>
+            <a href="AGB.pdf" class="mobile-nav-item mobile-nav-action" target="_blank" rel="noopener">Consulting Terms</a>
+            <a href="#" class="mobile-nav-item mobile-nav-action" id="legalMobileLink" role="button">Imprint</a>
     </nav>
 
     <section id="home" class="hero">
         <div class="particles"></div>
-        <div class="hero-content">
-            <h1 class="glitch" data-text="ALEXANDER KRAUCK">ALEXANDER KRAUCK</h1>
-            <p class="subtitle">Consultant (Einzelunternehmen, AT) • Founder of <a class="link" href="https://goedly.com" target="_blank" rel="noopener noreferrer">Goedly</a> — Autonomous Software Manufacturing</p>
-            <div class="consulting-badge">Consulting + Goedly: Automating the software lifecycle</div>
-            <div class="terminal">
-                <div class="terminal-header">$ whoami</div>
-                <div class="terminal-line">Founder@Goedly:~$ Autonomous software manufacturing from idea -> production</div>
-                <div class="terminal-line">Consultant@AT_Einzelunternehmen:~$ Strategy, automation & delivery</div>
-                <div class="terminal-line">AgentOps@Lifecycle:~$ Websites & apps generated, deployed, iterated</div>
-                <div class="terminal-line">Austria@Europe:~$ <span class="terminal-cursor">_</span></div>
+        <div class="hero-inner">
+            <div class="hero-text">
+                <span class="hero-eyebrow" data-dark-text="Consultant · Founder of Goedly" data-light-text="Consultant · Founder of Goedly">Consultant · Founder of Goedly</span>
+                <h1 class="hero-title">Ship agentic software that clients feel on the bottom line.</h1>
+                <p class="hero-subtitle">I partner with product and operations leaders to automate the entire software lifecycle - from the first opportunity scan to production-grade systems that keep shipping.</p>
+                <div class="hero-metrics">
+                    <div class="hero-metric">
+                        <span class="hero-metric-value">4x</span>
+                        <span class="hero-metric-label">Faster time from concept to production for ops-heavy teams.</span>
+                    </div>
+                    <div class="hero-metric">
+                        <span class="hero-metric-value">3</span>
+                        <span class="hero-metric-label">Agentic systems shipped for enterprise, public sector, and startup teams.</span>
+                    </div>
+                    <div class="hero-metric">
+                        <span class="hero-metric-value">2-6 weeks</span>
+                        <span class="hero-metric-label">Structured sprints that de-risk investment and prove ROI fast.</span>
+                    </div>
+                </div>
+                <div class="hero-cta">
+                    <a href="#contact" id="hireCta" class="cta-button primary" data-dark-text="BOOK_A_STRATEGY_CALL" data-light-text="Book a strategy call">Book a strategy call</a>
+                    <a href="#projects" id="viewProjectsCta" class="cta-button secondary" data-dark-text="VIEW_CASE_STUDIES" data-light-text="View case studies">View case studies</a>
+                </div>
+                <div class="hero-proof">
+                    <span class="hero-proof-label">Trusted by leaders at</span>
+                    <div class="hero-proof-list">
+                        <span class="hero-proof-item">Krauck-Systems</span>
+                        <span class="hero-proof-item">JKU LIT AI Lab</span>
+                        <span class="hero-proof-item">JKU RecSys Lab</span>
+                    </div>
+                </div>
             </div>
-            <div class="cta-buttons">
-                <a href="#consulting" id="hireCta" class="cta-button" data-dark-text="HIRE_ME" data-light-text="Book consultation">HIRE_ME</a>
-                <a href="#projects" id="viewProjectsCta" class="cta-button secondary" data-dark-text="VIEW_PROJECTS" data-light-text="View projects">VIEW_PROJECTS</a>
+            <div class="hero-media">
+                <div class="hero-portrait-frame">
+                    <img src="resources/cyberpunk_portrait_compressed.jpg" alt="Alexander Krauck - AI Visionary" class="hero-portrait hologram-portrait">
+                    <div class="hero-portrait-glow"></div>
+                </div>
+                <div class="hero-testimonial" aria-live="polite">
+                    <div class="hero-testimonial-quote">"Alexander quickly made it possible for me to ask even difficult questions about each project we have done so far."</div>
+                    <div class="hero-testimonial-meta">
+                        <span class="hero-testimonial-name">Alfred Krauck</span>
+                        <span class="hero-testimonial-role">CEO, Krauck-Systems</span>
+                    </div>
+                </div>
+                <div class="contact-terminal">
+                    <div class="terminal">
+                        <div class="terminal-header">$ connection_status --watch</div>
+                        <div class="terminal-line">Initiating secure channel... <span style="color:#00ff88;">READY</span></div>
+                        <div class="terminal-line">Response SLA: under 24 hours</div>
+                        <div class="terminal-line">Attachments: <a class="link" href="CV.pdf" target="_blank" rel="noopener">CV.pdf</a>, <a class="link" href="AGB.pdf" target="_blank" rel="noopener">Consulting_Terms.pdf</a></div>
+                        <div class="terminal-line">Preferred: project briefs, architectures, business objectives</div>
+                        <div class="terminal-line">Awaiting input <span class="terminal-cursor">_</span></div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="floating-avatar">
-            <img src="resources/cyberpunk_portrait_compressed.jpg" alt="Alexander Krauck - AI Visionary">
-        </div>
-        <div class="hero-hologram">
-            <img src="resources/cyberpunk_portrait_compressed.jpg" alt="Alexander Krauck - AI Visionary" class="hologram-portrait">
-            <div class="hero-hologram-overlay"></div>
-            <div class="hero-hologram-label">NEURAL_CORE_ACTIVE</div>
         </div>
     </section>
 
     <section id="consulting" class="section">
         <div class="container">
             <h2 class="section-title" id="consultingTitle" data-dark-text="CONSULTING_SERVICES.exe" data-light-text="Consulting Services">CONSULTING_SERVICES.exe</h2>
-            <div class="consulting-grid">
-                <div class="consulting-text">
-                    <p>I run <a class="highlight link" href="https://goedly.com" target="_blank" rel="noopener noreferrer">Goedly</a> — an autonomous software manufacturing company focused on automating the entire lifecycle of software (from brief to live site/app and beyond).</p>
-                    <br>
-                    <p>In parallel, I offer <span class="highlight red">consulting as an Einzelunternehmen in Austria</span> to help teams design, build, and operate agentic systems that deliver real outcomes.</p>
-                    <br>
-                    <p>Need <span class="highlight">full-lifecycle automation</span> for websites, internal tools, or data products? I combine <span class="highlight">multi-agent pipelines</span>, <span class="highlight">MLOps/CI-CD</span>, and <span class="highlight">infrastructure-as-code</span> to go from idea -> production fast.</p>
-                    <br>
-                    <p><span class="highlight red">Available for short engagements and long-term partnerships.</span></p>
-                    <br>
-                    <p style="font-size:14px;color:#888;">AGB (Allgemeine Geschäftsbedingungen) for consulting: <a class="link" href="AGB.pdf" target="_blank" rel="noopener">Download PDF</a></p>
-                    <br>
-                    <div style="text-align: center;">
-                        <button id="contactBtn" class="cta-button" style="margin: 0; font-size: 16px; padding: 18px 35px;">
-                            📧 CONTACT_ME_NOW
-                        </button>
-                    </div>
+            <div class="consulting-lead">
+                <div class="consulting-intro">
+                    <span class="consulting-eyebrow">Advisory & Delivery</span>
+                    <p class="consulting-paragraph">I help leadership teams move from AI ambition to deployed, reliable systems. From architecting Fabasoft's company-wide AI Ops process to shipping agentic products with Goedly and Omnipate, I combine deep research experience with full-stack execution.</p>
+                    <ul class="consulting-points">
+                        <li>Head of Competence Center AI @ Fabasoft — designed the AIOps lifecycle now powering production use-cases across every business unit.</li>
+                        <li>Invented novel graph neural network architectures with Univ.-Prof. Dr. Sepp Hochreiter at JKU and translated them into deployable tooling.</li>
+                        <li>Founder of Omnipate — building multi-agent web/mobile experiences backed by GraphRAG, Firebase, and React Native.</li>
+                    </ul>
                 </div>
-                <div class="hologram">
-                    <img src="resources/cyberpunk_portrait_compressed.jpg" alt="Alexander Krauck - AI Visionary" class="hologram-portrait">
-                    <div class="hologram-overlay"></div>
-                    <div class="hologram-glitch"></div>
-                    <div class="hologram-frame"></div>
-                    <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 10;">
-                        <div style="color: #00ff88; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px #00ff88;">NEURAL_CORE_ACTIVE</div>
-                        <div style="color: #888; font-size: 10px; margin-top: 5px;">PROCESSING...</div>
+                <div class="consulting-metrics">
+                    <div class="consulting-metric">
+                        <span class="consulting-metric-value">Company-wide</span>
+                        <span class="consulting-metric-label">AI Ops program rolling out across every Fabasoft business unit.</span>
+                    </div>
+                    <div class="consulting-metric">
+                        <span class="consulting-metric-value">Top 3</span>
+                        <span class="consulting-metric-label">ACM RecSys Challenge 2021 with the JKU AI Warriors team.</span>
+                    </div>
+                    <div class="consulting-metric">
+                        <span class="consulting-metric-value">&euro;70M</span>
+                        <span class="consulting-metric-label">Co-authored Austria's FWF AI research proposal with LIT AI Lab leadership.</span>
                     </div>
                 </div>
             </div>
-            
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🧩</div>
-                    <div class="service-name">Autonomous Manufacturing</div>
-                    <div class="service-description">Agentic pipelines that turn a brief into live software: generate, test, deploy, and iterate continuously.</div>
+
+            <div class="consulting-offers">
+                <div class="offer-card">
+                    <h3 class="offer-title">AI Opportunity Sprint</h3>
+                    <div class="offer-meta">
+                        <span class="offer-meta-tag">1-2 weeks</span>
+                        <span class="offer-meta-tag">Executive readout</span>
+                    </div>
+                    <p class="offer-description">Baseline the landscape before investing in delivery: align stakeholders, assess feasibility, and frame the ROI story.</p>
+                    <ul class="offer-list">
+                        <li>Leadership workshop to define outcomes, guardrails, and success metrics.</li>
+                        <li>Use-case scoring across impact, data readiness, compliance, and change effort.</li>
+                        <li>Decision memo with roadmap, next bets, and budget recommendations.</li>
+                    </ul>
                 </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">🤖</div>
-                    <div class="service-name">Agent Systems</div>
-                    <div class="service-description">Design and implement robust multi-agent systems for business automation and content/software generation.</div>
+                <div class="offer-card">
+                    <h3 class="offer-title">Agentic Delivery Pod</h3>
+                    <div class="offer-meta">
+                        <span class="offer-meta-tag">2-6 weeks</span>
+                        <span class="offer-meta-tag">Pilot → Production</span>
+                    </div>
+                    <p class="offer-description">Design, implement, and launch agentic workflows, websites, or internal tools with integrated testing and monitoring.</p>
+                    <ul class="offer-list">
+                        <li>Co-create agent architecture, safety guardrails, and evaluation loops.</li>
+                        <li>Implement pipelines with automated QA, deployment, and observability.</li>
+                        <li>Hand over runbooks, dashboards, and training so teams can continue shipping.</li>
+                    </ul>
                 </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">⚙️</div>
-                    <div class="service-name">Ops & Tooling</div>
-                    <div class="service-description">MLOps, CI/CD, observability, and infrastructure-as-code to keep autonomous systems reliable and compliant.</div>
+                <div class="offer-card">
+                    <h3 class="offer-title">AI Ops Enablement</h3>
+                    <div class="offer-meta">
+                        <span class="offer-meta-tag">Embedded</span>
+                        <span class="offer-meta-tag">Playbooks</span>
+                    </div>
+                    <p class="offer-description">Stand up the processes, toolchain, and rituals that let your teams deliver AI initiatives repeatedly and responsibly.</p>
+                    <ul class="offer-list">
+                        <li>Operating model design covering intake, governance, and evaluation.</li>
+                        <li>Toolchain selection across MLOps, experimentation, and monitoring.</li>
+                        <li>Enablement sessions and on-call coaching for product, engineering, and GTM.</li>
+                    </ul>
                 </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">🌐</div>
-                    <div class="service-name">Websites & Apps</div>
-                    <div class="service-description">From landing pages to full apps: automated generation, human QA, and zero-downtime deployment.</div>
+                <div class="offer-card">
+                    <h3 class="offer-title">Research → Production Bridge</h3>
+                    <div class="offer-meta">
+                        <span class="offer-meta-tag">Research</span>
+                        <span class="offer-meta-tag">Industrialization</span>
+                    </div>
+                    <p class="offer-description">Translate breakthrough ML research (GNNs, LLMs, uncertainty estimation) into products that scale with compliance in mind.</p>
+                    <ul class="offer-list">
+                        <li>Audit existing models, datasets, and IP to surface deployable assets.</li>
+                        <li>Design production architecture, data pipelines, and evaluation harnesses.</li>
+                        <li>Pair with internal teams for roll-out, documentation, and knowledge transfer.</li>
+                    </ul>
                 </div>
             </div>
+
+            <div class="consulting-capabilities">
+                <div class="capability-heading">Capability stack</div>
+                <div class="capability-tags">
+                    <span class="capability-tag">AI Ops leadership</span>
+                    <span class="capability-tag">Agent orchestration</span>
+                    <span class="capability-tag">Graph neural networks</span>
+                    <span class="capability-tag">LLMs &amp; RAG</span>
+                    <span class="capability-tag">PyTorch</span>
+                    <span class="capability-tag">TensorFlow</span>
+                    <span class="capability-tag">GraphRAG</span>
+                    <span class="capability-tag">Kubernetes &amp; Docker</span>
+                    <span class="capability-tag">AWS &amp; Firebase</span>
+                    <span class="capability-tag">React Native</span>
+                    <span class="capability-tag">OpenAI API</span>
+                    <span class="capability-tag">Uncertainty estimation</span>
+                </div>
+            </div>
+
+            <div class="consulting-links">
+                <a href="#contact" class="cta-button primary">Start a project</a>
+                <a href="CV.pdf" class="cta-button secondary" target="_blank" rel="noopener">Download CV</a>
+                <a href="AGB.pdf" class="cta-button ghost" target="_blank" rel="noopener">Consulting terms</a>
+            </div>
+            <p class="consulting-note">Based in Linz, Austria · Available for remote and on-site engagements across the EU.</p>
         </div>
     </section>
 
@@ -2205,37 +2531,12 @@
                 <div class="terminal-line">Parsing markdown files from /blog/ directory</div>
                 <div class="terminal-line">Ready for neural processing <span class="terminal-cursor">_</span></div>
             </div>
-            <div id="blog-posts">
-                <!-- Blog posts will be loaded here -->
+            <div id="blog-posts" class="medium-embed">
+                <a class="m-story" data-collapsed="true" href="https://medium.com/@alexander.krauck/when-newer-isnt-better-rethinking-code-updates-for-ai-agents-42964b2dd523"></a>
             </div>
+            <script async src="https://static.medium.com/embed.js"></script>
         </div>
     </section>
-
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="section-title" id="aboutTitle" data-dark-text="ABOUT_ME.exe" data-light-text="About">ABOUT_ME.exe</h2>
-            <div class="about-grid">
-                <div class="about-text">
-                    <p>I'm a consultant (Einzelunternehmen, AT) and the founder of <a class="highlight link" href="https://goedly.com" target="_blank" rel="noopener noreferrer">Goedly</a>, focused on autonomous software manufacturing.</p>
-                    <br>
-                    <p>I build systems that take a problem statement and manufacture working software: planning, coding, testing, deployment, and iteration. Under the hood: <span class="highlight">agentic architectures</span>, <span class="highlight">MLOps/CI/CD</span>, and <span class="highlight">infrastructure-as-code</span>.</p>
-                    <br>
-                    <p>My background includes applied AI R&D (e.g., <span class="highlight">Graph Neural Networks</span>, uncertainty modeling) and production delivery in industry settings.</p>
-                </div>
-                <div class="hologram">
-                    <img src="resources/cyberpunk_portrait_compressed.jpg" alt="Alexander Krauck - AI Visionary" class="hologram-portrait">
-                    <div class="hologram-overlay"></div>
-                    <div class="hologram-glitch"></div>
-                    <div class="hologram-frame"></div>
-                    <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 10;">
-                        <div style="color: #00ff88; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px #00ff88;">NEURAL_CORE_ACTIVE</div>
-                        <div style="color: #888; font-size: 10px; margin-top: 5px;">PROCESSING...</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="experience" class="section">
         <div class="container">
             <h2 class="section-title" id="experienceTitle" data-dark-text="EXPERIENCE_LOG" data-light-text="Experience">EXPERIENCE_LOG</h2>
@@ -2243,22 +2544,22 @@
                 <div class="experience-item">
                     <h3 class="exp-title">Founder</h3>
                     <div class="exp-company"><a class="link" href="https://goedly.com" target="_blank" rel="noopener noreferrer">Goedly</a></div>
-                    <div class="exp-date">2024 - Present</div>
-                    <p class="exp-description">Building autonomous software manufacturing pipelines that generate, deploy, and evolve software products from a problem brief.</p>
+                    <div class="exp-date">Aug 2025 - Present</div>
+                    <p class="exp-description">Launching Goedly in August 2025 to deliver autonomous software manufacturing pipelines that ship and evolve products from a brief.</p>
                 </div>
 
                 <div class="experience-item">
                     <h3 class="exp-title">Independent Consultant</h3>
                     <div class="exp-company">Einzelunternehmen (Austria)</div>
-                    <div class="exp-date">2024 - Present</div>
-                    <p class="exp-description">Consulting on agent systems, MLOps, and end-to-end automation for teams shipping AI-powered products.</p>
+                    <div class="exp-date">Aug 2024 - Present</div>
+                    <p class="exp-description">Advising leadership teams on agent systems, AI Ops, and automation initiatives, from discovery through production rollout.</p>
                 </div>
                 
                 <div class="experience-item">
                     <h3 class="exp-title">Head of Competence Center AI</h3>
                     <div class="exp-company">Fabasoft</div>
-                    <div class="exp-date">2024</div>
-                    <p class="exp-description">Led AI initiatives and collaboration across product teams; introduced LLM-driven capabilities and production-oriented AI practices.</p>
+                    <div class="exp-date">Apr 2024 - Aug 2025</div>
+                    <p class="exp-description">Stood up Fabasoft’s AI Ops program across all business units, shipping LLM-powered products and governance practices before transitioning to Goedly.</p>
                 </div>
                 
                 <div class="experience-item">
@@ -2273,61 +2574,6 @@
                     <div class="exp-company">Johannes Kepler Universität Linz</div>
                     <div class="exp-date">October 2019 - September 2024</div>
                     <p class="exp-description">Researched Graph Neural Networks and Graph Transformers, earning Master of Science in Artificial Intelligence with focus on cutting-edge ML architectures.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="section">
-        <div class="container">
-            <h2 class="section-title" id="skillsTitle" data-dark-text="SKILL_MATRIX" data-light-text="Skills">SKILL_MATRIX</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon">🧠</div>
-                    <div class="skill-name">MLOps</div>
-                    <div class="skill-level">
-                        <div class="skill-progress" style="width: 95%;"></div>
-                    </div>
-                </div>
-                
-                <div class="skill-card">
-                    <div class="skill-icon">🤖</div>
-                    <div class="skill-name">Multi-agent Systems</div>
-                    <div class="skill-level">
-                        <div class="skill-progress" style="width: 90%;"></div>
-                    </div>
-                </div>
-                
-                <div class="skill-card">
-                    <div class="skill-icon">⚡</div>
-                    <div class="skill-name">Scrum</div>
-                    <div class="skill-level">
-                        <div class="skill-progress" style="width: 85%;"></div>
-                    </div>
-                </div>
-                
-                <div class="skill-card">
-                    <div class="skill-icon">🔮</div>
-                    <div class="skill-name">Graph Neural Networks</div>
-                    <div class="skill-level">
-                        <div class="skill-progress" style="width: 88%;"></div>
-                    </div>
-                </div>
-                
-                <div class="skill-card">
-                    <div class="skill-icon">☕</div>
-                    <div class="skill-name">Java Development</div>
-                    <div class="skill-level">
-                        <div class="skill-progress" style="width: 80%;"></div>
-                    </div>
-                </div>
-                
-                <div class="skill-card">
-                    <div class="skill-icon">🎯</div>
-                    <div class="skill-name">LLM Technologies</div>
-                    <div class="skill-level">
-                        <div class="skill-progress" style="width: 92%;"></div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -2378,65 +2624,92 @@
     <section id="contact" class="section">
         <div class="container">
             <h2 class="section-title" id="contactTitle" data-dark-text="ESTABLISH_CONNECTION" data-light-text="Contact">ESTABLISH_CONNECTION</h2>
-            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
-                <div class="terminal">
-                    <div class="terminal-header">$ cat /etc/contact_info</div>
-                    <div class="terminal-line">Initializing secure communication channels...</div>
-                    <div class="terminal-line">All systems operational <span style="color: #00ff88;">✓</span></div>
-                    <div class="terminal-line">Ready for transmission <span class="terminal-cursor">_</span></div>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin: 50px 0;">
-                    <div class="contact-item" style="flex-direction: column; text-align: center; padding: 30px; background: rgba(0,255,136,0.05); border: 1px solid rgba(0,255,136,0.3);">
-                        <div class="contact-icon" style="font-size: 48px; margin-bottom: 15px;">📧</div>
-                        <div style="font-size: 18px; color: #00ff88; margin-bottom: 10px;">PRIMARY_CHANNEL</div>
-                        <div>alexander.krauck@googlemail.com</div>
+            <div class="contact-wrapper">
+                <div class="contact-hero">
+                    <div class="contact-message">
+                        <span class="contact-eyebrow">Let’s build the next deployment</span>
+                        <h3 class="contact-heading">Ready when you are.</h3>
+                        <p class="contact-paragraph">Drop a note with the opportunity you’re exploring, and I’ll follow up within one business day. Europe-based, serving clients worldwide.</p>
+                        <div class="contact-cta">
+                            <button id="contactBtn2" class="cta-button primary">Send consultation request</button>
+                            <a href="https://calendly.com/alexander-krauck-klgi/alexander-krauck-intro" target="_blank" rel="noopener" class="cta-button secondary">Book intro call</a>
+                            <a href="CV.pdf" target="_blank" rel="noopener" class="cta-button ghost">Download CV</a>
+                        </div>
+                        <p class="contact-note">Prefer to call? Reach me directly at <a class="link" href="tel:+4367762516842">+43 677 6251 6842</a>.</p>
                     </div>
-                    
-                    <div class="contact-item" style="flex-direction: column; text-align: center; padding: 30px; background: rgba(0,255,136,0.05); border: 1px solid rgba(0,255,136,0.3);">
-                        <div class="contact-icon" style="font-size: 48px; margin-bottom: 15px;">💼</div>
-                        <div style="font-size: 18px; color: #00ff88; margin-bottom: 10px;">PROFESSIONAL_NET</div>
-                        <div>linkedin.com/in/alexander-krauck-979264173</div>
-                    </div>
-                    
-                    <div class="contact-item" style="flex-direction: column; text-align: center; padding: 30px; background: rgba(0,255,136,0.05); border: 1px solid rgba(0,255,136,0.3);">
-                        <div class="contact-icon" style="font-size: 48px; margin-bottom: 15px;">📍</div>
-                        <div style="font-size: 18px; color: #00ff88; margin-bottom: 10px;">LOCATION</div>
-                        <div>Linz-Wels-Steyr Area, Austria</div>
-                    </div>
-                    
-                    <div class="contact-item" style="flex-direction: column; text-align: center; padding: 30px; background: rgba(0,255,136,0.05); border: 1px solid rgba(0,255,136,0.3);">
-                        <div class="contact-icon" style="font-size: 48px; margin-bottom: 15px;">🏢</div>
-                        <div style="font-size: 18px; color: #00ff88; margin-bottom: 10px;">CURRENT_ROLE</div>
-                        <div>Founder @ <a class="link" href="https://goedly.com" target="_blank" rel="noopener noreferrer">Goedly</a> • Consultant (Einzelunternehmen, AT)</div>
-                    </div>
-                    
-                    <div class="contact-item" style="flex-direction: column; text-align: center; padding: 30px; background: rgba(0,255,136,0.05); border: 1px solid rgba(0,255,136,0.3);">
-                        <div class="contact-icon" style="font-size: 48px; margin-bottom: 15px;">🚀</div>
-                        <div style="font-size: 18px; color: #00ff88; margin-bottom: 10px;">CONSULTING_STATUS</div>
-                        <div>Available for Independent Projects</div>
-                    </div>
-                    
-                    <div class="contact-item" style="flex-direction: column; text-align: center; padding: 30px; background: rgba(255,0,64,0.1); border: 1px solid rgba(255,0,64,0.5);">
-                        <div class="contact-icon" style="font-size: 48px; margin-bottom: 15px; color: #ff0040;">⚡</div>
-                        <div style="font-size: 18px; color: #ff0040; margin-bottom: 10px;">RESPONSE_TIME</div>
-                        <div style="color: #ff0040;">< 24 Hours</div>
+                    <div class="contact-card-grid">
+                        <div class="contact-card">
+                            <div class="contact-icon">📧</div>
+                            <div class="contact-label">Email</div>
+                            <a class="contact-value link" href="mailto:alexander.krauck@googlemail.com">alexander.krauck@googlemail.com</a>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">📱</div>
+                            <div class="contact-label">Phone</div>
+                            <a class="contact-value link" href="tel:+4367762516842">+43 677 6251 6842</a>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">💼</div>
+                            <div class="contact-label">LinkedIn</div>
+                            <a class="contact-value link" href="https://linkedin.com/in/alexander-krauck-979264173" target="_blank" rel="noopener">linkedin.com/in/alexander-krauck-979264173</a>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-label">Base</div>
+                            <div class="contact-value">Linz · Vienna · Remote EU</div>
+                        </div>
                     </div>
                 </div>
-                
-                <div style="margin-top: 50px;">
-                    <button id="contactBtn2" class="cta-button" style="font-size: 18px; padding: 20px 40px;">
-                        📧 SEND_CONSULTATION_REQUEST
-                    </button>
+                <div class="contact-terminal">
+                    <div class="terminal">
+                        <div class="terminal-header">$ connection_status --watch</div>
+                        <div class="terminal-line">Initiating secure channel... <span style="color:#00ff88;">READY</span></div>
+                        <div class="terminal-line">Response SLA: under 24 hours</div>
+                        <div class="terminal-line">Attachments: <a class="link" href="CV.pdf" target="_blank" rel="noopener">CV.pdf</a>, <a class="link" href="AGB.pdf" target="_blank" rel="noopener">Consulting_Terms.pdf</a></div>
+                        <div class="terminal-line">Preferred: project briefs, architectures, business objectives</div>
+                        <div class="terminal-line">Awaiting input <span class="terminal-cursor">_</span></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <div class="legal-modal" id="legalModal" aria-hidden="true">
+        <div class="legal-modal-content" role="dialog" aria-modal="true" aria-labelledby="legalModalTitle">
+            <button class="legal-close" id="legalCloseBtn" aria-label="Close legal information">×</button>
+            <h3 id="legalModalTitle">Legal & Data Protection</h3>
+            <div class="legal-columns">
+                <div class="legal-card">
+                    <strong>Imprint</strong>
+                    <ul>
+                        <li><strong>Company</strong><span>Alexander Krauck AI-Projektabwicklung</span></li>
+                        <li><strong>Owner</strong><span>Alexander Krauck MSc</span></li>
+                        <li><strong>Address</strong><span>Worathweg 15, 4040 Linz, Austria</span></li>
+                        <li><strong>Email</strong><span><a class="link" href="mailto:alexander.krauck@krauck-systems.com">alexander.krauck@krauck-systems.com</a></span></li>
+                        <li><strong>Phone</strong><span><a class="link" href="tel:+4367762516842">+43 677 6251 6842</a></span></li>
+                        <li><strong>GISA</strong><span>36935963</span></li>
+                        <li><strong>VAT</strong><span>ATU80406348</span></li>
+                    </ul>
+                </div>
+                <div class="legal-card">
+                    <strong>Data Protection</strong>
+                    <p class="legal-text">
+                        This site does not use tracking cookies, analytics, or third-party embeds. Server logs are collected only to maintain
+                        technical security (IP address, timestamp) and are deleted automatically after 30 days. If you contact me, your details will
+                        be processed solely to respond to the inquiry and will not be shared with third parties without consent.
+                    </p>
+                    <p class="legal-text">
+                        You have the right to access, rectify, or erase personal data stored about you. To exercise these rights, contact me at
+                        <a class="link" href="mailto:alexander.krauck@krauck-systems.com">alexander.krauck@krauck-systems.com</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Load external scripts -->
     <script src="js/github-projects.js"></script>
-    <script src="js/blog-loader.js"></script>
-    
+        
     <script>
         // Custom Cursor
         const cursor = document.querySelector('.cursor');
@@ -2454,7 +2727,7 @@
         });
 
         // Show cursor avatar on hover over key sections
-        const avatarTriggers = document.querySelectorAll('.section-title, .cta-button, .service-card, .project-card, .hologram');
+        const avatarTriggers = document.querySelectorAll('.section-title, .cta-button, .service-card, .project-card, .hero-metric, .hero-testimonial');
         
         avatarTriggers.forEach(trigger => {
             trigger.addEventListener('mouseenter', () => {
@@ -2466,19 +2739,97 @@
             });
         });
 
-        // Large hologram on title hover
-        const heroTitle = document.querySelector('.glitch');
-        const heroHologram = document.querySelector('.hero-hologram');
-        
-        if (heroTitle && heroHologram) {
-            heroTitle.addEventListener('mouseenter', () => {
-                heroHologram.style.opacity = '0.9';
-            });
-            
-            heroTitle.addEventListener('mouseleave', () => {
-                heroHologram.style.opacity = '0';
+        // Hero testimonials rotation
+        const heroTestimonialEl = document.querySelector('.hero-testimonial');
+        const heroTestimonialQuote = heroTestimonialEl ? heroTestimonialEl.querySelector('.hero-testimonial-quote') : null;
+        const heroTestimonialName = heroTestimonialEl ? heroTestimonialEl.querySelector('.hero-testimonial-name') : null;
+        const heroTestimonialRole = heroTestimonialEl ? heroTestimonialEl.querySelector('.hero-testimonial-role') : null;
+
+        const heroTestimonials = [
+            {
+                quote: 'Alexander quickly made it possible for me to ask even difficult questions about each project we have done so far.',
+                name: 'Alfred Krauck',
+                role: 'CEO, Krauck-Systems'
+            },
+            {
+                quote: 'Alexander succeeded in inventing a new graph neural network that outperforms comparable research methods. His creative drive and execution were decisive.',
+                name: 'Univ.-Prof. Dr. Sepp Hochreiter',
+                role: 'Head of Institute, LIT AI Lab & JKU Linz'
+            },
+            {
+                quote: 'His achievements in the ACM RecSys Challenge 2021 were very impressive and demonstrate his technical skills and independence.',
+                name: 'Prof. Markus Schedl',
+                role: 'Professor of Computational Perception, JKU Linz'
+            }
+        ];
+
+        if (heroTestimonialEl && heroTestimonialQuote && heroTestimonialName && heroTestimonialRole && heroTestimonials.length > 1) {
+            let testimonialIndex = 0;
+            setInterval(() => {
+                testimonialIndex = (testimonialIndex + 1) % heroTestimonials.length;
+                heroTestimonialEl.classList.add('is-transitioning');
+                setTimeout(() => {
+                    const item = heroTestimonials[testimonialIndex];
+                    heroTestimonialQuote.textContent = '"' + item.quote + '"';
+                    heroTestimonialName.textContent = item.name;
+                    heroTestimonialRole.textContent = item.role;
+                    heroTestimonialEl.classList.remove('is-transitioning');
+                }, 220);
+            }, 6000);
+        }
+
+
+        const legalModal = document.getElementById('legalModal');
+        const legalCloseBtn = document.getElementById('legalCloseBtn');
+        const legalNavLink = document.getElementById('legalNavLink');
+        const legalMobileLink = document.getElementById('legalMobileLink');
+
+        function openLegalModal(event) {
+            if (event) event.preventDefault();
+            if (legalModal) {
+                legalModal.classList.add('active');
+                legalModal.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('modal-open');
+                if (mobileNav) {
+                    mobileNav.classList.remove('open');
+                    if (burger) burger.classList.remove('open');
+                }
+            }
+        }
+
+        function closeLegalModal() {
+            if (legalModal) {
+                legalModal.classList.remove('active');
+                legalModal.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('modal-open');
+            }
+        }
+
+        if (legalNavLink) {
+            legalNavLink.addEventListener('click', openLegalModal);
+        }
+
+        if (legalMobileLink) {
+            legalMobileLink.addEventListener('click', openLegalModal);
+        }
+
+        if (legalCloseBtn) {
+            legalCloseBtn.addEventListener('click', closeLegalModal);
+        }
+
+        if (legalModal) {
+            legalModal.addEventListener('click', (e) => {
+                if (e.target === legalModal) {
+                    closeLegalModal();
+                }
             });
         }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLegalModal();
+            }
+        });
 
         // Matrix Background
         const canvas = document.getElementById('matrix');
@@ -2598,7 +2949,7 @@
         });
 
         // Hover effects for interactive elements
-        document.querySelectorAll('.skill-card, .experience-item, .service-card').forEach(item => {
+        document.querySelectorAll('.experience-item, .service-card').forEach(item => {
             item.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-10px) scale(1.02)';
             });
@@ -2708,14 +3059,9 @@ This message was sent via alexanderkrauck.com`;
             document.querySelectorAll('.hologram-portrait').forEach(img => {
                 if (img && img.getAttribute('src') !== src) {
                     img.setAttribute('src', src);
-                    img.setAttribute('alt', isLight ? 'Alexander Krauck — Professional Portrait' : 'Alexander Krauck — AI Visionary');
+                    img.setAttribute('alt', isLight ? 'Alexander Krauck - Professional Portrait' : 'Alexander Krauck - AI Visionary');
                 }
             });
-            const favatar = document.querySelector('.floating-avatar img');
-            if (favatar && favatar.getAttribute('src') !== src) {
-                favatar.setAttribute('src', src);
-                favatar.setAttribute('alt', isLight ? 'Alexander Krauck — Professional Portrait' : 'Alexander Krauck — AI Visionary');
-            }
             const cimg = document.querySelector('.cursor-avatar img');
             if (cimg) {
                 cimg.setAttribute('src', src);
